@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>החוש החסר</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700&display=swap">
+<style>
+/* Layout: flat colour blocks on a clean white field, like the school's signage. A hard-edged grid, no rounded cards; colour = stage of the 7D process. */
+:root{
+  --navy:#215068; --teal:#4bc3c0; --orange:#f18215; --yellow:#f6ad0c; --red:#ea3144;
+  --bg:#ffffff; --fg:#1d3a4b; --muted:#5b7482; --line:#d6e2e8; --soft:#f2f7f9;
+  --ink-on-color:#ffffff; --ink-on-yellow:#1d3a4b;
+  --d1:var(--yellow); --d2:var(--teal); --d3:var(--orange); --d4:var(--red); --d5:var(--navy);
+  --display:"Secular One","Assistant","Arial Hebrew",Arial,sans-serif;
+  --body:"Assistant","Arial Hebrew",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#132f3e; --fg:#eef5f7; --muted:#a6bfca; --line:#2c4f62; --soft:#1a3b4d; --navy:#2c6584;
+  color-scheme:dark;}}
+:root[data-theme="dark"]{--bg:#132f3e; --fg:#eef5f7; --muted:#a6bfca; --line:#2c4f62; --soft:#1a3b4d; --navy:#2c6584; color-scheme:dark;}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;direction:rtl;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+p{margin:0}
+
+/* top wave band */
+.band{height:56px;background:linear-gradient(176deg,var(--yellow) 0 38%,transparent 38.5%),linear-gradient(184deg,transparent 30%,var(--red) 30.5%) ; background-color:var(--bg)}
+.band{background:none;position:relative;overflow:hidden}
+.band svg{position:absolute;inset:0;width:100%;height:100%}
+
+header.top{padding-block:20px 8px}
+.brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
+.brand a{text-decoration:none}
+.brand .mark{font-family:var(--display);font-size:clamp(34px,6vw,58px);color:var(--teal);line-height:1}
+.brand .mark b{font-weight:400;color:var(--fg)}
+.brand .sub{color:var(--muted);font-size:15px}
+
+nav.groups{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav.groups a{text-decoration:none;font-weight:700;font-size:15px;padding:6px 12px;border:2px solid var(--line)}
+nav.groups a:hover,nav.groups a[aria-current="page"]{border-color:var(--fg)}
+
+main{padding-block:24px 64px}
+section{scroll-margin-top:16px}
+
+/* home */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:start}
+@media (max-width:820px){.hero{grid-template-columns:1fr}}
+.hero h2{font-size:clamp(28px,4.4vw,44px)}
+.hero h2 mark{background:var(--orange);color:#fff;padding:0 .2em}
+.hero p.lead{font-size:19px;margin-top:14px;max-width:60ch}
+.qbox{background:var(--navy);color:#fff;padding:22px}
+.qbox h3{font-size:22px;margin-bottom:8px;color:var(--yellow)}
+
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:34px}
+@media (max-width:820px){.phases{grid-template-columns:repeat(2,1fr)}}
+.ph{padding:14px;color:var(--ink-on-color);min-width:0}
+.ph .n{font-family:var(--display);font-size:26px;line-height:1}
+.ph .t{font-weight:700}
+.ph small{display:block;font-size:14px;opacity:.95;line-height:1.4;margin-top:4px}
+.ph.d1{background:var(--d1);color:var(--ink-on-yellow)}.ph.d2{background:var(--d2);color:#0f3442}.ph.d3{background:var(--d3)}.ph.d4{background:var(--d4)}.ph.d5{background:#215068}
+.ph.dim{opacity:.55}
+
+h2.sec{font-size:30px;margin:48px 0 6px}
+.sec-sub{color:var(--muted);margin-bottom:18px;max-width:70ch}
+
+.senses{display:grid;gap:26px}
+.sense h3{font-size:22px;display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sense h3 .sw{width:18px;height:18px;display:inline-block}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.card{display:flex;flex-direction:column;gap:6px;padding:16px;border:2px solid var(--line);text-decoration:none;min-width:0;background:var(--bg);transition:border-color .15s, transform .15s}
+.card:hover{border-color:var(--fg);transform:translateY(-2px)}
+.card .k{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted)}
+.card .h{font-family:var(--display);font-size:21px;line-height:1.2}
+.card .c{font-size:15px;color:var(--muted)}
+
+.intel{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media (max-width:900px){.intel{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.intel{grid-template-columns:1fr}}
+.in{border-top:6px solid var(--orange);background:var(--soft);padding:14px;min-width:0}
+.in h4{font-size:19px}
+.in p{font-size:15px;margin-top:4px}
+
+/* project page */
+.crumb{font-size:15px;color:var(--muted);margin-bottom:10px}
+.crumb a{font-weight:700}
+.ptitle{font-size:clamp(30px,5vw,50px)}
+.pmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{font-size:14px;font-weight:700;padding:3px 10px;background:var(--soft);border:1px solid var(--line)}
+.contrast{display:grid;grid-template-columns:1fr auto 1fr;gap:0;margin-top:22px;align-items:stretch}
+.contrast div{padding:14px 16px;font-family:var(--display);font-size:21px;line-height:1.25;min-width:0}
+.contrast .a{background:var(--navy);color:#fff}
+.contrast .x{background:var(--yellow);color:#1d3a4b;display:flex;align-items:center;font-size:26px}
+.contrast .b{background:var(--teal);color:#0f3442}
+@media (max-width:560px){.contrast{grid-template-columns:1fr}.contrast .x{justify-content:center;padding:4px}}
+
+.stage{margin-top:40px;display:grid;grid-template-columns:120px 1fr;gap:20px}
+@media (max-width:720px){.stage{grid-template-columns:1fr;gap:10px}}
+.stage>aside{padding:12px;min-width:0}
+.stage>aside .n{font-family:var(--display);font-size:34px;line-height:1}
+.stage>aside .t{font-family:var(--display);font-size:20px}
+.stage>aside small{display:block;font-size:13px;line-height:1.35;margin-top:4px}
+.stage.d1>aside{background:var(--d1);color:#1d3a4b}
+.stage.d2>aside{background:var(--d2);color:#0f3442}
+.stage.d34>aside{background:linear-gradient(var(--d3) 0 50%,var(--d4) 50%);color:#fff}
+.stage>div{min-width:0;display:grid;gap:22px}
+.stage h3{font-size:23px;margin-bottom:8px}
+.stage h4{font-size:18px;margin-bottom:6px}
+ul.q{margin:0;padding-inline-start:20px;display:grid;gap:6px}
+ul.q li::marker{color:var(--orange)}
+.legs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:720px){.legs{grid-template-columns:1fr}}
+.leg{border:2px solid var(--line);padding:12px;min-width:0}
+.leg b{display:block;font-family:var(--display);font-weight:400;font-size:18px;color:var(--teal)}
+.leg p{font-size:15px}
+
+.builder{background:var(--soft);padding:16px;border-inline-start:6px solid var(--yellow)}
+.builder .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+@media (max-width:600px){.builder .grid{grid-template-columns:1fr}}
+.builder label{font-size:14px;font-weight:700;display:grid;gap:4px}
+.builder input{font:inherit;font-size:16px;padding:8px 10px;border:2px solid var(--line);background:var(--bg);color:var(--fg);width:100%}
+.builder .out{margin-top:14px;font-family:var(--display);font-size:21px;line-height:1.35}
+.builder .out span{background:var(--yellow);color:#1d3a4b;padding:0 .15em}
+.builder .out span.empty{background:transparent;color:var(--muted);border-bottom:2px dashed var(--muted)}
+.btn{font:inherit;font-weight:700;font-size:15px;padding:7px 14px;border:2px solid var(--fg);background:var(--bg);color:var(--fg);cursor:pointer}
+.btn:hover{background:var(--fg);color:var(--bg)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.note{font-size:14px;color:var(--muted)}
+
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:820px){.tools{grid-template-columns:1fr}}
+.tool{border:2px solid var(--line);padding:14px;min-width:0}
+.tool h4{display:flex;gap:8px;align-items:flex-start}
+.tool input[type=checkbox]{width:20px;height:20px;accent-color:var(--teal);flex:none;margin-top:2px}
+.tool ul{margin:6px 0 0;padding-inline-start:18px;font-size:15px;display:grid;gap:4px}
+
+/* links */
+.lhead{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filters button{font:inherit;font-size:14px;font-weight:700;padding:4px 10px;border:2px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+ol.links{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:0;counter-reset:l}
+ol.links li{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line);counter-increment:l}
+ol.links li::before{content:counter(l);font-family:var(--display);font-size:24px;color:var(--teal);line-height:1.1;font-variant-numeric:tabular-nums}
+ol.links li>div{min-width:0}
+ol.links a.t{font-weight:700;font-size:18px;text-decoration-color:var(--teal);text-underline-offset:3px;overflow-wrap:anywhere}
+ol.links .tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.tag{font-size:12px;font-weight:700;padding:1px 8px;letter-spacing:.03em}
+.tag.d1{background:var(--d1);color:#1d3a4b}.tag.d2{background:var(--d2);color:#0f3442}
+.tag.kind{background:var(--soft);border:1px solid var(--line)}
+ol.links p{font-size:16px}
+ol.links .use{font-size:15px;color:var(--muted);margin-top:4px}
+ol.links .use b{color:var(--fg)}
+
+.nosol{background:var(--red);color:#fff;padding:14px 16px;font-weight:700}
+.nosol b{font-family:var(--display);font-weight:400;font-size:20px;display:block}
+.iq{display:grid;gap:8px}
+.iq details{border:2px solid var(--line);padding:0}
+.iq summary{cursor:pointer;padding:12px 14px;font-family:var(--display);font-size:19px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.iq summary::-webkit-details-marker{display:none}
+.iq summary::after{content:"+";color:var(--orange)}
+.iq details[open] summary::after{content:"–"}
+.iq details>div{padding:0 14px 14px}
+.iq .def{font-size:14px;color:var(--muted);margin-bottom:6px}
+
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-top:20px}
+.gi{border:2px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.gi .pic{aspect-ratio:16/9;max-width:100%;display:flex;align-items:center;justify-content:center}
+.gi .pic svg{height:70%}
+.gi .gb{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.gi h3{font-size:22px}
+.gi p{font-size:15px}
+.gi .use{font-size:14px;color:var(--muted)}
+.gi .more{margin-top:auto;font-weight:700;text-decoration:none;color:var(--fg);border-top:1px solid var(--line);padding-top:8px}
+.gi .more:hover{color:var(--orange)}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:48px;flex-wrap:wrap}
+.pager a{font-weight:700;text-decoration:none;border:2px solid var(--line);padding:10px 14px;max-width:48%}
+.pager a:hover{border-color:var(--fg)}
+footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<div class="band" aria-hidden="true"><svg viewBox="0 0 1200 56" preserveAspectRatio="none"><path d="M0 0H760C600 10 420 24 0 40Z" fill="#f6ad0c"/><path d="M300 0H1200V44C1020 20 860 14 720 16 560 18 430 8 300 0Z" fill="#ea3144"/></svg></div>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <a href="#home" class="mark">החוש <b>החסר</b></a>
+    <span class="sub">מיני-פרויקט בעיצוב מוצר · מגמת אמנויות העיצוב, כיתה י״א · שאלון 891589</span>
+  </div>
+  <nav class="groups" id="nav" aria-label="ניווט"></nav>
+</header>
+<main id="app"></main>
+<footer>אתר השראה וכיווני חשיבה בלבד. הפתרון הוא שלכן. המקורות נבחרו כנקודת פתיחה; בדקו כל מקור בעצמכן ורשמו אותו בביבליוגרפיה.</footer>
+</div>
+
+<script>
+const PROJECTS = [
+/* ================= שמיעה ================= */
+{id:"music",sense:"hear",title:"מוזיקה מעבר לשמע",who:"חרשים וכבדי שמיעה באירועי מוזיקה",
+contrast:["דממה אקוסטית","רטט, קצב ואנרגיה בגוף"],
+d1:{pain:["מה בדיוק ״הולך לאיבוד״ בהופעה חיה למי שאינו שומע: המילים? הקצב? תחושת השייכות לקהל?","מתי אדם חרש בוחר לא ללכת לאירוע מוזיקלי, ומה הסיבה האמיתית: נגישות, מבוכה, או שאין בשביל מה?","האם הבעיה היא החוויה האישית, או הפער בין החוויה שלו לחוויה של החבר השומע שעומד לידו?"],
+legs:["חרשים מלידה / מי שאיבדו שמיעה בגיל מבוגר / כבדי שמיעה עם מכשיר. מי מהם ומה ההבדל ביניהם?","הדרה מחוויה תרבותית משותפת, תלות בתרגום, תחושת ״אורח״ באירוע.","הופעה באולם / חתונה / שיעור מוזיקה בבית ספר / האזנה לבד בחדר. רעש, צפיפות, חושך, זמן."],
+bound:"האם הפרויקט עוסק בהאזנה למוזיקה, ביצירת מוזיקה, או בחוויה החברתית סביבה? בחרו אחד."},
+d2:{persona:["ראיון עם אדם חרש שאוהב מוזיקה: איך הוא ״שומע״ אותה היום? (רצפת עץ, רמקול מוחזק, בלונים?)","תצפית: צפו בהופעה בתרגום לשפת סימנים ותעדו מה עושה הקהל החרש בגוף."],
+bench:["SubPac (אפוד באס)","Neosensory Buzz (צמיד)","הופעות עם רצפה רוטטת / מתורגמני שירים","בלון מוחזק מול רמקול (הפתרון הביתי)"],
+stem:["קולטני פאצ׳יני: באילו תדרים העור הכי רגיש?","הולכת עצם מול הולכת אוויר","פירוק צליל לתדרים (התמרת פורייה)","מוליכות רטט בחומרים: עץ, אלומיניום, סיליקון בדרגות קושי"]},
+links:[
+{t:"Evelyn Glennie – Hearing Essay",u:"https://www.evelyn.co.uk/hearing-essay/",p:"d1",k:"מאמר",lang:"EN",s:"המתופפת החירשת אוולין גלני מסבירה ש״שמיעה היא צורה מיוחדת של מגע״: איך היא מרגישה צלילים נמוכים ברגליים וגבוהים בפנים ובצוואר.",use:"ציטוטים אותנטיים למבוא ולמפת האמפתיה."},
+{t:"Evelyn Glennie: How to truly listen (TED)",u:"https://www.ted.com/talks/evelyn_glennie_how_to_truly_listen",p:"d1",k:"וידאו",lang:"EN",s:"הרצאה שבה גלני מנגנת ומדגימה שהקשבה היא פעולה של כל הגוף, לא רק של האוזן.",use:"צפו בשפת הגוף שלה: היכן בגוף היא ״קולטת״?"},
+{t:"Christine Sun Kim: The enchanting music of sign language (TED)",u:"https://www.ted.com/talks/christine_sun_kim_the_enchanting_music_of_sign_language",p:"d1",k:"וידאו",lang:"EN",s:"אמנית סאונד חירשת מראה ששפת הסימנים היא מוזיקלית, ושצליל הוא ״מטבע חברתי״ בעולם השומעים.",use:"עוזר לנסח את הניגוד ולערער על ההנחה שהבעיה היא ״לתקן״."},
+{t:"Brains of deaf people rewire to “hear” music",u:"https://www.washington.edu/news/2001/11/27/brains-of-deaf-people-rewire-to-hear-music/",p:"d2",k:"מחקר",lang:"EN",s:"מחקר מאוניברסיטת וושינגטון (2001): אצל חרשים, רטט מעובד באזור השמיעה במוח. בסיס מדעי לכך שרטט הוא ״שמיעה״.",use:"שורה בטבלת התובנות: מה בדקנו → מה גילינו."},
+{t:"Pacinian corpuscle",u:"https://en.wikipedia.org/wiki/Pacinian_corpuscle",p:"d2",k:"STEM",lang:"EN",s:"קולטני הלחץ והרטט בעור, הרגישים במיוחד לתדרים של כ-250 הרץ. היכן הם מרוכזים בגוף?",use:"מחקר טכנולוגי-חומרי: מיפוי אזורי רגישות בגוף."},
+{t:"Bone conduction",u:"https://en.wikipedia.org/wiki/Bone_conduction",p:"d2",k:"STEM",lang:"EN",s:"הסבר על הולכת קול דרך עצמות הגולגולת, ההבדל מהולכת אוויר, ועל מי זה עובד ועל מי לא.",use:"שימו לב: לא מתאים לכל סוגי החירשות. זו תובנה חשובה."},
+{t:"SubPac",u:"https://subpac.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"אפוד/גב כיסא שמעביר באסים לגוף. תוכנן במקור למפיקי מוזיקה שומעים.",use:"בנצ׳מרקינג: למי הוא תוכנן? מה המחיר? מה הוא לא נותן למשתמש חרש?"},
+{t:"Neosensory",u:"https://neosensory.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"צמיד שמתרגם צלילים מהסביבה לדפוסי רטט על פרק היד, פרי מחקר של דייוויד איגלמן.",use:"בנצ׳מרקינג: ממשק, ארגונומיה, שפה חזותית."},
+{t:"Cymatics",u:"https://en.wikipedia.org/wiki/Cymatics",p:"d2",k:"השראה",lang:"EN",s:"תבניות שנוצרות כשחול או מים רוטטים בתדר מסוים (צורות חלדני). צליל שהופך לצורה נראית.",use:"לוח השראה (מודבורד) ונספח החריש."},
+{t:"But what is the Fourier Transform? (3Blue1Brown)",u:"https://www.youtube.com/watch?v=spUNpyF58BY",p:"d2",k:"STEM",lang:"EN",s:"סרטון ויזואלי שמסביר איך מפרקים צליל מורכב לתדרים בודדים. בהיר גם בלי רקע במתמטיקה.",use:"פרק ה-STEM: איך מכונה ״מבינה״ מוזיקה."},
+{t:"David Eagleman: Can we create new senses for humans? (TED)",u:"https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_humans",p:"d1",k:"וידאו",lang:"EN",s:"חוקר מוח מסביר החלפה חושית: המוח לומד לפענח מידע מכל ערוץ שמגיע אליו.",use:"מושג מפתח לכל פרויקטי ״החוש החסר״."}
+],
+intel:{app:"באיזה רגע בדיוק בהופעה או בהאזנה המשתמש צריך מידע? מה הוא עושה עם הידיים והגוף באותו רגע (רוקד, עומד, יושב)?",cog:"איזה מידע מוזיקלי הכי חשוב להעביר: קצב, עוצמה, גובה צליל, רגש, מילים? איך יידע שהוא ״בזמן״ עם הקהל?",soc:"האם החוויה פרטית או משותפת עם שומעים? מה המוצר אומר על חירשות בעיני הסביבה?",cre:"מה אם הכלל ״מוזיקה = שמיעה״ מתהפך? מה אם השומעים הם אלה שצריכים להתאים את עצמם?",emo:"מה מרגיש אדם שרוקד בקצב יחד עם כולם בפעם הראשונה? שחרור, שייכות, גאווה?"}},
+
+{id:"talk",sense:"hear",title:"גשר בין חרשים לשומעים",who:"חרשים ושומעים שאינם יודעים שפת סימנים",
+contrast:["שפה של ידיים ועיניים","שפה של קול ואוזניים"],
+d1:{pain:["באילו מצבים יומיומיים (קופה בסופר, רופא, נהג אוטובוס) התקשורת נשברת? מה קורה ברגע הזה?","מי מרגיש יותר אי-נוחות: החרש או השומע? ומה כל אחד מהם עושה כדי להימנע מהמצב?","מה כבר עובד היום (כתיבה בטלפון, שפת גוף, תמלול) ואיפה זה נכשל?"],
+legs:["אדם חרש שמשתמש בשפת סימנים / אדם שומע שרוצה לעזור. אפשר לבחור צד אחד בלבד.","ניתוק, תלות במתורגמן, מבוכה, איבוד עצמאות.","מקום ציבורי רועש / מצב של לחץ זמן / מסכה על הפנים שמסתירה את השפתיים."],
+bound:"הפרויקט לא יכול ״ללמד את כל העולם שפת סימנים״. איזה רגע אחד ספציפי הוא בוחר לתקן?"},
+d2:{persona:["שתי פרסונות: האדם החרש שמחפש עצמאות, והאדם השומע שרוצה להבין אבל חושש.","תיעוד שטח: התנסות של 30 דקות בקנייה בסופר בלי לדבר. תעדו מה קרה."],
+bench:["כפפות מתרגמות (ובעיקר הביקורת עליהן)","אפליקציות תמלול חי","שירותי מתורגמן בווידאו","כרטיסיות תקשורת בבתי חולים"],
+stem:["זיהוי מחוות בעזרת חיישני תאוצה וג׳ירוסקופ","זיהוי דיבור (Speech-to-Text) ומגבלותיו ברעש","מבנה של שפת סימנים: צורת יד, מיקום, תנועה, הבעת פנים"]},
+links:[
+{t:"Israeli Sign Language",u:"https://en.wikipedia.org/wiki/Israeli_Sign_Language",p:"d1",k:"רקע",lang:"EN",s:"סקירת שפת הסימנים הישראלית: מקורה, מספר המשתמשים, ומדוע היא שפה עצמאית ולא ״עברית בידיים״.",use:"מבוא: עובדות על הקהילה."},
+{t:"כל זכות: חירשים וכבדי שמיעה",u:"https://www.kolzchut.org.il/he/%D7%97%D7%99%D7%A8%D7%A9%D7%99%D7%9D_%D7%95%D7%9B%D7%91%D7%93%D7%99_%D7%A9%D7%9E%D7%99%D7%A2%D7%94",p:"d1",k:"רקע",lang:"HE",s:"ריכוז הזכויות והשירותים לחירשים בישראל, כולל שירותי תרגום ונגישות. מראה מה המדינה כבר נותנת.",use:"הצגת המצב הקיים (מה לא עובד כרגע)."},
+{t:"כל זכות: אגודת החרשים בישראל",u:"https://www.kolzchut.org.il/he/%D7%90%D7%92%D7%95%D7%93%D7%AA_%D7%94%D7%97%D7%A8%D7%A9%D7%99%D7%9D_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C",p:"d1",k:"ארגון",lang:"HE",s:"מידע על הארגון המרכזי של הקהילה (בית הלן קלר). דרך טובה ליצור קשר לראיון.",use:"מקור לראיון עומק / עיצוב משתף."},
+{t:"Why Sign-Language Gloves Don’t Help Deaf People (The Atlantic)",u:"https://www.theatlantic.com/technology/archive/2017/11/why-sign-language-gloves-dont-help-deaf-people/545441/",p:"d2",k:"ביקורת",lang:"EN",s:"כתבה שמסבירה למה הקהילה החירשת דחתה ״כפפות מתרגמות״: הן מתעלמות מהבעות פנים ומעמיסות את המאמץ דווקא על החרש.",use:"חובה לטבלת הבנצ׳מרקינג: למה מוצר ״חכם״ נכשל רגשית."},
+{t:"Live Transcribe (Google)",u:"https://www.android.com/accessibility/live-transcribe/",p:"d2",k:"מוצר קיים",lang:"EN",s:"אפליקציית תמלול דיבור בזמן אמת. כדאי לבדוק אותה בעצמכן בעברית ובמקום רועש.",use:"ניסוי שטח קצר + שורה בטבלת הבנצ׳מרקינג."},
+{t:"Al-Sayyid Bedouin Sign Language",u:"https://en.wikipedia.org/wiki/Al-Sayyid_Bedouin_Sign_Language",p:"d1",k:"השראה",lang:"EN",s:"כפר בנגב שבו חירשות נפוצה, ולכן גם רבים מהשומעים יודעים שפת סימנים. קהילה שבה ״הפער״ כמעט לא קיים.",use:"שאלה למבוא: מה הופך קהילה לנגישה?"},
+{t:"Martha’s Vineyard Sign Language",u:"https://en.wikipedia.org/wiki/Martha%27s_Vineyard_Sign_Language",p:"d1",k:"השראה",lang:"EN",s:"אי באמריקה שבו במשך דורות כולם, חרשים ושומעים, דיברו בסימנים. דוגמה היסטורית לחיבור מלא.",use:"מודבורד וחשיבה על הנושא ״חיבורים״."},
+{t:"Nicaraguan Sign Language",u:"https://en.wikipedia.org/wiki/Nicaraguan_Sign_Language",p:"d2",k:"מחקר",lang:"EN",s:"שפה שנולדה מעצמה בין ילדים חרשים בבית ספר אחד. מראה ששפה נוצרת מתוך צורך לתקשר.",use:"תובנה: תקשורת צומחת מלמטה, לא מוכתבת."},
+{t:"DeafSpace – Gallaudet University",u:"https://gallaudet.edu/campus-design-facilities/deafspace/",p:"d2",k:"עקרונות עיצוב",lang:"EN",s:"עקרונות תכנון של אוניברסיטה לחרשים: קווי ראייה, אור, מרחב לשיחה בידיים, צבעים שמרגיעים את העין.",use:"עקרונות לניתוח ״איך חרשים משתמשים במרחב״."},
+{t:"Sign Language Research Lab – University of Haifa",u:"https://signlab.haifa.ac.il/",p:"d2",k:"מחקר",lang:"EN",s:"המעבדה לחקר שפות סימנים באוניברסיטת חיפה, שחוקרת את שפת הסימנים הישראלית.",use:"מקור אקדמי לביבליוגרפיה."},
+{t:"Gesture recognition",u:"https://en.wikipedia.org/wiki/Gesture_recognition",p:"d2",k:"STEM",lang:"EN",s:"איך מחשבים מזהים תנועות ידיים: מצלמות, חיישני תאוצה, למידת מכונה. ומה עדיין קשה להם.",use:"מחקר טכנולוגי: גבולות הטכנולוגיה."}
+],
+intel:{app:"מי מתחיל את השיחה? כמה שניות יש לה? באיזו יד מחזיקים מה (סל קניות, תיק, טלפון)?",cog:"איזה מידע חייב לעבור כדי שהרגע יצליח: מילה, כוונה, רגש? איך כל צד יודע שהבינו אותו?",soc:"מי ״עושה את המאמץ״ בשיחה? האם המוצר מעביר את המאמץ מהחרש אל השומע, או להפך?",cre:"מה אם השומע הוא זה ש״חסר חוש״ בשיחה הזו? מה אם הפתרון לא ״מתרגם״ בכלל?",emo:"מה מרגיש השומע שרוצה לעזור ולא יודע איך? ומה מרגיש החרש כשמתחילים לדבר אליו לאט ובקול רם?"}},
+
+{id:"alarm",sense:"hear",title:"אזעקה שלא שומעים",who:"חרשים וכבדי שמיעה במצבי חירום",
+contrast:["צופר שמיע לכולם","שקט מוחלט באותו רגע"],
+d1:{pain:["מה קורה לאדם חרש כשאזעקה נשמעת בלילה, כשהוא ישן והטלפון בצד?","איך הוא יודע שהאזעקה נגמרה ואפשר לצאת מהממ״ד?","מי לוקח עליו אחריות היום (שכנים, בני משפחה) ומה זה עושה לעצמאות שלו?"],
+legs:["חרש שגר לבד / הורה חרש לילדים שומעים / סטודנטית כבדת שמיעה במעונות.","פחד, תלות בסביבה, איחור בתגובה, חוסר ודאות.","לילה ושינה / רחוב / מקלחת / 15–90 שניות להגיע למרחב מוגן."],
+bound:"האם מדובר בהתרעת טילים, אש בבית, או שתיהן? תחמו."},
+d2:{persona:["ראיון: איך עברה עליך הלילה שבו הייתה אזעקה? מה הודיע לך?","מיפוי זמן: ציר זמן שנייה-אחר-שנייה של אזעקה עבור שומע מול חרש."],
+bench:["מערכות התראה ביתיות עם רוטט מיטה (Bellman)","זיהוי צלילים בטלפון","אפליקציית פיקוד העורף","מהבהבי אש תקניים"],
+stem:["מהבהבים: תדירות הבהוב ובטיחות (אפילפסיה רגישה לאור)","רטט: איזה רטט מעיר אדם ישן?","זיהוי תדר של צופר","זמן תגובה ומרחק"]},
+links:[
+{t:"מדריך היערכות לחירום לאנשים עם מוגבלות שמיעה (מערכות)",u:"https://www.maarachot.idf.il/media/akefmvfu/%D7%9E%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-%D7%A2%D7%95%D7%A8%D7%A3-3-%D7%90%D7%97%D7%A8%D7%99%D7%95%D7%AA-%D7%9E%D7%A9%D7%95%D7%AA%D7%A4%D7%AA-%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%94%D7%99%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-%D7%9C%D7%9E%D7%A6%D7%91%D7%99-%D7%97%D7%99%D7%A8%D7%95%D7%9D-%D7%A2%D7%91%D7%95%D7%A8-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%A2%D7%9D-%D7%9E%D7%95%D7%92%D7%91%D7%9C%D7%95%D7%AA-%D7%A9%D7%9E%D7%99%D7%A2%D7%94.pdf",p:"d1",k:"מסמך רשמי",lang:"HE",s:"מדריך בעברית (סדרת ״מערכות עורף״) להיערכות לחירום עבור אנשים עם מוגבלות שמיעה. מתאר את המצב הקיים ואת ההמלצות.",use:"הצגת הבעיה והמצב הקיים בישראל."},
+{t:"פיקוד העורף",u:"https://www.oref.org.il/",p:"d1",k:"רשמי",lang:"HE",s:"האתר הרשמי: הנחיות, זמני התגוננות לפי אזור, ואמצעי ההתרעה הקיימים.",use:"נתון לאילוץ הזמן: כמה שניות יש בכל אזור?"},
+{t:"כל זכות: חירשים וכבדי שמיעה",u:"https://www.kolzchut.org.il/he/%D7%97%D7%99%D7%A8%D7%A9%D7%99%D7%9D_%D7%95%D7%9B%D7%91%D7%93%D7%99_%D7%A9%D7%9E%D7%99%D7%A2%D7%94",p:"d1",k:"רקע",lang:"HE",s:"זכויות, מכשירים מסובסדים ושירותים. אילו אמצעי התרעה כבר מגיעים לבית של אדם חרש?",use:"מבוא ותיאור המצב הקיים."},
+{t:"Bellman & Symfon – Bed Shaker",u:"https://shop.bellman.com/products/bed-shaker",p:"d2",k:"מוצר קיים",lang:"EN",s:"רוטט שמונח מתחת לכרית ומחובר למערכת התראות ביתית (פעמון, טלפון, גלאי עשן).",use:"בנצ׳מרקינג: מה הוא עושה טוב? האם הוא מבדיל בין סוגי אירועים?"},
+{t:"iOS 14 lets deaf users set alerts for important sounds (TechCrunch)",u:"https://techcrunch.com/2020/06/25/ios-14-lets-deaf-users-set-alerts-for-important-sounds-among-other-clever-accessibility-perks",p:"d2",k:"מוצר קיים",lang:"EN",s:"על תכונת ״זיהוי צלילים״ באייפון: הטלפון מקשיב לסירנות, דפיקות בדלת ובכי תינוק ומתריע.",use:"בנצ׳מרקינג: מה קורה כשהטלפון בטעינה בחדר אחר?"},
+{t:"Fire alarm notification appliance",u:"https://en.wikipedia.org/wiki/Fire_alarm_notification_appliance",p:"d2",k:"תקנים",lang:"EN",s:"סוגי מתריעי אש: צופרים, מהבהבים, ותקנים לעוצמת אור ולקצב הבהוב בבניינים ציבוריים.",use:"מחקר טכנולוגי: מה התקן כבר יודע?"},
+{t:"Photosensitive epilepsy",u:"https://en.wikipedia.org/wiki/Photosensitive_epilepsy",p:"d2",k:"STEM",lang:"EN",s:"באילו תדירויות הבהוב אור עלול לגרום להתקף. גבול בטיחות שכל אור מהבהב צריך לכבד.",use:"אילוץ טכני חשוב לגבולות הגזרה."},
+{t:"Haptic technology",u:"https://en.wikipedia.org/wiki/Haptic_technology",p:"d2",k:"STEM",lang:"EN",s:"סקירת טכנולוגיות משוב מגע: מנועי רטט, LRA, פיזו. מה ההבדל בתחושה ובצריכת חשמל.",use:"מחקר חומרים ומנגנונים."},
+{t:"Siren (alarm)",u:"https://en.wikipedia.org/wiki/Siren_(alarm)",p:"d2",k:"STEM",lang:"EN",s:"איך צופר עובד: תדרים, עוצמה, ולמה צליל ״עולה ויורד״ מושך תשומת לב.",use:"להבין מה בדיוק ״חסר״ לאדם החרש."},
+{t:"Brain scans show deaf subjects ‘hear’ vibrations (Scientific American)",u:"https://www.scientificamerican.com/article/brain-scans-show-deaf-sub/",p:"d2",k:"מחקר",lang:"EN",s:"אצל חרשים, רטט מעורר את אזור השמיעה במוח. תמיכה מדעית לשימוש במגע כערוץ התרעה.",use:"שורה בטבלת התובנות."},
+{t:"Mimosa pudica (נוגע-לא-נוגע)",u:"https://en.wikipedia.org/wiki/Mimosa_pudica",p:"d2",k:"ביומימיקרי",lang:"EN",s:"צמח שמקפל עלים תוך שניות כשנוגעים בו. תגובה מהירה וגלויה לגירוי, בלי קול.",use:"מודבורד: איך הטבע ״מתריע״ בלי צליל?"}
+],
+intel:{app:"איפה המשתמש נמצא ב-3 מצבים: ער בבית, ישן, בחוץ? מה הפעולה הראשונה שהוא חייב לעשות?",cog:"איך הוא יבחין בין אזעקה אמיתית לבין צלצול בדלת? איך יידע שהסכנה עברה?",soc:"האם המוצר מחזק את העצמאות או את התלות בשכנים? האם אורח בבית יבין מה קורה?",cre:"מה אם ההתרעה לא מגיעה ״אליו״ אלא משנה את כל הסביבה? מה אם השקט הוא הסימן?",emo:"פחד, בהלה, ואז הקלה. איך מרגיש אדם שהוא היחיד שלא יודע מה קורה, ומה ירגיע אותו?"}},
+
+{id:"freq",sense:"hear",title:"צלילים שנעלמים",who:"אנשים עם אובדן שמיעה בתדרים מסוימים",
+contrast:["גלי קול שקיימים במרחב","צלילים שלא מגיעים למוח"],
+d1:{pain:["אילו צלילים בדיוק ״נעלמים״ למי שאיבד תדרים גבוהים: עיצורים כמו ס׳ ו-ש׳, ציוץ ציפורים, צפצוף של מכשירים?","איך זה מרגיש לשמוע שמישהו מדבר, אבל לא להבין מה הוא אומר?","מי לא יודע שיש לו בעיה? (צעירים עם אוזניות, מבוגרים בהדרגה)"],
+legs:["מבוגרים עם ירידת שמיעה הדרגתית / צעירים עם נזק מרעש / ילדים עם מכשיר שמיעה.","בלבול בשיחה, צלילי אזהרה שמתפספסים, עייפות מהמאמץ להקשיב.","מטבח עם מכשירים מצפצפים / כיתה רועשת / מסעדה."],
+bound:"האם הפרויקט עוסק בדיבור, בצלילי אזהרה, או בחוויית הסביבה? אחד מהם."},
+d2:{persona:["בקשו מבן משפחה מבוגר לעשות בדיקת שמיעה פשוטה (מחולל צלילים) ותעדו.","ראיון: אילו צלילים בבית הפסקת לשמוע? מתי שמת לב?"],
+bench:["מכשירי שמיעה","אפליקציות הגברה","כתוביות חיות","מכשירי חשמל עם חיווי אור"],
+stem:["אודיוגרמה: איך קוראים אותה","תדר, אמפליטודה, דציבל","האוזן הפנימית: כל אזור בשבלול שומע תדר אחר","מיקרופונים ומתמרים פיזואלקטריים"]},
+links:[
+{t:"Audiogram",u:"https://en.wikipedia.org/wiki/Audiogram",p:"d1",k:"STEM",lang:"EN",s:"הגרף שמתאר שמיעה: תדר על ציר אחד, עוצמה על השני. ככה רופא ״רואה״ אילו צלילים חסרים.",use:"הבסיס להגדרת קהל היעד."},
+{t:"Speech banana",u:"https://en.wikipedia.org/wiki/Speech_banana",p:"d1",k:"STEM",lang:"EN",s:"האזור על האודיוגרמה שבו נמצאים צלילי הדיבור. מראה למה אובדן בתדרים גבוהים פוגע בהבנת עיצורים.",use:"תרשים מצוין לעמוד הבעיה."},
+{t:"World report on hearing (WHO)",u:"https://www.who.int/publications/i/item/9789240020481",p:"d1",k:"נתונים",lang:"EN",s:"הדו״ח העולמי של ארגון הבריאות העולמי על שמיעה: היקף התופעה, גורמים ומניעה.",use:"נתונים מספריים להצדקת הפרויקט."},
+{t:"Noise-Induced Hearing Loss (NIDCD)",u:"https://www.nidcd.nih.gov/health/noise-induced-hearing-loss",p:"d1",k:"רקע",lang:"EN",s:"איך רעש פוגע בשמיעה, אילו עוצמות מסוכנות, ולמה הנזק מתחיל דווקא בתדרים הגבוהים.",use:"קהל יעד צעיר ולא צפוי."},
+{t:"Online Tone Generator",u:"https://www.szynalski.com/tone-generator/",p:"d2",k:"כלי ניסוי",lang:"EN",s:"מחולל צלילים פשוט בדפדפן. אפשר לבדוק עד איזה תדר כל אחת מכן שומעת.",use:"ניסוי כיתתי לתיעוד שטח (בעוצמה נמוכה!)."},
+{t:"Spectrogram – Chrome Music Lab",u:"https://musiclab.chromeexperiments.com/Spectrogram/",p:"d2",k:"כלי ניסוי",lang:"EN",s:"מציג כל צליל כתמונה צבעונית של תדרים לאורך זמן. רואים איך נראית מילה, שריקה או צפצוף.",use:"איך נראה צליל שלא שומעים? חומר מצוין למודבורד."},
+{t:"Hearing loss simulator (Starkey)",u:"https://www.starkey.com/hearing-loss-simulator",p:"d2",k:"סימולציה",lang:"EN",s:"סימולטור שמשמיע איך נשמעת מסעדה או שיחה עם דרגות שונות של אובדן שמיעה.",use:"אמפתיה: להקשיב כמו המשתמש."},
+{t:"Equal-loudness contour",u:"https://en.wikipedia.org/wiki/Equal-loudness_contour",p:"d2",k:"STEM",lang:"EN",s:"האוזן לא שומעת את כל התדרים באותה עוצמה. גרף שמראה כמה רגישה האוזן לכל תדר.",use:"פרק STEM: פיזיקה של שמיעה."},
+{t:"Tonotopy",u:"https://en.wikipedia.org/wiki/Tonotopy",p:"d2",k:"STEM",lang:"EN",s:"בשבלול שבאוזן, כל מקום מגיב לתדר אחר, כמו מקלדת פסנתר מגולגלת.",use:"השראה צורנית + הסבר מדעי."},
+{t:"Cocktail party effect",u:"https://en.wikipedia.org/wiki/Cocktail_party_effect",p:"d2",k:"מחקר",lang:"EN",s:"היכולת להתמקד בקול אחד בתוך רעש. בדיוק היכולת שנפגעת ראשונה אצל כבדי שמיעה.",use:"תובנה לטבלה המסכמת."},
+{t:"The Mosquito",u:"https://en.wikipedia.org/wiki/The_Mosquito",p:"d2",k:"השראה",lang:"EN",s:"מכשיר שמשמיע צליל גבוה שרק צעירים שומעים. דוגמה הפוכה: תדר שמבדיל בין אנשים לפי גיל.",use:"ניגוד מעניין לפרק הנושא השנתי."},
+{t:"Piezoelectricity",u:"https://en.wikipedia.org/wiki/Piezoelectricity",p:"d2",k:"STEM",lang:"EN",s:"חומרים שמייצרים חשמל כשלוחצים עליהם, ולהפך. הבסיס של מיקרופונים וזמזמים קטנים.",use:"מחקר חומרים ומנגנונים."}
+],
+intel:{app:"באיזה רגע ביום הצליל הנעלם חשוב באמת? מה המשתמש עושה באותו רגע?",cog:"האם המשתמש יודע שהוא מפספס משהו? איך מעבירים מידע על צליל בלי ״לצעוק״?",soc:"האם הבעיה מוסתרת מתוך בושה? מה המוצר מספר עליו לאנשים אחרים?",cre:"מה אם במקום להגביר את הצליל, משנים את מה שמשמיע אותו? מה אם רואים את מה שלא שומעים?",emo:"עייפות מהמאמץ להקשיב, בדידות בתוך שיחה. איזו תחושה תבוא במקומן?"}},
+
+{id:"surf",sense:"hear",title:"גולשים בשקט",who:"גולשי גלים חרשים וכבדי שמיעה",
+contrast:["ים רועש ותנועה בלתי פוסקת","גולש בלי קול, בלי מכשיר שמיעה"],
+d1:{pain:["מה קורה בליינאפ כשגולש אחר צועק ״שלי!״ או כשהמציל קורא לצאת מהמים?","גולש חרש מוריד את מכשיר השמיעה לפני הכניסה למים. מה זה אומר לבטיחות שלו?","איך הוא מתקשר עם המדריך, עם חברים, ועם גולשים זרים?"],
+legs:["גולשים חרשים מתחילים / גולשים מנוסים / ילדים בבית ספר לגלישה.","בטיחות, חיכוך עם גולשים אחרים, ניתוק חברתי במים.","מים מלוחים, שמש, נפילות (wipeout), ידיים עסוקות בחתירה."],
+bound:"האם הפרויקט עוסק בבטיחות, בתקשורת עם המדריך, או בכללי הליינאפ? בחרו."},
+d2:{persona:["ראיון עם גולש חרש או עם מדריך גלישה שעבד עם גולשים חרשים.","תצפית בחוף: מתי גולשים מתקשרים בקול, ומתי בתנועות?"],
+bench:["אותות ידיים של צוללים ומצילים","שלטי אותות חירום בחופים","דגלי החוף","שעונים חכמים עמידים במים"],
+stem:["קול במים מול באוויר","מערכת שיווי המשקל (וסטיבולרית)","תקן עמידות למים IP","ניאופרן וסיליקון: גמישות, ציפה, עמידות לשמש"]},
+links:[
+{t:"Pool program brings wave-riding to the deaf in Switzerland",u:"https://wavepoolmag.com/swiss-surf-program-for-the-deaf/",p:"d1",k:"כתבה",lang:"EN",s:"תוכנית גלישה לחרשים בבריכת גלים. מתארת איך המדריכים מתקשרים בלי קול.",use:"מקור לתיאור הבעיה והפתרונות המאולתרים היום."},
+{t:"“Sound doesn’t matter underwater – everyone’s Deaf down there” (Lonely Planet)",u:"https://www.lonelyplanet.com/articles/deaf-scuba-diving-aqua-hands",p:"d1",k:"כתבה",lang:"EN",s:"מדריך צלילה חרש שמסביר שמתחת למים כולם ״חרשים״. היפוך מעניין של היתרון והחיסרון.",use:"ציטוט חזק למבוא ולנושא ״ניגודים״."},
+{t:"Hearing impaired Mentawai charter (Swellnet)",u:"https://www.swellnet.com/photos/swellnet-sessions/hearing-impaired-mentawai-charter",p:"d1",k:"כתבה",lang:"EN",s:"טיול גלישה של קבוצת גולשים כבדי שמיעה. תמונות ותיאור של החוויה מבפנים.",use:"מודבורד ותיעוד משתמשים."},
+{t:"Deaflympics",u:"https://www.deaflympics.com/",p:"d1",k:"ארגון",lang:"EN",s:"האולימפיאדה של ספורטאים חרשים. איך ספורט תחרותי מותאם בלי זינוק בקול.",use:"השראה: איך ספורט מוותר על צליל."},
+{t:"The complete directory of adaptive surfing organizations (SurferToday)",u:"https://www.surfertoday.com/surfing/13658-the-complete-directory-of-adaptive-surfing-organizations",p:"d2",k:"מאגר",lang:"EN",s:"רשימה של ארגוני גלישה מותאמת בעולם. מקום טוב למצוא אנשי קשר וגישות.",use:"בנצ׳מרקינג ומציאת מרואיינים."},
+{t:"Irish tow surf rescue club – emergency signal signs (Carve)",u:"https://www.carvemag.com/2018/09/irish-tow-surf-rescue-club-produce-emergency-signal-signs-for-popular-surf-spots/",p:"d2",k:"מוצר קיים",lang:"EN",s:"שלטים בחופים שמלמדים אותות ידיים לחירום בין גולשים. שפה חזותית קיימת.",use:"בנצ׳מרקינג: מה עובד בשפה חזותית במים?"},
+{t:"Diver communications",u:"https://en.wikipedia.org/wiki/Diver_communications",p:"d2",k:"מחקר",lang:"EN",s:"כל הדרכים שבהן צוללים מתקשרים: אותות ידיים, משיכות בחבל, אור, לוחות כתיבה.",use:"מילון של פתרונות שכבר קיימים בעולם המים."},
+{t:"Underwater acoustics",u:"https://en.wikipedia.org/wiki/Underwater_acoustics",p:"d2",k:"STEM",lang:"EN",s:"קול נע במים מהר פי ארבעה בערך מאשר באוויר, אבל האוזן האנושית לא בנויה לקלוט אותו שם.",use:"פרק STEM: פיזיקה של קול במים."},
+{t:"Vestibular system",u:"https://en.wikipedia.org/wiki/Vestibular_system",p:"d2",k:"STEM",lang:"EN",s:"מערכת שיווי המשקל באוזן הפנימית. אצל חלק מהחרשים היא נפגעת, וזה משפיע על הגלישה.",use:"תובנה פיזיולוגית לפרסונה."},
+{t:"IP Code",u:"https://en.wikipedia.org/wiki/IP_code",p:"d2",k:"תקנים",lang:"EN",s:"התקן שמגדיר עמידות של מכשירים למים ולאבק (למשל IP68). מה כל ספרה אומרת.",use:"אילוץ טכני לגבולות הגזרה."},
+{t:"Neoprene",u:"https://en.wikipedia.org/wiki/Neoprene",p:"d2",k:"חומר",lang:"EN",s:"החומר של חליפות הגלישה: בידוד, גמישות, ציפה. יתרונות וחסרונות.",use:"חקר חומרים (CMF)."},
+{t:"Rip current",u:"https://en.wikipedia.org/wiki/Rip_current",p:"d1",k:"בטיחות",lang:"EN",s:"זרם הסחיפה: הסכנה המרכזית בחופי ישראל, ואיך מזהים אותו בעין.",use:"הבנת הסיכון בשלב החריש."}
+],
+intel:{app:"מה הגולש עושה עם הידיים, הראש והגוף בכל שלב: חתירה, המתנה, עמידה, נפילה? איפה אין מקום לשום דבר?",cog:"איזה מידע הוא צריך לקבל, וכמה מהר: אזהרה, תור, קריאה לצאת? מה הוא צריך לשדר לאחרים?",soc:"איך הגולשים השומעים בליינאפ יבינו? האם זה מבודד אותו או מחבר?",cre:"מה אם השפה במים היא שוויונית, כמו אצל צוללים, וכולם ״חרשים״?",emo:"חופש, אדרנלין, וגם פחד. מה ייתן לו ביטחון בלי לקחת ממנו את החופש?"}},
+
+/* ================= ראייה ================= */
+{id:"mall",sense:"see",title:"להתמצא בקניון",who:"עיוורים וכבדי ראייה במרחב ציבורי",
+contrast:["קניון ויזואלי, מהיר ורועש","עולם של קצב, מגע וצליל"],
+d1:{pain:["מה הכי קשה בקניון: למצוא כניסה, שירותים, מעלית, חנות מסוימת, או לצאת?","מה קורה כשמקל הנחייה פוגש מרחב פתוח בלי קירות, או רצפה חלקה ואחידה?","רעש מוזיקה, הכרזות ומזגנים: איך הם מבלבלים מי שמנווט לפי שמיעה?"],
+legs:["עיוור מלידה / מי שהתעוור בבגרות / כבדת ראייה / מבוגרים עם ירידה בראייה.","אובדן עצמאות, תלות בעובדים, חרדה, התנגשויות.","קניון ספציפי שאתן מכירות, שעות עומס, מדרגות נעות."],
+bound:"קניון שלם זה גדול מדי. איזה מסלול אחד או צומת אחד תתמקדו בו?"},
+d2:{persona:["ליווי (באישור!) של אדם עיוור בקניון, או הליכה שלכן עם כיסוי עיניים ומלווה.","מיפוי הקניון: צלמו את כל המידע הנגיש שכבר קיים (מישושים, ברייל, הכרזות)."],
+bench:["מקל לבן","כלב נחייה","RightHear","WeWALK","Be My Eyes / Aira"],
+stem:["חיישני מרחק אולטרסוניים","אקוסטיקה של חללים ואקולוקציה","מרצפות מישוש: גובה, צורה, ניגוד","מפות מנטליות וגאומטריה של מרחב"]},
+links:[
+{t:"Chris Downey: Design with the blind in mind (TED)",u:"https://www.ted.com/talks/chris_downey_design_with_the_blind_in_mind",p:"d1",k:"וידאו",lang:"EN",s:"אדריכל שהתעוור בגיל 45 מתאר איך עיר נחווית בלי ראייה, ולמה עיצוב טוב לעיוורים טוב לכולם.",use:"מבוא ומפת אמפתיה."},
+{t:"Daniel Kish: How I use sonar to navigate the world (TED)",u:"https://www.ted.com/talks/daniel_kish_how_i_use_sonar_to_navigate_the_world",p:"d1",k:"וידאו",lang:"EN",s:"אדם עיוור שמנווט בעזרת נקישות לשון, כמו עטלף. משנה את ההבנה מה עיוורים ״יכולים״.",use:"שבירת הנחות בשלב החריש."},
+{t:"״דיאלוג בחשכה״ במוזיאון הילדים בחולון (מעריב)",u:"https://www.maariv.co.il/news/israel/article-1328927",p:"d1",k:"חוויה",lang:"HE",s:"כתבה על התערוכה בחולון שבה מדריכים עיוורים מובילים את המבקרים בחושך מוחלט.",use:"סיור כיתתי מומלץ לתיעוד שטח."},
+{t:"Tactile paving",u:"https://en.wikipedia.org/wiki/Tactile_paving",p:"d1",k:"רקע",lang:"EN",s:"מרצפות המישוש: הומצאו ביפן ב-1965. סוגי בליטות (נקודות לעצירה, פסים לכיוון) והתקנים.",use:"מה כבר קיים במרחב הציבורי."},
+{t:"RightHear",u:"https://www.right-hear.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מערכת ישראלית שמשמיעה לעיוורים בטלפון היכן הם נמצאים בתוך מבנה, בעזרת משדרים קטנים.",use:"בנצ׳מרקינג (ואולי אפילו מרואיינים מהחברה)."},
+{t:"Microsoft Soundscape",u:"https://www.microsoft.com/en-us/research/product/soundscape/",p:"d2",k:"מחקר",lang:"EN",s:"פרויקט מחקר שהשתמש בצליל תלת-ממדי באוזניות כדי ״לצייר״ את הסביבה סביב המשתמש.",use:"בנצ׳מרקינג: למה הפרויקט נסגר?"},
+{t:"WeWALK",u:"https://wewalk.io/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מקל לבן עם חיישן מכשולים בגובה הראש וחיבור לטלפון.",use:"בנצ׳מרקינג: משקל, מחיר, מה המשתמשים אומרים."},
+{t:"Be My Eyes",u:"https://www.bemyeyes.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"אפליקציה שמחברת עיוור למתנדב רואה בשיחת וידאו. חיבור אנושי ולא רק טכנולוגי.",use:"השוואה: עזרה אנושית מול עזרה ממוחשבת."},
+{t:"Wayfinding",u:"https://en.wikipedia.org/wiki/Wayfinding",p:"d2",k:"עקרונות עיצוב",lang:"EN",s:"התחום שעוסק באיך אנשים מוצאים את דרכם: נקודות ציון, מסלולים, צמתים (קווין לינץ׳).",use:"מסגרת לניתוח מפת הקניון."},
+{t:"Human echolocation",u:"https://en.wikipedia.org/wiki/Human_echolocation",p:"d2",k:"STEM",lang:"EN",s:"המדע של אקולוקציה אצל בני אדם: איך הד מקירות וחפצים מספר על המרחב.",use:"פרק STEM: אקוסטיקה של חללים."},
+{t:"Ultrasonic Sensor HC-SR04 and Arduino",u:"https://howtomechatronics.com/tutorials/arduino/ultrasonic-sensor-hc-sr04/",p:"d2",k:"STEM",lang:"EN",s:"מדריך בסיסי לחיישן מרחק אולטרסוני: איך הוא מודד, מה הטווח ומה הוא לא רואה.",use:"מחקר טכנולוגי: היתכנות וגבולות."},
+{t:"Microsoft Inclusive Design",u:"https://inclusive.microsoft.design/",p:"d1",k:"שיטה",lang:"EN",s:"ערכת עיצוב מכליל. ״ספקטרום הפרסונות״: מוגבלות קבועה, זמנית ומצבית.",use:"להרחיב את קהל היעד (למשל אם עם עגלה בעומס)."}
+],
+intel:{app:"מה המשתמש כבר מחזיק ביד (מקל, רצועת כלב, שקיות)? מה סדר הפעולות מהכניסה ועד היעד?",cog:"מה הוא צריך לדעת בכל צומת: איפה אני, לאן אני פונה, מה מסביבי? כמה מידע זה יותר מדי?",soc:"איך העובדים והקונים מסביב מבינים את המצב? האם המשתמש בולט, ורוצה לבלוט?",cre:"מה אם המרחב עצמו ״מדבר״? מה אם הרואים הם אלה שהולכים לאיבוד?",emo:"חרדה בכניסה, ביטחון ביציאה. מה נותן תחושת שליטה ועצמאות?"}},
+
+{id:"draw",sense:"see",title:"לצייר בלי לראות",who:"עיוורים וכבדי ראייה שרוצים ליצור",
+contrast:["דימוי חזותי על דף","מגע, תנועה וזיכרון של היד"],
+d1:{pain:["מה הבעיה המרכזית: לדעת איפה הקו הקודם? לבחור צבע? לראות את היצירה הגמורה?","מה המשמעות של ״ציור״ למי שנולד עיוור, לעומת מי שהתעוור ויש לו זיכרון חזותי?","למה בשיעורי אמנות בבתי ספר רגילים ילדים עיוורים מקבלים רק פלסטלינה?"],
+legs:["ילדים עיוורים בבית ספר / אמן שהתעוור / מבוגרים עם ירידה בראייה.","תסכול, תלות במישהו שיתאר, אובדן כלי ביטוי.","שולחן עבודה בבית, חוג, שיעור אמנות, ניקיון וצבע."],
+bound:"ציור בקו? בצבע? בתלת-ממד? הפרויקט לא יכול לכסות הכול."},
+d2:{persona:["ראיון עם מורה לאמנות בבית ספר לעיוורים, או עם אמן עיוור.","ניסוי: ציירו כוס בעיניים עצומות. מה הלך לאיבוד ומה הפתיע?"],
+bench:["לוח ציור מישושי (Draftsman)","חוטי שעווה","מזרקי צבע תלת-ממדי","נייר ״מתנפח״ לגרפיקה מישושית"],
+stem:["תפיסה הפטית: מה האצבע מרגישה (טקסטורה, טמפרטורה, קשיות)","החלפה חושית: צבע לצליל","חומרים שמגיבים ללחץ או חום"]},
+links:[
+{t:"Eşref Armağan",u:"https://en.wikipedia.org/wiki/E%C5%9Fref_Arma%C4%9Fan",p:"d1",k:"אמן",lang:"EN",s:"צייר טורקי שנולד עיוור ומצייר בפרספקטיבה ובצללים. נחקר על ידי מדעני מוח.",use:"מבוא: פריצת ההנחה שעיוורים לא מציירים."},
+{t:"Blind artist relies on touch and texture (My Modern Met)",u:"https://mymodernmet.com/john-bramblitt-blind-painter/",p:"d1",k:"אמן",lang:"EN",s:"ג׳ון ברמבליט, צייר שהתעוור, ומשתמש בצבע עם טקסטורה כדי ״לראות״ באצבעות.",use:"תיעוד שיטת עבודה אמיתית."},
+{t:"Neil Harbisson: I listen to color (TED)",u:"https://www.ted.com/talks/neil_harbisson_i_listen_to_color",p:"d1",k:"וידאו",lang:"EN",s:"אמן עיוור צבעים ששומע צבעים דרך חיישן. מה זה אומר על הקשר בין חושים?",use:"השראה לחשיבה על צבע מעבר לראייה."},
+{t:"Molyneux’s problem",u:"https://en.wikipedia.org/wiki/Molyneux%27s_problem",p:"d1",k:"פילוסופיה",lang:"EN",s:"שאלה פילוסופית בת 300 שנה: אם עיוור יחזור לראות, האם יזהה בעין כדור שהכיר רק במגע?",use:"שאלה מעוררת למבוא."},
+{t:"DRAFTSMAN Tactile Drawing Board (APH)",u:"https://aph.org/product/draftsman-tactile-drawing-board",p:"d2",k:"מוצר קיים",lang:"EN",s:"לוח שעליו ציור בעט רגיל יוצר קו בולט שאפשר למשש מיד.",use:"בנצ׳מרקינג מרכזי."},
+{t:"Tactile literacy tools (APH Blog)",u:"https://aph.org/blog/tactile-literacy-tools",p:"d2",k:"מאגר",lang:"EN",s:"סקירה של כלים לאוריינות מישושית: ערכות שרטוט, סרגלים, ניירות מיוחדים.",use:"מיפוי שוק רחב."},
+{t:"DIY Raised Line Drawing (Paths to Literacy)",u:"https://pathstoliteracy.org/wp-content/uploads/2024/08/DIYRaisedLineDrawing2024.pdf",p:"d2",k:"מדריך",lang:"EN",s:"מדריך לייצור ביתי של משטחי ציור בקו בולט מחומרים זמינים.",use:"השראה לניסויים מהירים בחומר."},
+{t:"Art Materials for students with visual impairments",u:"https://teachingvisuallyimpaired.com/art-materials.html",p:"d2",k:"מאגר",lang:"EN",s:"רשימת חומרי אמנות מותאמים, ממורה לבעלי לקויות ראייה.",use:"בנצ׳מרקינג + רעיונות לחקר חומרים."},
+{t:"Tactile graphic",u:"https://en.wikipedia.org/wiki/Tactile_graphic",p:"d2",k:"STEM",lang:"EN",s:"איך מייצרים תמונות למישוש: נייר מתנפח בחום, הדפסה בולטת, תלת-ממד. ומה המגבלות.",use:"מחקר טכנולוגי-חומרי."},
+{t:"Haptic perception",u:"https://en.wikipedia.org/wiki/Haptic_perception",p:"d2",k:"STEM",lang:"EN",s:"איך אנחנו מזהים צורה בתנועה של היד: חקירה אקטיבית מול מגע פסיבי.",use:"פרק STEM: מה היד יודעת."},
+{t:"EyeMusic (National Geographic)",u:"https://www.nationalgeographic.com/culture/article/140403-eyemusic-ssd-visual-impairment-software-science",p:"d2",k:"מחקר",lang:"EN",s:"האפליקציה של פרופ׳ אמיר אמדי מהאוניברסיטה העברית שמתרגמת צורות וצבעים לצלילים.",use:"מחקר ישראלי על החלפה חושית."}
+],
+intel:{app:"איך היד יודעת איפה היא על הדף? מה סדר הפעולות: לבחור, לסמן, לבדוק, לתקן?",cog:"איך היוצר יודע מה כבר צויר? איך הוא ״קורא״ את היצירה שלו?",soc:"האם היצירה מדברת גם אל רואים? איך ציור כזה יוצג בתערוכה משותפת?",cre:"מה אם הציור לא נועד לעין בכלל? מה אם צבע הוא טמפרטורה, צליל, או מרקם?",emo:"גאווה, חופש ביטוי, שליטה. מה מרגיש יוצר שיכול לגעת בעבודה שסיים?"}},
+
+{id:"read",sense:"see",title:"לקרוא סיפור במגע",who:"עיוורים ולקויי ראייה, ילדים ומבוגרים",
+contrast:["טקסט מודפס ואיורים","נקודות ברייל, קול ומרקם"],
+d1:{pain:["מה חסר בספר ברייל לעומת ספר מודפס: איורים? כריכה? היכולת לדפדף מהר?","ילדה עיוורת וחברה רואה רוצות לקרוא ספר יחד. מה קורה?","רוב העיוורים לא יודעים ברייל ומאזינים לספרים. מה הם מפסידים?"],
+legs:["ילדים בגן ובכיתה א׳ / מתבגרים / מבוגרים שהתעוורו.","אוריינות, הדרה מתרבות, חוויה משותפת עם רואים.","ספריית בית ספר, מיטה לפני שינה, משקל וגודל של ספרי ברייל."],
+bound:"קריאה עצמאית, הקראה משותפת, או לימוד קריאה? אחד."},
+d2:{persona:["ביקור או שיחה עם הספרייה המרכזית לעיוורים בנתניה.","נסו לקרוא שורה בברייל עם אצבע. כמה זמן לקח?"],
+bench:["ספרי ברייל","ספרי מישוש מאוירים (Les Doigts Qui Rêvent)","צג ברייל דינמי","ספרי שמע"],
+stem:["מטריצת 6 הנקודות: קומבינטוריקה","מנגנון פינים בצג ברייל","ברייל עברי","מדוע הכתב היה ״כתב לילה״ צבאי"]},
+links:[
+{t:"Braille",u:"https://en.wikipedia.org/wiki/Braille",p:"d1",k:"רקע",lang:"EN",s:"כתב ברייל: היסטוריה, מבנה התא בן 6 הנקודות, מידות וגודל.",use:"מבוא ומחקר מתמטי."},
+{t:"Louis Braille",u:"https://en.wikipedia.org/wiki/Louis_Braille",p:"d1",k:"היסטוריה",lang:"EN",s:"ממציא הכתב, שהתעוור בגיל 3 ופיתח את השיטה כנער בן 15.",use:"סיפור אנושי לפתיחת הפרויקט."},
+{t:"Night writing",u:"https://en.wikipedia.org/wiki/Night_writing",p:"d1",k:"היסטוריה",lang:"EN",s:"״כתב לילה״ של צבא נפוליאון לקריאה בחושך, שממנו נולד הברייל. דוגמה לחיבור בין עולמות.",use:"נושא השנה: חיבור בין צבא לנגישות."},
+{t:"כל זכות: הספרייה המרכזית לעיוורים",u:"https://www.kolzchut.org.il/he/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%94_%D7%94%D7%9E%D7%A8%D7%9B%D7%96%D7%99%D7%AA_%D7%9C%D7%A2%D7%99%D7%95%D7%95%D7%A8%D7%99%D7%9D,_%D7%9B%D7%91%D7%93%D7%99_%D7%A8%D7%90%D7%99%D7%99%D7%94_%D7%95%D7%9E%D7%95%D7%92%D7%91%D7%9C%D7%99%D7%9D",p:"d1",k:"ארגון",lang:"HE",s:"מידע על הספרייה בנתניה שמפיקה ומשאילה ספרים בברייל, בקול ובהגדלה.",use:"מקור לראיון ולנתונים בעברית."},
+{t:"Hebrew Braille",u:"https://en.wikipedia.org/wiki/Hebrew_Braille",p:"d2",k:"רקע",lang:"EN",s:"איך ברייל עובד בעברית: קריאה משמאל לימין, ניקוד, אותיות סופיות.",use:"פרט ייחודי לישראל."},
+{t:"Les Doigts Qui Rêvent – tactile books (Paths to Literacy)",u:"https://www.pathstoliteracy.org/resource/les-doigts-qui-revent-dreaming-fingers-tactile-books",p:"d2",k:"מוצר קיים",lang:"EN",s:"הוצאה צרפתית שמייצרת ספרי ילדים מאוירים במרקמים: בד, עץ, נייר זכוכית.",use:"בנצ׳מרקינג והשראה חומרית."},
+{t:"Designing Tactile Illustrated Books (NFB)",u:"https://nfb.org/images/nfb/publications/jbir/jbir14/jbir040101.html",p:"d2",k:"מחקר",lang:"EN",s:"מאמר מחקרי על איך ילדים עיוורים מבינים איורים מישושיים, ומה עובד ומה מבלבל.",use:"מקור אקדמי לטבלת התובנות."},
+{t:"Refreshable braille display",u:"https://en.wikipedia.org/wiki/Refreshable_braille_display",p:"d2",k:"STEM",lang:"EN",s:"איך עובד צג שבו פינים קטנים עולים ויורדים (בדרך כלל במנגנון פיזואלקטרי). למה הוא יקר כל כך.",use:"מחקר מנגנונים."},
+{t:"Dot Inc.",u:"https://www.dotincorp.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"חברה שפיתחה שעון ומכשירים עם ברייל דינמי בעלות נמוכה יותר.",use:"בנצ׳מרקינג."},
+{t:"Moon type",u:"https://en.wikipedia.org/wiki/Moon_type",p:"d2",k:"השראה",lang:"EN",s:"כתב מישוש חלופי שמבוסס על צורות פשוטות של אותיות. קל יותר למי שהתעוור בגיל מבוגר.",use:"השוואה: עוד דרך לקרוא במגע."},
+{t:"NLS – National Library Service for the Blind (Library of Congress)",u:"https://www.loc.gov/nls/",p:"d2",k:"ארגון",lang:"EN",s:"שירות הספרייה הלאומית האמריקאית לספרי שמע וברייל, כולל מכשירי השמעה ייעודיים.",use:"בנצ׳מרקינג של ספרי שמע."}
+],
+intel:{app:"איך מחזיקים את הספר, איפה האצבעות, איך מדפדפים ואיך מוצאים את המקום שבו עצרו?",cog:"איך הקורא יודע מה קורה בתמונה? כמה מידע אפשר להעביר באצבע לפני שזה מבלבל?",soc:"האם רואה ועיוור יכולים לחוות את אותו ספר יחד? ספר כזה יעמוד במדף רגיל בספרייה?",cre:"מה אם הסיפור לא ״מתורגם״ לברייל אלא נולד במגע? מה אם הרואים יקראו בעיניים עצומות?",emo:"סקרנות, הנאה, עצמאות. מה מרגיש ילד שמגלה בעצמו את סוף הסיפור?"}},
+
+{id:"color",sense:"see",title:"העולם בלי אדום",who:"אנשים עם עיוורון צבעים לאדום (פרוטנופיה)",
+contrast:["אדום שמסמן סכנה, אהבה ובשלות","חום-אפור שנראה כמו כל השאר"],
+d1:{pain:["איפה העולם ״מדבר באדום״: רמזור, נורת אזהרה, בשר לא מבושל, גרף בשיעור, ציון באדום?","מה קורה לילד בגן כשמבקשים ממנו ״להביא את הכדור האדום״?","רבים לא יודעים שהם עיוורי צבעים. מתי מגלים?"],
+legs:["ילדים בגיל בית ספר / נהגים / עובדים במקצועות טכניים (חשמל, בישול).","טעויות, מבוכה, סכנה, החמצת מידע.","כיתה, מטבח, כביש, מסך."],
+bound:"עיוורון צבעים לאדום בלבד. באיזה תחום חיים אחד תתמקדו?"},
+d2:{persona:["חפשו בבית הספר מישהו עם עיוורון צבעים (בעיקר בנים, משפחה). ראיון קצר.","ניסוי: צלמו 10 חפצים בבית והריצו אותם בסימולטור."],
+bench:["משקפי EnChroma (והביקורת עליהם)","שיטת ColorADD","אפליקציות סימולציה","רמזורים עם סימני צורה"],
+stem:["תאי מדוך (L, M, S) באורכי גל","מבחן אישיהרה","יחס ניגודיות (WCAG)","מרחבי צבע RGB"]},
+links:[
+{t:"Color blindness",u:"https://en.wikipedia.org/wiki/Color_blindness",p:"d1",k:"רקע",lang:"EN",s:"סוגי עיוורון צבעים, שכיחות לפי מגדר, גנטיקה ומצבים בחיי היומיום.",use:"נתונים למבוא."},
+{t:"Colour Blind Awareness",u:"https://www.colourblindawareness.org/",p:"d1",k:"ארגון",lang:"EN",s:"ארגון בריטי עם סיפורים ממשתמשים על קשיים בבית הספר, בעבודה ובבית.",use:"מקור לכאבים אמיתיים ולמפת אמפתיה."},
+{t:"Neil Harbisson: I listen to color (TED)",u:"https://www.ted.com/talks/neil_harbisson_i_listen_to_color",p:"d1",k:"וידאו",lang:"EN",s:"אדם שנולד בלי לראות צבעים בכלל, ו״שומע״ אותם דרך אנטנה. נקודת מבט קיצונית ומעוררת.",use:"שבירת מוסכמות."},
+{t:"Cone cell",u:"https://en.wikipedia.org/wiki/Cone_cell",p:"d2",k:"STEM",lang:"EN",s:"שלושת סוגי תאי המדוך ברשתית ואורכי הגל שכל אחד קולט.",use:"פרק STEM: ביולוגיה של צבע."},
+{t:"Ishihara test",u:"https://en.wikipedia.org/wiki/Ishihara_test",p:"d2",k:"STEM",lang:"EN",s:"מבחן הנקודות הצבעוניות שמגלה עיוורון צבעים. איך הוא בנוי ולמה הוא עובד.",use:"השראה גרפית + ניסוי כיתתי."},
+{t:"Coblis – Color Blindness Simulator",u:"https://www.color-blindness.com/coblis-color-blindness-simulator/",p:"d2",k:"כלי ניסוי",lang:"EN",s:"מעלים תמונה ורואים איך היא נראית לכל סוג של עיוורון צבעים.",use:"לוח השוואה ״לפני / אחרי״."},
+{t:"Sim Daltonism",u:"https://michelf.ca/projects/sim-daltonism/",p:"d2",k:"כלי ניסוי",lang:"EN",s:"אפליקציה למק ולאייפון שמציגה בזמן אמת דרך המצלמה איך נראה העולם.",use:"תיעוד שטח בסופר או ברחוב."},
+{t:"ColorADD",u:"https://www.coloradd.net/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מערכת סמלים פורטוגזית שמייצגת צבעים בצורות פשוטות. בשימוש בתחבורה ובבתי ספר.",use:"בנצ׳מרקינג: שפה חזותית חלופית."},
+{t:"EnChroma",u:"https://enchroma.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"משקפיים שמגבירים את ההבדל בין צבעים לחלק מהאנשים. כדאי לחפש גם ביקורות מדעיות עליהם.",use:"בנצ׳מרקינג ביקורתי: מה מבטיחים ומה באמת."},
+{t:"WCAG: Use of Color",u:"https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html",p:"d2",k:"תקנים",lang:"EN",s:"התקן הבינלאומי לנגישות: אסור שצבע יהיה הדרך היחידה להעביר מידע.",use:"עיקרון מנחה לגבולות הגזרה."},
+{t:"Viz Palette",u:"https://projects.susielu.com/viz-palette",p:"d2",k:"כלי ניסוי",lang:"EN",s:"כלי לבדיקה אם פלטת צבעים מובחנת גם לעיוורי צבעים.",use:"בדיקת פלטת ה-CMF בהמשך."},
+{t:"Traffic light",u:"https://en.wikipedia.org/wiki/Traffic_light",p:"d2",k:"רקע",lang:"EN",s:"היסטוריה ותקנים של רמזורים, כולל סידור קבוע של האורות ופתרונות שננקטו לעיוורי צבעים.",use:"מקרה בוחן לבנצ׳מרקינג."}
+],
+intel:{app:"באיזה רגע המשתמש צריך להבחין באדום? כמה זמן יש לו? מה הוא עושה בידיים באותו רגע?",cog:"איזה מידע האדום נושא: סכנה, מצב, דירוג? איך עוד אפשר לקודד את המידע הזה?",soc:"האם הפתרון עוזר רק לו, או משנה את המערכת לכולם? האם הוא בולט כ״מיוחד״?",cre:"מה אם הרואים-הכל הם אלה שמפספסים משהו? מה אם צבע הוא לא הדרך היחידה לראות?",emo:"מבוכה מטעות, חשש מסכנה. מה ייתן ביטחון בלי להזכיר כל הזמן את החיסרון?"}},
+
+/* ================= מגע / טמפרטורה ================= */
+{id:"heat",sense:"touch",title:"לא מרגישים חום",who:"אנשים שאינם חשים טמפרטורה וכאב (CIPA, נוירופתיה)",
+contrast:["עולם חם ומסוכן","גוף שמרגיש שהכול רגיל"],
+d1:{pain:["איך אדם שלא מרגיש חום יודע שהקפה רותח, שהמים במקלחת חמים מדי, שהשמש שורפת?","מי שומר עליו היום: הורים, מטפלים? מה זה עושה לעצמאות שלו?","יש עוד אוכלוסיות שמאבדות תחושת חום (סוכרתיים בכפות הרגליים, מבוגרים). האם הן קהל היעד שלכן?"],
+legs:["ילדים עם CIPA / מבוגרים עם נוירופתיה סוכרתית / מטופלים אחרי פגיעת עצבים.","כוויות, תלות במטפלים, חרדת הורים, חוסר ויסות חום.","מטבח, אמבטיה, חוף ים בקיץ הישראלי."],
+bound:"חום של חפצים, של מים, של הסביבה, או של הגוף עצמו? בחרו אחד."},
+d2:{persona:["ראיון עם אחות או רופא סוכרת על כוויות בכפות רגליים.","תצפית במטבח: כמה פעמים ביום נוגעים במשהו חם בלי לבדוק?"],
+bench:["כפות תינוק שמשנות צבע","ספלים שומרי חום","מדחומי אינפרא-אדום","ברזים עם מגביל טמפרטורה"],
+stem:["קולטני חום בעור (TRPV1)","חומרים תרמוכרומיים","מצלמות תרמיות","אפקט פלטייה (Peltier)"]},
+links:[
+{t:"Congenital insensitivity to pain with anhidrosis (CIPA)",u:"https://en.wikipedia.org/wiki/Congenital_insensitivity_to_pain_with_anhidrosis",p:"d1",k:"רקע",lang:"EN",s:"המחלה הגנטית שבה לא מרגישים כאב וטמפרטורה ולא מזיעים. סימנים, סיבוכים וחיי היומיום.",use:"מבוא והגדרת הבעיה."},
+{t:"CIPA – MedlinePlus Genetics",u:"https://medlineplus.gov/genetics/condition/congenital-insensitivity-to-pain-with-anhidrosis/",p:"d1",k:"רקע",lang:"EN",s:"הסבר רפואי פשוט: הגן NTRK1, איך זה עובר במשפחה ומה השכיחות.",use:"פרק הרקע המדעי."},
+{t:"Living without pain: a 10-year study of CIPA (BGU)",u:"https://cris.bgu.ac.il/en/publications/living-without-pain-a-10-year-study-of-congenital-insensitivity-t/",p:"d1",k:"מחקר ישראלי",lang:"EN",s:"מחקר מאוניברסיטת בן-גוריון שעקב 10 שנים אחרי ילדים עם CIPA בנגב, שם התופעה שכיחה יחסית.",use:"מקור אקדמי ישראלי לביבליוגרפיה."},
+{t:"Israeli team offers genetic counselling to Bedouin families (Israel21c)",u:"https://archive.israel21c.org/israeli-team-offers-genetic-counselling-to-bedouin-families/",p:"d1",k:"כתבה",lang:"EN",s:"רקע על מחלות גנטיות בקהילה הבדואית בנגב ועל העבודה עם המשפחות.",use:"להבין את הקהל ואת ההקשר התרבותי."},
+{t:"Peripheral neuropathy (NIDDK)",u:"https://www.niddk.nih.gov/health-information/diabetes/overview/preventing-problems/nerve-damage-diabetic-neuropathies/peripheral-neuropathy",p:"d1",k:"רקע",lang:"EN",s:"נוירופתיה סוכרתית: אובדן תחושה, כולל חום, בכפות הרגליים. קהל יעד גדול בהרבה.",use:"להרחיב או לדייק את קהל היעד."},
+{t:"Burns – WHO fact sheet",u:"https://www.who.int/news-room/fact-sheets/detail/burns",p:"d1",k:"נתונים",lang:"EN",s:"נתונים עולמיים על כוויות: איפה הן קורות, למי, ואיך מונעים אותן.",use:"נתונים להצגת הבעיה."},
+{t:"Nobel Prize 2021: receptors for temperature and touch",u:"https://www.nobelprize.org/prizes/medicine/2021/press-release/",p:"d2",k:"STEM",lang:"EN",s:"פרס נובל על גילוי הקולטנים שבעזרתם העור מרגיש חום (בעזרת צ׳ילי!) ומגע.",use:"פרק STEM: איך הגוף מרגיש חום."},
+{t:"Thermoreceptor",u:"https://en.wikipedia.org/wiki/Thermoreceptor",p:"d2",k:"STEM",lang:"EN",s:"קולטני חום וקור בעור: טווחי הטמפרטורה שבהם כל אחד פעיל.",use:"מחקר מדעי."},
+{t:"Thermochromic materials (Explain that Stuff)",u:"https://www.explainthatstuff.com/thermochromic-materials.html",p:"d2",k:"חומר",lang:"EN",s:"הסבר פשוט על חומרים שמשנים צבע בחום: צבעי לויקו וגבישים נוזליים, ובאיזה טמפרטורות.",use:"חקר חומרים."},
+{t:"Thermochromic materials – D&T A-level notes",u:"https://design-and-technology-a-level.readthedocs.io/en/latest/Materials/Smart%20and%20Modern%20Materials/thermochromicmaterials/",p:"d2",k:"חומר",lang:"EN",s:"סיכום לימודי על חומרים ״חכמים״ תרמוכרומיים בעיצוב מוצר: תכונות, יתרונות ומגבלות.",use:"טבלת חומרים."},
+{t:"US6865815B1 – Safety utensils for infants (Google Patents)",u:"https://patents.google.com/patent/US6865815",p:"d2",k:"פטנט",lang:"EN",s:"פטנט על כלי אוכל לתינוקות שמחווים טמפרטורה. דוגמה לקריאת פטנט.",use:"הביבליוגרפיה דורשת פטנטים. זה המקום להתחיל."},
+{t:"Thermography",u:"https://en.wikipedia.org/wiki/Thermography",p:"d2",k:"STEM",lang:"EN",s:"צילום תרמי: איך מצלמה ״רואה״ חום בקרינת אינפרא-אדום.",use:"מחקר טכנולוגי: חישה מרחוק."},
+{t:"Thermoelectric effect (Peltier)",u:"https://en.wikipedia.org/wiki/Thermoelectric_effect",p:"d2",k:"STEM",lang:"EN",s:"רכיבים שמייצרים חשמל מהפרש טמפרטורות, או מחממים ומקררים בעזרת חשמל.",use:"מחקר מנגנונים."}
+],
+intel:{app:"מתי בדיוק נוגעים בדבר החם? באיזו יד, באיזו תנוחה, כמה מהר? מה קורה שנייה לפני?",cog:"איך המשתמש יידע שמשהו חם, כמה חם, ומתי זה כבר בטוח? מה קורה כשהוא עייף או ממהר?",soc:"האם זה נראה כמו ציוד רפואי? מה ההורים, המטפלים והחברים מבינים מזה?",cre:"מה אם במקום הגוף, החפצים הם שמרגישים? מה אם החום הוא מקור של משחק ולא של פחד?",emo:"חרדת ההורים מול רצון הילד לעצמאות. איזו תחושה צריכה להחליף את הפחד?"}}
+];
+
+const SENSES = {hear:{name:"שמיעה",color:"var(--orange)"},see:{name:"ראייה",color:"var(--teal)"},touch:{name:"מגע וטמפרטורה",color:"var(--red)"}};
+
+const GENERAL = [
+{t:"עזרי טרזי (ויקיפדיה)",u:"https://he.wikipedia.org/wiki/%D7%A2%D7%96%D7%A8%D7%99_%D7%98%D7%A8%D7%96%D7%99",p:"d1",k:"שיטה",lang:"HE",s:"מי הוא פרופ׳ עזרי טרזי, מעצב ישראלי ופיתח את שיטת ה-7D."},
+{t:"Microsoft Inclusive Design",u:"https://inclusive.microsoft.design/",p:"d1",k:"שיטה",lang:"EN",s:"״לפתור לאחד, להרחיב לרבים״: ספקטרום מוגבלות קבועה, זמנית ומצבית."},
+{t:"The Senses: Design Beyond Vision (Cooper Hewitt)",u:"https://collection.cooperhewitt.org/exhibitions/1125223887",p:"d1",k:"תערוכה",lang:"EN",s:"תערוכה של מוזיאון העיצוב הלאומי האמריקאי, עם עשרות מוצרים רב-חושיים ותמונות של כל אחד מהם. מאגר השראה מצוין לכל הקבוצות."},
+{t:"Inclusive Design Toolkit (University of Cambridge)",u:"https://www-edc.eng.cam.ac.uk/files/idtoolkit.pdf",p:"d2",k:"שיטה",lang:"EN",s:"מדריך מקיף לעיצוב מכליל, עם כלים להערכת אובדן יכולות ודוגמאות למוצרים."},
+{t:"IDEO Design Kit – Methods",u:"https://www.designkit.org/methods",p:"d2",k:"שיטה",lang:"EN",s:"עשרות שיטות מחקר משתמשים מפורטות: ראיון, תצפית, מפת אמפתיה, עיצוב משתף."},
+{t:"Sensory substitution",u:"https://en.wikipedia.org/wiki/Sensory_substitution",p:"d2",k:"STEM",lang:"EN",s:"המושג המרכזי של כל הפרויקטים: העברת מידע של חוש אחד דרך חוש אחר."},
+{t:"Paul Bach-y-Rita",u:"https://en.wikipedia.org/wiki/Paul_Bach-y-Rita",p:"d2",k:"מחקר",lang:"EN",s:"אבי תחום ההחלפה החושית, שגרם לעיוורים ״לראות״ דרך הלשון והגב."},
+{t:"David Eagleman: Can we create new senses for humans? (TED)",u:"https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_humans",p:"d1",k:"וידאו",lang:"EN",s:"המוח לומד לפענח מידע מכל ערוץ שמגיע אליו."},
+{t:"James Dyson",u:"https://en.wikipedia.org/wiki/James_Dyson",p:"d1",k:"השראה",lang:"EN",s:"5,127 אבות טיפוס עד שואב האבק הציקלוני. תזכורת למה לא מתאהבים ברעיון הראשון."}
+];
+
+const INTEL = [
+{k:"app",n:"יישומית",d:"איך זה פועל פיזית? מה סדר הפעולות?"},
+{k:"cog",n:"קוגניטיבית",d:"איזה מידע עובר למשתמש, ואיך הוא מבין אותו?"},
+{k:"soc",n:"חברתית / אקולוגית",d:"קיימות, שוויון, נגישות, חיבור קהילתי."},
+{k:"cre",n:"יצירתית",d:"שבירת מוסכמות, היפוך, הרעיון ה״משוגע״."},
+{k:"emo",n:"רגשית",d:"אילו תחושות זה מעורר: ביטחון, רוגע, שמחה?"}
+];
+
+/* ---------- גלריית השראה: מוצרים לפי חוש ודרך ההחלפה ---------- */
+const HOW = {
+  vib:{n:"רטט",c:"var(--orange)"},
+  touch:{n:"מגע ומרקם",c:"var(--red)"},
+  sound:{n:"צליל",c:"var(--teal)"},
+  light:{n:"אור וצבע",c:"var(--yellow)"},
+  shape:{n:"צורה וסמל",c:"var(--navy)"},
+  human:{n:"חיבור אנושי",c:"var(--muted)"}
+};
+const GSENSES = {...SENSES, incl:{name:"עיצוב מכליל",color:"var(--navy)"}};
+const GALLERY = [
+{n:"Ontenna",sense:"hear",how:"vib",u:"https://www.pcworld.com/article/410547/fujitsus-ontenna-could-be-a-big-deal-for-the-deaf.html",s:"סיכת שיער של המעצב היפני טטסויה הונדה ופוג׳יטסו. היא רוטטת ומאירה בעוצמה שמשתנה לפי הצליל שמסביב, ומרגישים אותה דרך שורשי השיער.",why:"מקום לא צפוי בגוף, צורה של תכשיט ולא של מכשיר רפואי. נבנה יחד עם ילדים חרשים."},
+{n:"Unfolding Space Glove",sense:"see",how:"vib",u:"https://www.mdpi.com/1424-8220/22/5/1859",s:"כפפה של יאקוב קיליאן, שהתחילה כפרויקט סטודנט לעיצוב בקלן. מצלמת עומק קטנה ״רואה״ את המרחב, ומטריצה של 9 מנועי רטט על גב היד מתרגמת מרחק לעוצמה. הקוד והחומרה פתוחים ב-GitHub.",why:"מחקר אקדמי עם בדיקות משתמשים אמיתיות, ועם שפה חזותית נקייה. דוגמה מצוינת לחיבור STEM ועיצוב."},
+{n:"feelSpace naviBelt",sense:"see",how:"vib",u:"https://feelspace.de/en",s:"חגורה עם מנועי רטט סביב המותניים, שתמיד רוטטת לכיוון צפון או לכיוון היעד. התחילה כמחקר מדעי מוח באוניברסיטת אוסנבריק.",why:"מצפן שמרגישים בגוף. ניווט שלא תופס את הידיים ולא את האוזניים."},
+{n:"Bradley Timepiece",sense:"see",how:"touch",u:"https://www.dezeen.com/2014/03/26/bradley-timepiece/",s:"שעון של Eone שבו שני כדורי מתכת נעים בתוך מסלולים ומראים את השעה. ממששים את הכדורים בלי לראות. נקרא על שם בראד סניידר, אלוף פראלימפי שהתעוור.",why:"מוצר שנועד לעיוורים ונקנה גם על ידי רואים רק בגלל שהוא יפה. הוא נמצא באוסף של קופר יואיט."},
+{n:"Braille Neue",sense:"see",how:"touch",u:"https://mymodernmet.com/braille-neue-typeface-kosuke-takahashi",s:"גופן של קוסוקה טקהאשי שבו נקודות הברייל הן חלק מצורת האות עצמה. שלט אחד שרואים וממששים קוראים יחד.",why:"חיבור במקום הפרדה: לא שלט מיוחד לעיוורים, אלא אות אחת לכולם."},
+{n:"אוזניות הולכת עצם (Shokz)",sense:"see",how:"sound",u:"https://reviewed.com/accessibility/content/shokz-opencomm-review-ideal-headset-blind-users",s:"אוזניות שיושבות על עצם הלחי ומשאירות את תעלות האוזן פתוחות. עיוורים יכולים להקשיב לניווט ולשמוע בו-זמנית את התנועה ברחוב.",why:"חוש אחד ששומרים עליו פתוח בזמן שמוסיפים עליו מידע. הטכנולוגיה מוסברת גם בעמוד ״מוזיקה מעבר לשמע״."},
+{n:"Sound of Vision",sense:"see",how:"sound",u:"https://www.mdpi.com/2079-9292/10/14/1619",s:"מערכת מחקר אירופית שמתרגמת את הסביבה לצליל ולרטט בזמן אמת, ונבדקה עם משתמשים עיוורים בחוץ.",why:"מחקר חזק, אבל הציוד כבד ובולט. כדאי לשאול למה מערכות כאלה לא יוצאות מהמעבדה."},
+{n:"Eatwell",sense:"incl",how:"light",u:"https://www.dwell.com/article/designs-for-patients-with-dementia-e8806ddc",s:"כלי אוכל של המעצבת שה יאו, שעיצבה אותם אחרי שסבתה חלתה בדמנציה. הצבעים העזים בתוך הכלים מבליטים את האוכל, ודפנות משופעות עוזרות לאסוף אותו בלי לשפוך.",why:"ניגודיות צבע וצורה שמחליפות ראייה ותפיסה שנחלשו. שימו לב: זה קהל של ירידה קוגניטיבית, לא רק של חוש חסר."},
+{n:"OXO Good Grips",sense:"incl",how:"touch",u:"https://www.moma.org/collection/works/3754",s:"כלי מטבח עם ידיות גומי עבות, שעוצבו (Smart Design, 1990) בשביל אישה עם דלקת מפרקים. היום הם מוצר רגיל לכולם, ונמצאים באוסף של MoMA.",why:"הדוגמה הקלאסית לעיצוב שמתחיל מקושי של אדם אחד ומשרת את כולם."},
+{n:"SubPac",sense:"hear",how:"vib",u:"https://subpac.com/",s:"גב או אפוד שמעביר את הבאסים של המוזיקה ישר לגוף. תוכנן למפיקי מוזיקה, ומשמש גם אנשים חרשים.",why:"צליל שהופך לתחושה בגב. שאלה לתלמידות: למה דווקא הגב?"},
+{n:"Neosensory Buzz",sense:"hear",how:"vib",u:"https://neosensory.com/",s:"צמיד שמקשיב לסביבה ומתרגם צלילים לדפוסי רטט על פרק היד. אחרי אימון, המוח לומד ״לקרוא״ את הרטט.",why:"דוגמה מצוינת להחלפה חושית: המוח לומד שפה חדשה."},
+{n:"Bed Shaker של Bellman",sense:"hear",how:"vib",u:"https://shop.bellman.com/products/bed-shaker",s:"רוטט שמונח מתחת לכרית ומעיר אדם חרש כשמישהו מצלצל בדלת, הטלפון מצלצל או גלאי העשן פועל.",why:"מוצר צנוע ופשוט שפותר את הבעיה הכי קשה: שינה."},
+{n:"זיהוי צלילים באייפון",sense:"hear",how:"light",u:"https://techcrunch.com/2020/06/25/ios-14-lets-deaf-users-set-alerts-for-important-sounds-among-other-clever-accessibility-perks",s:"הטלפון מקשיב לסירנות, דפיקות בדלת ובכי תינוק, ומציג התראה על המסך עם רטט.",why:"מכשיר שכבר יש לכולם מקבל תפקיד חדש."},
+{n:"Live Transcribe",sense:"hear",how:"light",u:"https://www.android.com/accessibility/live-transcribe/",s:"תמלול דיבור לטקסט בזמן אמת, על מסך הטלפון.",why:"פשוט ושימושי, וגם חושף את הבעיה: מי מחזיק את הטלפון בזמן השיחה?"},
+{n:"DeafSpace",sense:"hear",how:"light",u:"https://gallaudet.edu/campus-design-facilities/deafspace/",s:"עקרונות האדריכלות של אוניברסיטת גלודה לחרשים: קירות שקופים, מסדרונות רחבים לשיחה בידיים, אור רך שלא מסנוור.",why:"עיצוב שמתחיל מהחוזקות של המשתמשים, לא מהחיסרון."},
+{n:"שלטי אותות חירום לגולשים",sense:"hear",how:"shape",u:"https://www.carvemag.com/2018/09/irish-tow-surf-rescue-club-produce-emergency-signal-signs-for-popular-surf-spots/",s:"שלטים בחופי אירלנד שמלמדים את כל הגולשים שפת אותות ידיים משותפת לחירום.",why:"פתרון שלא דורש טכנולוגיה, רק שפה משותפת."},
+{n:"RightHear",sense:"see",how:"sound",u:"https://www.right-hear.com/",s:"מערכת ישראלית: משדרים קטנים בתוך מבנה, והטלפון אומר לאדם עיוור איפה הוא נמצא ומה יש מולו.",why:"המבנה עצמו ״מדבר״ עם המבקר."},
+{n:"Microsoft Soundscape",sense:"see",how:"sound",u:"https://www.microsoft.com/en-us/research/product/soundscape/",s:"צליל תלת-ממדי באוזניות: שם של חנות נשמע מהכיוון שבו היא נמצאת באמת.",why:"מפה שלא רואים אלא שומעים."},
+{n:"WeWALK",sense:"see",how:"vib",u:"https://wewalk.io/",s:"מקל לבן עם חיישן שמזהה מכשולים בגובה הראש ומתריע ברטט בידית.",why:"שדרוג לאובייקט מוכר, במקום להמציא אובייקט חדש."},
+{n:"Be My Eyes",sense:"see",how:"human",u:"https://www.bemyeyes.com/",s:"אפליקציה שמחברת אדם עיוור למתנדב רואה בשיחת וידאו קצרה.",why:"לפעמים הפתרון הוא חיבור בין אנשים."},
+{n:"מרצפות מישוש",sense:"see",how:"touch",u:"https://en.wikipedia.org/wiki/Tactile_paving",s:"נקודות בולטות שאומרות ״עצור״ ופסים שאומרים ״המשך״. הומצאו ביפן ב-1965 ונמצאות היום בכל העולם.",why:"שפה של כפות רגליים. עיצוב מינימלי שעובד בקנה מידה של עיר."},
+{n:"DRAFTSMAN – לוח ציור מישושי",sense:"see",how:"touch",u:"https://aph.org/product/draftsman-tactile-drawing-board",s:"מציירים בעט רגיל על דף מיוחד, והקו יוצא בולט מיד. כך אפשר להרגיש מה ציירת.",why:"החומר עושה את העבודה, בלי חשמל."},
+{n:"ספרי Les Doigts Qui Rêvent",sense:"see",how:"touch",u:"https://www.pathstoliteracy.org/resource/les-doigts-qui-revent-dreaming-fingers-tactile-books",s:"ספרי ילדים מצרפת שבהם האיורים עשויים מבד, עץ ונייר זכוכית, לצד ברייל.",why:"ספר שרואים ועיוורים יכולים לקרוא יחד."},
+{n:"Dot Watch",sense:"see",how:"touch",u:"https://www.dotincorp.com/",s:"שעון חכם שמציג שעה והודעות בנקודות ברייל שעולות ויורדות.",why:"מוצר יפה שלא נראה כמו ״מכשיר עזר״."},
+{n:"EyeMusic",sense:"see",how:"sound",u:"https://www.nationalgeographic.com/culture/article/140403-eyemusic-ssd-visual-impairment-software-science",s:"אפליקציה מהאוניברסיטה העברית שמתרגמת תמונה לצלילים: גובה הצליל הוא המיקום, וכלי הנגינה הוא הצבע.",why:"מחקר ישראלי שמראה איך צבע יכול להפוך למוזיקה."},
+{n:"ColorADD",sense:"see",how:"shape",u:"https://www.coloradd.net/",s:"מערכת סמלים פשוטים לעיוורי צבעים: משולש, קו ושילובים שלהם מייצגים צבעים.",why:"שפה גרפית קטנה שמוסיפה מידע בלי לשנות את הצבע."},
+{n:"משקפי EnChroma",sense:"see",how:"light",u:"https://enchroma.com/",s:"עדשות שמסננות אורכי גל כדי להגדיל את ההבדל בין אדום לירוק אצל חלק מעיוורי הצבעים.",why:"כדאי לחפש גם את הביקורת המדעית עליהן. דוגמה טובה לבנצ׳מרקינג ביקורתי."},
+{n:"כפית תינוק שמשנה צבע",sense:"touch",how:"light",u:"https://patents.google.com/patent/US6865815",s:"פטנט על כלי אוכל לתינוקות עם חומר תרמוכרומי שמשנה צבע כשהאוכל חם מדי.",why:"חום שאי אפשר להרגיש הופך לצבע שרואים."},
+{n:"ספל Ember",sense:"touch",how:"touch",u:"https://ember.com/",s:"ספל שמחזיק את המשקה בטמפרטורה קבועה שבוחרים מראש.",why:"נבנה בשביל טעם, לא בשביל בטיחות. איפה הפער?"},
+{n:"צילום תרמי",sense:"touch",how:"light",u:"https://en.wikipedia.org/wiki/Thermography",s:"מצלמה שקולטת קרינת אינפרא-אדום ומציגה חום כצבעים.",why:"טכנולוגיה שהופכת חום לתמונה."}
+];
+
+function glyph(how){
+  const c={vib:"#f18215",touch:"#ea3144",sound:"#4bc3c0",light:"#f6ad0c",shape:"#215068",human:"#5b7482"}[how];
+  const g={
+    vib:`<rect x="38" y="30" width="24" height="40" fill="${c}"/><path d="M28 36q-6 14 0 28M20 30q-10 20 0 40M72 36q6 14 0 28M80 30q10 20 0 40" stroke="${c}" stroke-width="4" fill="none"/>`,
+    touch:`<g fill="${c}">${[0,1,2].map(r=>[0,1].map(k=>`<circle cx="${40+k*20}" cy="${28+r*22}" r="7"/>`).join("")).join("")}</g>`,
+    sound:`<path d="M24 42h12l16-14v44L36 58H24z" fill="${c}"/><path d="M62 38q8 12 0 24M70 30q14 20 0 40" stroke="${c}" stroke-width="4" fill="none"/>`,
+    light:`<circle cx="50" cy="50" r="16" fill="${c}"/><g stroke="${c}" stroke-width="4">${[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180;return `<line x1="${50+24*Math.cos(r)}" y1="${50+24*Math.sin(r)}" x2="${50+32*Math.cos(r)}" y2="${50+32*Math.sin(r)}"/>`}).join("")}</g>`,
+    shape:`<polygon points="30,70 46,38 62,70" fill="${c}"/><circle cx="68" cy="40" r="10" fill="none" stroke="${c}" stroke-width="4"/><rect x="24" y="24" width="14" height="14" fill="${c}"/>`,
+    human:`<circle cx="36" cy="38" r="9" fill="${c}"/><circle cx="64" cy="38" r="9" fill="${c}"/><path d="M22 72q14-22 28 0q14-22 28 0" fill="${c}"/>`
+  }[how];
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="${HOW[how].n}">${g}</svg>`;
+}
+
+function gallery(){
+  nav("gallery");
+  const f = store.get("gal-filter",{sense:"all",how:"all"});
+  const btns=(key,opts)=>`<div class="filters" role="group" data-gal="${key}">`+[["all","הכול"],...opts].map(([v,n])=>`<button type="button" data-v="${v}" aria-pressed="${f[key]===v}">${n}</button>`).join("")+`</div>`;
+  return `<div class="crumb"><a href="#home">כל הנושאים</a> · גלריית השראה</div>
+  <h2 class="ptitle">מוצרים שמחליפים חוש</h2>
+  <p class="sec-sub" style="margin-top:10px">דוגמאות למוצרים ולמערכות שכבר קיימים בעולם, ממוינים לפי החוש החסר ולפי הדרך שבה המידע מגיע למשתמש. זו השראה למחקר השוק (D2), לא פתרון להעתיק. לכל דוגמה שאלו: מה היא עושה טוב, ומה היא מפספסת?</p>
+  <div style="display:grid;gap:8px;margin-top:8px">
+    <div class="row"><b style="min-width:70px">חוש חסר</b>${btns("sense",Object.entries(GSENSES).map(([k,v])=>[k,v.name]))}</div>
+    <div class="row"><b style="min-width:70px">איך</b>${btns("how",Object.entries(HOW).map(([k,v])=>[k,v.n]))}</div>
+  </div>
+  <div class="gal" id="gal">${GALLERY.map(g=>`<article class="gi" data-sense="${g.sense}" data-how="${g.how}">
+    <div class="pic" style="background:color-mix(in srgb, ${HOW[g.how].c} 14%, var(--bg))">${glyph(g.how)}</div>
+    <div class="gb"><div class="tags"><span class="tag" style="background:${GSENSES[g.sense].color};color:#fff">${GSENSES[g.sense].name}</span><span class="tag kind">${HOW[g.how].n}</span></div>
+    <h3>${esc(g.n)}</h3><p>${esc(g.s)}</p><p class="use"><b>למה זה מעניין:</b> ${esc(g.why)}</p>
+    <a class="more" href="${esc(g.u)}" target="_blank" rel="noopener">לתמונות ולמוצר ←</a></div></article>`).join("")}</div>
+  <p class="note" id="gal-empty" hidden>אין דוגמאות בצירוף הזה. נסו סינון אחר.</p>`;
+}
+function wireGallery(){
+  const apply=()=>{
+    const f=store.get("gal-filter",{sense:"all",how:"all"}); let n=0;
+    document.querySelectorAll(".gi").forEach(el=>{const ok=(f.sense==="all"||el.dataset.sense===f.sense)&&(f.how==="all"||el.dataset.how===f.how);el.hidden=!ok;if(ok)n++;});
+    document.getElementById("gal-empty").hidden=n>0;
+  };
+  document.querySelectorAll("[data-gal]").forEach(g=>g.addEventListener("click",e=>{
+    const b=e.target.closest("button"); if(!b) return;
+    const f=store.get("gal-filter",{sense:"all",how:"all"}); f[g.dataset.gal]=b.dataset.v; store.set("gal-filter",f);
+    g.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false")); apply();
+  }));
+  apply();
+}
+
+const store = {
+  get(k,d){try{const v=localStorage.getItem("hachush:"+k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem("hachush:"+k,JSON.stringify(v))}catch(e){}}
+};
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function nav(active){
+  const n=document.getElementById("nav");
+  n.innerHTML = `<a href="#home" ${active==="home"?'aria-current="page"':""}>כל הנושאים</a><a href="#gallery" ${active==="gallery"?'aria-current="page"':""} style="background:var(--yellow);color:#1d3a4b;border-color:var(--yellow)">גלריית השראה</a>` +
+    PROJECTS.map(p=>`<a href="#${p.id}" ${active===p.id?'aria-current="page"':""} style="border-bottom-color:${SENSES[p.sense].color}">${esc(p.title)}</a>`).join("");
+}
+
+function linkList(links, id){
+  return `<div class="lhead"><h3>מקורות, מחקרים והשראות <span class="note">(${links.length})</span></h3>
+  <div class="filters" role="group" aria-label="סינון לפי שלב" data-for="${id}">
+    <button type="button" data-f="all" aria-pressed="true">הכול</button>
+    <button type="button" data-f="d1" aria-pressed="false">חריש D1</button>
+    <button type="button" data-f="d2" aria-pressed="false">זריעה D2</button>
+  </div></div>
+  <ol class="links" id="links-${id}">` + links.map(l=>`<li data-p="${l.p}"><div>
+    <a class="t" href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.t)}</a>
+    <div class="tags"><span class="tag ${l.p}">${l.p==="d1"?"חריש":"זריעה"}</span><span class="tag kind">${esc(l.k)}</span><span class="tag kind">${l.lang}</span></div>
+    <p>${esc(l.s)}</p>${l.use?`<p class="use"><b>איך להשתמש:</b> ${esc(l.use)}</p>`:""}
+  </div></li>`).join("") + `</ol>`;
+}
+
+function home(){
+  nav("home");
+  const groups = Object.keys(SENSES).map(s=>{
+    const ps = PROJECTS.filter(p=>p.sense===s);
+    return `<div class="sense"><h3><span class="sw" style="background:${SENSES[s].color}"></span>${SENSES[s].name} <span class="note">· ${ps.length} פרויקטים</span></h3>
+    <div class="cards">${ps.map(p=>`<a class="card" href="#${p.id}" style="border-top:6px solid ${SENSES[s].color}">
+      <span class="k">${esc(p.who)}</span><span class="h">${esc(p.title)}</span>
+      <span class="c">${esc(p.contrast[0])} ⟷ ${esc(p.contrast[1])}</span></a>`).join("")}</div></div>`;
+  }).join("");
+  return `<section class="hero">
+    <div><h2>מה קורה כשחוש אחד <mark>חסר</mark>?</h2>
+    <p class="lead">לכל אחד מעשרת הנושאים יש כאן עמוד משלו: שאלות לשלב החריש, משימות מחקר לשלב הזריעה, ולפחות 10 מקורות עם תקציר והסבר איך להשתמש בכל אחד. בשלבי הנביטה וההנצה תמצאו רק שאלות. את התשובות תמצאו בעצמכן.</p></div>
+    <div class="qbox"><h3>לפני שפותחות תוכנות עיצוב או דפי סקיצות</h3><p>התעמקו במקורות השונים כאן ואספו השראה רלוונטית לקובץ המחקר האישי שלכן.</p></div>
+  </section>
+  <div class="phases" aria-label="שלבי 7D בתיק">
+    <div class="ph d1"><div class="n">D1</div><div class="t">חריש</div><small>הבעיה, שלוש הרגליים, שאלת האתגר</small></div>
+    <div class="ph d2"><div class="n">D2</div><div class="t">זריעה</div><small>מחקר משתמשים, שוק ו-STEM</small></div>
+    <div class="ph d3"><div class="n">D3</div><div class="t">נביטה</div><small>כאן: רק שאלות דרך 5 האינטליגנציות</small></div>
+    <div class="ph d4"><div class="n">D4</div><div class="t">הנצה</div><small>כאן: רק שאלות. הקונספט שלכן.</small></div>
+    <div class="ph d5 dim"><div class="n">D5</div><div class="t">פריחה</div><small>CMF, שרטוטים, מיתוג</small></div>
+  </div>
+  <h2 class="sec">הנושאים, לפי החוש החסר</h2>
+  <p class="sec-sub">בחרו את הנושא שלכן. כדאי להציץ גם בנושאים של הקבוצות האחרות באותו חוש; הרבה מקורות משותפים.</p>
+  <div class="senses">${groups}</div>
+  <h2 class="sec">חמש האינטליגנציות של עזרי טרזי</h2>
+  <p class="sec-sub">בכל עמוד נושא תמצאו שאלה אחת לכל אינטליגנציה, לשלבי הנביטה וההנצה. השתמשו בהן כדי לבדוק כל אחד מ-15–20 הרעיונות שלכן.</p>
+  <p style="margin-top:28px"><a class="btn" href="#gallery" style="text-decoration:none;display:inline-block">לגלריית ההשראה: ${GALLERY.length} מוצרים שמחליפים חוש ←</a></p>
+  <div class="intel" style="margin-top:20px">${INTEL.map(i=>`<div class="in"><h4>${i.n}</h4><p>${i.d}</p></div>`).join("")}</div>
+  <h2 class="sec">מקורות לכל הקבוצות</h2>
+  <p class="sec-sub">שיטה ומושגי יסוד שמתאימים לכל אחד מהנושאים.</p>
+  ${linkList(GENERAL,"general")}`;
+}
+
+function project(p){
+  nav(p.id);
+  const idx = PROJECTS.indexOf(p), prev = PROJECTS[(idx-1+PROJECTS.length)%PROJECTS.length], next = PROJECTS[(idx+1)%PROJECTS.length];
+  const cq = store.get("cq-"+p.id,{v:"",x:"",w:"",c:""});
+  const done = store.get("tools-"+p.id,{});
+  const legsNames=["קהל יעד","נושא וכאב","אילוץ סביבתי / זמני"];
+  return `<div class="crumb"><a href="#home">כל הנושאים</a> · ${SENSES[p.sense].name}</div>
+  <h2 class="ptitle">${esc(p.title)}</h2>
+  <div class="pmeta"><span class="chip">${esc(p.who)}</span><span class="chip">${p.links.length} מקורות</span></div>
+  <div class="contrast" aria-label="הניגוד המרכזי"><div class="a">${esc(p.contrast[0])}</div><div class="x">⟷</div><div class="b">${esc(p.contrast[1])}</div></div>
+
+  <section class="stage d1" id="d1-${p.id}"><aside><div class="n">D1</div><div class="t">חריש</div><small>תשתית ומכוון עיצוב · 1–2 עמודים</small></aside><div>
+    <div><h3>מה לא עובד כרגע?</h3><ul class="q">${p.d1.pain.map(q=>`<li>${esc(q)}</li>`).join("")}</ul></div>
+    <div><h3>בסיס שלוש הרגליים</h3><p class="note" style="margin-bottom:8px">אפשרויות לבחירה. בחרו אחת מכל רגל, ודייקו.</p>
+      <div class="legs">${p.d1.legs.map((l,i)=>`<div class="leg"><b>${legsNames[i]}</b><p>${esc(l)}</p></div>`).join("")}</div></div>
+    <div class="builder"><h3>בונה שאלת האתגר</h3><p class="note">התבנית המחייבת. מה שתכתבו נשמר רק בדפדפן שלכן.</p>
+      <div class="grid">
+        <label for="cq-v-${p.id}">כיצד נוכל ל… (פועל)<input id="cq-v-${p.id}" data-k="v" value="${esc(cq.v)}" placeholder="לדוגמה: להנגיש, לחבר, לצמצם"></label>
+        <label for="cq-x-${p.id}">את… (הבעיה)<input id="cq-x-${p.id}" data-k="x" value="${esc(cq.x)}"></label>
+        <label for="cq-w-${p.id}">עבור… (קהל היעד)<input id="cq-w-${p.id}" data-k="w" value="${esc(cq.w)}"></label>
+        <label for="cq-c-${p.id}">תוך… (אילוץ / הזדמנות / חיבור)<input id="cq-c-${p.id}" data-k="c" value="${esc(cq.c)}"></label>
+      </div>
+      <p class="out" id="cq-out" aria-live="polite"></p>
+      <div class="row"><button class="btn" type="button" id="cq-copy">העתקה</button><span class="note" id="cq-msg"></span></div>
+    </div>
+    <div><h3>גבולות גזרה</h3><p>${esc(p.d1.bound)}</p></div>
+  </div></section>
+
+  <section class="stage d2" id="d2-${p.id}"><aside><div class="n">D2</div><div class="t">זריעה</div><small>מחקר עיצוב מבוסס STEM · 4–6 עמודים</small></aside><div>
+    <div><h3>שלושת כלי המחקר</h3><p class="note" style="margin-bottom:8px">חובה לפחות שניים. סמנו מה בחרתן.</p>
+    <div class="tools">
+      ${[["persona","מחקר משתמשים משתף",p.d2.persona],["bench","מחקר שוק (בנצ׳מרקינג): מה למפות",p.d2.bench],["stem","מחקר טכנולוגי-חומרי (STEM)",p.d2.stem]].map(([k,n,arr])=>`
+      <div class="tool"><h4><input type="checkbox" id="tool-${p.id}-${k}" data-tool="${k}" ${done[k]?"checked":""}><label for="tool-${p.id}-${k}">${n}</label></h4><ul>${arr.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}
+    </div></div>
+    <div><h3>עמוד התובנות (חובה)</h3><p>לכל מקור שבחרתן: <b>מה בדקנו ← מה גילינו ← מה המסקנה העיצובית?</b> ובסוף, 2–3 ״הזדמנויות לפעולה״.</p></div>
+    <div>${linkList(p.links,p.id)}</div>
+  </div></section>
+
+  <section class="stage d34" id="d34-${p.id}"><aside><div class="n">D3·D4</div><div class="t">נביטה והנצה</div><small>רעיונאות, סינון ומודלים</small></aside><div>
+    <div class="nosol"><b>כאן אין פתרונות.</b>רק שאלות. כל אחד מ-15–20 הרעיונות שלכן צריך לעבור דרך חמש השאלות האלה.</div>
+    <div class="iq">${INTEL.map((i,n)=>`<details ${n===0?"open":""}><summary>${i.n}</summary><div><p class="def">${i.d}</p><p>${esc(p.intel[i.k])}</p></div></details>`).join("")}</div>
+    <div><h4>שאלות לסינון (מטריצת ההחלטה)</h4><ul class="q">
+      <li>איזה רעיון עונה הכי מדויק על הכאב שהגדרתן בחריש, ולא על כאב אחר?</li>
+      <li>מה תלמדו ממודל מקרטון בקנה מידה 1:1 שלא תלמדו מסקיצה?</li>
+      <li>מה אמר המשתמש כשנגע במודל? מה הפתיע אותו?</li>
+      <li>האם הוא הבין מה לעשות בשלוש השניות הראשונות?</li></ul></div>
+  </div></section>
+
+  <div class="pager"><a href="#${prev.id}">→ ${esc(prev.title)}</a><a href="#${next.id}">${esc(next.title)} ←</a></div>`;
+}
+
+function wire(p){
+  document.querySelectorAll(".filters").forEach(g=>{
+    g.addEventListener("click",e=>{
+      const b=e.target.closest("button"); if(!b) return;
+      g.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));
+      const f=b.dataset.f; document.querySelectorAll(`#links-${g.dataset.for} li`).forEach(li=>{li.hidden = f!=="all" && li.dataset.p!==f;});
+    });
+  });
+  if(!p) return;
+  const ins=[...document.querySelectorAll(".builder input")], out=document.getElementById("cq-out");
+  const parts=[["v","כיצד נוכל ל",""],["x"," את ",""],["w"," עבור ",""],["c"," תוך ","?"]];
+  const render=()=>{
+    const v={}; ins.forEach(i=>v[i.dataset.k]=i.value.trim());
+    out.innerHTML = '"'+parts.map(([k,pre,post])=>esc(pre)+(v[k]?`<span>${esc(v[k])}</span>`:`<span class="empty">……</span>`)+post).join("")+'"';
+    store.set("cq-"+p.id,v); return v;
+  };
+  ins.forEach(i=>i.addEventListener("input",render)); render();
+  document.getElementById("cq-copy").addEventListener("click",()=>{
+    const v=render(); const txt=`כיצד נוכל ל${v.v} את ${v.x} עבור ${v.w} תוך ${v.c}?`;
+    const msg=document.getElementById("cq-msg");
+    navigator.clipboard.writeText(txt).then(()=>msg.textContent="הועתק").catch(()=>{const r=document.createRange();r.selectNodeContents(out);const s=getSelection();s.removeAllRanges();s.addRange(r);msg.textContent="מסומן. אפשר להעתיק ידנית.";});
+  });
+  document.querySelectorAll("[data-tool]").forEach(c=>c.addEventListener("change",()=>{
+    const d=store.get("tools-"+p.id,{}); d[c.dataset.tool]=c.checked; store.set("tools-"+p.id,d);
+  }));
+}
+
+function route(){
+  const id=(location.hash||"#home").slice(1);
+  const p=PROJECTS.find(x=>x.id===id);
+  const app=document.getElementById("app");
+  if(id==="gallery"){app.innerHTML=gallery();wireGallery();document.title="גלריית השראה · החוש החסר";window.scrollTo(0,0);return;}
+  app.innerHTML = p ? project(p) : home();
+  wire(p);
+  document.title = p ? p.title+" · החוש החסר" : "החוש החסר";
+  if(p) window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>
