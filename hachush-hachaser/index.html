@@ -10,7 +10,7 @@
 <style>
 /* Layout: flat colour blocks on a clean white field, like the school's signage. A hard-edged grid, no rounded cards; colour = stage of the 7D process. */
 :root{
-  --navy:#215068; --teal:#4bc3c0; --orange:#f18215; --yellow:#f6ad0c; --red:#ea3144;
+  --navy:#215068; --teal:#4bc3c0; --orange:#f18215; --yellow:#f6ad0c; --red:#ea3144; --red-ink:#c8243a; --teal-ink:#1d7d7a;
   --bg:#ffffff; --fg:#1d3a4b; --muted:#5b7482; --line:#d6e2e8; --soft:#f2f7f9;
   --ink-on-color:#ffffff; --ink-on-yellow:#1d3a4b;
   --d1:var(--yellow); --d2:var(--teal); --d3:var(--orange); --d4:var(--red); --d5:var(--navy);
@@ -19,9 +19,9 @@
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#132f3e; --fg:#eef5f7; --muted:#a6bfca; --line:#2c4f62; --soft:#1a3b4d; --navy:#2c6584;
+  --bg:#132f3e; --fg:#eef5f7; --muted:#a6bfca; --line:#2c4f62; --soft:#1a3b4d; --navy:#1d4a62; --teal-ink:var(--teal);
   color-scheme:dark;}}
-:root[data-theme="dark"]{--bg:#132f3e; --fg:#eef5f7; --muted:#a6bfca; --line:#2c4f62; --soft:#1a3b4d; --navy:#2c6584; color-scheme:dark;}
+:root[data-theme="dark"]{--bg:#132f3e; --fg:#eef5f7; --muted:#a6bfca; --line:#2c4f62; --soft:#1a3b4d; --navy:#1d4a62; --teal-ink:var(--teal); color-scheme:dark;}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -41,7 +41,7 @@ p{margin:0}
 header.top{padding-block:20px 8px}
 .brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
 .brand a{text-decoration:none}
-.brand .mark{font-family:var(--display);font-size:clamp(34px,6vw,58px);color:var(--teal);line-height:1}
+.brand .mark{font-family:var(--display);font-size:clamp(34px,6vw,58px);color:var(--teal-ink);line-height:1}
 .brand .mark b{font-weight:400;color:var(--fg)}
 .brand .sub{color:var(--muted);font-size:15px}
 
@@ -56,7 +56,7 @@ section{scroll-margin-top:16px}
 .hero{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:start}
 @media (max-width:820px){.hero{grid-template-columns:1fr}}
 .hero h2{font-size:clamp(28px,4.4vw,44px)}
-.hero h2 mark{background:var(--orange);color:#fff;padding:0 .2em}
+.hero h2 mark{background:var(--orange);color:#1d3a4b;padding:0 .2em}
 .hero p.lead{font-size:19px;margin-top:14px;max-width:60ch}
 .qbox{background:var(--navy);color:#fff;padding:22px}
 .qbox h3{font-size:22px;margin-bottom:8px;color:var(--yellow)}
@@ -67,7 +67,7 @@ section{scroll-margin-top:16px}
 .ph .n{font-family:var(--display);font-size:26px;line-height:1}
 .ph .t{font-weight:700}
 .ph small{display:block;font-size:14px;opacity:.95;line-height:1.4;margin-top:4px}
-.ph.d1{background:var(--d1);color:var(--ink-on-yellow)}.ph.d2{background:var(--d2);color:#0f3442}.ph.d3{background:var(--d3)}.ph.d4{background:var(--d4)}.ph.d5{background:#215068}
+.ph.d1{background:var(--d1);color:var(--ink-on-yellow)}.ph.d2{background:var(--d2);color:#0f3442}.ph.d3{background:var(--d3);color:#1d3a4b}.ph.d4{background:var(--red-ink)}.ph.d5{background:#215068}
 .ph.dim{opacity:.55}
 
 h2.sec{font-size:30px;margin:48px 0 6px}
@@ -111,7 +111,7 @@ h2.sec{font-size:30px;margin:48px 0 6px}
 .stage>aside small{display:block;font-size:13px;line-height:1.35;margin-top:4px}
 .stage.d1>aside{background:var(--d1);color:#1d3a4b}
 .stage.d2>aside{background:var(--d2);color:#0f3442}
-.stage.d34>aside{background:linear-gradient(var(--d3) 0 50%,var(--d4) 50%);color:#fff}
+.stage.d34>aside{background:var(--d3);color:#1d3a4b;border-bottom:12px solid var(--red-ink)}
 .stage>div{min-width:0;display:grid;gap:22px}
 .stage h3{font-size:23px;margin-bottom:8px}
 .stage h4{font-size:18px;margin-bottom:6px}
@@ -120,7 +120,7 @@ ul.q li::marker{color:var(--orange)}
 .legs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media (max-width:720px){.legs{grid-template-columns:1fr}}
 .leg{border:2px solid var(--line);padding:12px;min-width:0}
-.leg b{display:block;font-family:var(--display);font-weight:400;font-size:18px;color:var(--teal)}
+.leg b{display:block;font-family:var(--display);font-weight:400;font-size:18px;color:var(--teal-ink)}
 .leg p{font-size:15px}
 
 .builder{background:var(--soft);padding:16px;border-inline-start:6px solid var(--yellow)}
@@ -150,7 +150,7 @@ ul.q li::marker{color:var(--orange)}
 .filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 ol.links{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:0;counter-reset:l}
 ol.links li{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line);counter-increment:l}
-ol.links li::before{content:counter(l);font-family:var(--display);font-size:24px;color:var(--teal);line-height:1.1;font-variant-numeric:tabular-nums}
+ol.links li::before{content:counter(l);font-family:var(--display);font-size:24px;color:var(--teal-ink);line-height:1.1;font-variant-numeric:tabular-nums}
 ol.links li>div{min-width:0}
 ol.links a.t{font-weight:700;font-size:18px;text-decoration-color:var(--teal);text-underline-offset:3px;overflow-wrap:anywhere}
 ol.links .tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
@@ -161,7 +161,7 @@ ol.links p{font-size:16px}
 ol.links .use{font-size:15px;color:var(--muted);margin-top:4px}
 ol.links .use b{color:var(--fg)}
 
-.nosol{background:var(--red);color:#fff;padding:14px 16px;font-weight:700}
+.nosol{background:var(--red-ink);color:#fff;padding:14px 16px;font-weight:700}
 .nosol b{font-family:var(--display);font-weight:400;font-size:20px;display:block}
 .iq{display:grid;gap:8px}
 .iq details{border:2px solid var(--line);padding:0}
@@ -214,6 +214,51 @@ ul.chk input:checked+span{color:var(--muted);text-decoration:line-through;text-d
 .rub table,.rubt{border-collapse:collapse;width:100%;margin-top:8px;font-size:15px}
 .rub td,.rubt td{border-top:1px solid var(--line);padding:6px 4px}
 .rub td:last-child,.rubt td:last-child{width:60px;text-align:center;font-family:var(--display);font-variant-numeric:tabular-nums}
+/* seven habits */
+.lead2{font-family:var(--display);font-size:clamp(24px,3.6vw,34px);margin-top:10px;line-height:1.25}
+.lead2 mark{background:var(--yellow);color:#1d3a4b;padding:0 .2em}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-weight:700;font-size:15px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;flex:none;vertical-align:middle}
+.why{background:var(--soft);border-inline-start:6px solid var(--navy);padding:16px 18px;margin-top:20px}
+.why h3{font-size:22px;margin-bottom:6px}
+.hb{display:grid;grid-template-columns:72px 1fr;gap:18px;margin-top:40px;padding-top:24px;border-top:2px solid var(--line)}
+@media (max-width:600px){.hb{grid-template-columns:1fr;gap:6px}}
+.hb>div{min-width:0;display:grid;gap:12px;align-content:start}
+.hn{font-family:var(--display);font-size:44px;line-height:1;color:var(--teal-ink)}
+.hb h3{font-size:28px}
+.hsub{font-size:18px;color:var(--muted)}
+.where{display:inline-block;justify-self:start;font-size:14px;font-weight:700;background:var(--navy);color:#fff;padding:3px 10px}
+.ashaf{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:600px){.ashaf{grid-template-columns:1fr}}
+.ashaf div{border:2px solid var(--line);padding:12px;display:grid;gap:2px;min-width:0}
+.ashaf b{font-family:var(--display);font-weight:400;font-size:34px;line-height:1;color:var(--teal-ink)}
+.ashaf span{font-weight:700;font-size:18px}
+.ashaf small{font-size:14px;color:var(--muted)}
+.tscroll{overflow-x:auto;max-width:100%}
+table.jt{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+.jt th{text-align:start;font-size:13px;color:var(--muted);border-bottom:2px solid var(--fg);padding:6px}
+.jt td{border-bottom:1px solid var(--line);padding:8px 6px;vertical-align:top}
+.pull{font-family:var(--display);font-size:20px;line-height:1.35;border-inline-start:6px solid var(--yellow);padding:6px 14px}
+.ba{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}
+@media (max-width:600px){.ba{grid-template-columns:1fr}.ba .arr{transform:rotate(-90deg);justify-self:center}}
+.ba>div:not(.arr){border:2px solid var(--line);padding:12px;font-family:var(--display);font-size:18px;line-height:1.35;min-width:0}
+.ba>div:last-child{border-color:var(--teal)}
+.ba small{display:block;font-family:var(--body);font-size:13px;font-weight:700;color:var(--muted)}
+.ba .arr{align-self:center;font-size:26px}
+.two,.cred{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media (max-width:600px){.two,.cred{grid-template-columns:1fr}}
+.two div,.cred div{background:var(--soft);padding:12px;min-width:0}
+.two b,.cred b{font-family:var(--display);font-weight:400;font-size:19px}
+ol.honest{margin:0;padding-inline-start:24px;display:grid;gap:8px;font-family:var(--display);font-size:19px;line-height:1.35}
+.okay{background:var(--teal);color:#0f3442;padding:12px 16px}
+.stagelist{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.stagelist>div{border-top:6px solid;background:var(--soft);padding:12px;min-width:0}
+.stagelist b{font-family:var(--display);font-weight:400;font-size:20px;display:block}
+.stagelist small{color:var(--muted);font-size:13px}
+.stagelist ul{margin:6px 0 0;padding-inline-start:18px;font-size:15px;display:grid;gap:4px}
+.consent{border:2px solid var(--teal);padding:14px 16px}.consent h3{font-size:20px;margin-bottom:4px}
+.xq .okn{margin-top:10px;font-weight:700;font-family:var(--body)}
 footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);font-size:14px}
 </style>
 </head>
@@ -566,7 +611,7 @@ function gallery(){
   </div>
   <div class="gal" id="gal">${GALLERY.map(g=>`<article class="gi" data-sense="${g.sense}" data-how="${g.how}">
     <div class="pic" style="background:color-mix(in srgb, ${HOW[g.how].c} 14%, var(--bg))">${glyph(g.how)}</div>
-    <div class="gb"><div class="tags"><span class="tag" style="background:${GSENSES[g.sense].color};color:#fff">${GSENSES[g.sense].name}</span><span class="tag kind">${HOW[g.how].n}</span></div>
+    <div class="gb"><div class="tags"><span class="tag" style="background:${g.sense==="touch"?"var(--red-ink)":GSENSES[g.sense].color};color:${g.sense==="hear"||g.sense==="see"?"#1d3a4b":"#fff"}">${GSENSES[g.sense].name}</span><span class="tag kind">${HOW[g.how].n}</span></div>
     <h3>${esc(g.n)}</h3><p>${esc(g.s)}</p><p class="use"><b>למה זה מעניין:</b> ${esc(g.why)}</p>
     <a class="more" href="${esc(g.u)}" target="_blank" rel="noopener">לתמונות ולמוצר ←</a></div></article>`).join("")}</div>
   <p class="note" id="gal-empty" hidden>אין דוגמאות בצירוף הזה. נסו סינון אחר.</p>`;
@@ -593,7 +638,7 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 
 function nav(active){
   const n=document.getElementById("nav");
-  n.innerHTML = `<a href="#home" ${active==="home"?'aria-current="page"':""}>כל הנושאים</a><a href="#gallery" ${active==="gallery"?'aria-current="page"':""} style="background:var(--yellow);color:#1d3a4b;border-color:var(--yellow)">גלריית השראה</a><a href="#tik" ${active==="tik"?'aria-current="page"':""} style="background:var(--navy);color:#fff;border-color:var(--navy)">מלווה לתיק</a>` +
+  n.innerHTML = `<a href="#home" ${active==="home"?'aria-current="page"':""}>כל הנושאים</a><a href="#gallery" ${active==="gallery"?'aria-current="page"':""} style="background:var(--yellow);color:#1d3a4b;border-color:var(--yellow)">גלריית השראה</a><a href="#tik" ${active==="tik"?'aria-current="page"':""} style="background:var(--navy);color:#fff;border-color:var(--navy)">מלווה לתיק</a><a href="#habits" ${active==="habits"?'aria-current="page"':""} style="background:var(--soft)">שבעה הרגלים</a>` +
     PROJECTS.map(p=>`<a href="#${p.id}" ${active===p.id?'aria-current="page"':""} style="border-bottom-color:${SENSES[p.sense].color}">${esc(p.title)}</a>`).join("");
 }
 
@@ -632,7 +677,8 @@ function home(){
     <div class="ph d4"><div class="n">D4</div><div class="t">הנצה</div><small>כאן: רק שאלות. הקונספט שלכן.</small></div>
     <div class="ph d5"><div class="n">D5</div><div class="t">פריחה</div><small>CMF, שרטוטים, מיתוג</small></div>
   </div>
-  <a class="tikcta" href="#tik"><b>מלווה לתיק התהליך</b><span>מה חייב להופיע במצגת בכל פרק, משימות שמחברות בין האתר, קלוד והמצגת, ובדיקת מוכנות לייצוא PDF ←</span></a>
+  <a class="tikcta" href="#tik"><b>מלווה לתיק התהליך</b><span>מה חייב להופיע במצגת בכל פרק, משימות שמחברות בין האתר, כלי הבינה והמצגת, ובדיקת מוכנות לייצוא PDF ←</span></a>
+  <a class="tikcta" href="#habits" style="background:var(--soft);color:var(--fg);border:2px solid var(--fg)"><b style="color:var(--fg)">שבעה הרגלים לתיק</b><span>לא רק מה עשיתן, איך החלטתן: יומן הכרעות, שני מרואיינים, אישור לשימוש במידע, קרדיטים ושאלות הכנות ←</span></a>
   <h2 class="sec">הנושאים, לפי החוש החסר</h2>
   <p class="sec-sub">בחרו את הנושא שלכן. כדאי להציץ גם בנושאים של הקבוצות האחרות באותו חוש; הרבה מקורות משותפים.</p>
   <div class="senses">${groups}</div>
@@ -660,7 +706,7 @@ function project(p){
     <div><h3>מה לא עובד כרגע?</h3><ul class="q">${p.d1.pain.map(q=>`<li>${esc(q)}</li>`).join("")}</ul></div>
     <div><h3>בסיס שלוש הרגליים</h3><p class="note" style="margin-bottom:8px">אפשרויות לבחירה. בחרו אחת מכל רגל, ודייקו.</p>
       <div class="legs">${p.d1.legs.map((l,i)=>`<div class="leg"><b>${legsNames[i]}</b><p>${esc(l)}</p></div>`).join("")}</div></div>
-    <div class="builder"><h3>בונה שאלת המחקר</h3><p class="note">התבנית של שקף 6 במצגת. מה שתכתבו נשמר רק בדפדפן שלכן.</p>
+    <div class="builder"><h3>בונה שאלת המחקר</h3><p class="note">התבנית של שקף 7 במצגת. מה שתכתבו נשמר רק בדפדפן שלכן.</p>
       <div class="grid">
         <label for="cq-v-${p.id}">כיצד נוכל ל… (פועל)<input id="cq-v-${p.id}" data-k="v" value="${esc(cq.v)}" placeholder="לדוגמה: להנגיש, לחבר, לצמצם"></label>
         <label for="cq-x-${p.id}">את… (הבעיה)<input id="cq-x-${p.id}" data-k="x" value="${esc(cq.x)}"></label>
@@ -669,6 +715,7 @@ function project(p){
       </div>
       <p class="out" id="cq-out" aria-live="polite"></p>
       <div class="row"><button class="btn" type="button" id="cq-copy">העתקה</button><span class="note" id="cq-msg"></span></div>
+      <p class="note" style="margin-top:8px">שמרו גם את הגרסה הראשונה. בתיק היא תעמוד ליד הסופית.</p>
     </div>
     <div><h3>גבולות גזרה</h3><p>${esc(p.d1.bound)}</p></div>
   </div></section>
@@ -677,7 +724,7 @@ function project(p){
     <div><h3>שלושת כלי המחקר</h3><p class="note" style="margin-bottom:8px">חובה לפחות שניים. סמנו מה בחרתן.</p>
     <div class="tools">
       ${[["persona","מחקר משתמשים משתף",p.d2.persona],["bench","מחקר שוק (בנצ׳מרקינג): מה למפות",p.d2.bench],["stem","מחקר טכנולוגי-חומרי (STEM)",p.d2.stem]].map(([k,n,arr])=>`
-      <div class="tool"><h4><input type="checkbox" id="tool-${p.id}-${k}" data-tool="${k}" ${done[k]?"checked":""}><label for="tool-${p.id}-${k}">${n}</label></h4><ul>${arr.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}
+      <div class="tool"><h4><input type="checkbox" id="tool-${p.id}-${k}" data-tool="${k}" ${done[k]?"checked":""}><label for="tool-${p.id}-${k}">${n}</label></h4><ul>${arr.map(x=>`<li>${esc(x)}</li>`).join("")}${k==="persona"?"<li><b>לפחות שני אנשים, מסוגים שונים.</b></li>":""}</ul></div>`).join("")}
     </div></div>
     <div><h3>עמוד התובנות (חובה)</h3><p>לכל מקור שבחרתן: <b>מה בדקנו ← מה גילינו ← מה המסקנה העיצובית?</b> ובסוף, 2–3 ״הזדמנויות לפעולה״.</p></div>
     <div>${linkList(p.links,p.id)}</div>
@@ -726,43 +773,44 @@ function wire(p){
 
 /* ---------- מלווה לתיק התהליך (המצגת) ---------- */
 const TIK = [
-{id:"t0",n:"פתיחה",t:"שער ותוכן עניינים",bg:"var(--navy)",ink:"#fff",pages:"שקפים 1 ו-2",
- must:[["שקף 1","שער: השמות שלכן מלאים. את הכותרת ממלאות רק בסוף, בשלב הפריחה"],["שקף 2","תוכן עניינים: חריש, זריעה, נביטה, הנצה, פריחה. מעדכנות מספרי שקפים לפני הייצוא"]],
+{id:"t0",n:"פתיחה",t:"שער ותוכן עניינים",bg:"var(--navy)",ink:"#fff",pages:"שקפים 2 ו-3",
+ must:[["שקף 2","שער: השמות שלכן מלאים. את הכותרת ממלאות רק בסוף, בשלב הפריחה"],["שקף 3","תוכן עניינים: חריש, זריעה, נביטה, הנצה, פריחה. מעדכנות מספרי שקפים לפני הייצוא"]],
  rub:[["שער ותוכן עניינים מלאים ומעודכנים",3]]},
-{id:"t1",n:"D1",t:"חריש",bg:"var(--d1)",ink:"#1d3a4b",pages:"שקפים 3 עד 5",
- must:[["שקף 3","מפת חשיבה סביב ״החוש החסר״: ידנית ומצולמת, בלי בינה"],["שקף 4","תיאור הבעיה: אני רוצה ליצור…, קהל היעד…, בחרתי כי…"],["שקף 4","שלושה מקורות. לכל אחד: קראתי ש… / המסקנות שלי"],["שקף 5","הגדרת הבעיה: תשובה לכל שאלה בשקף (מה מציק, מה מלהיב, אילו הזדמנויות, מה לשמר, מה לשפר)"]],
- task:{h:"שלושה מקורות, והמסקנה שלכן",steps:["בעמוד הנושא שלכן באתר, סננו ל״חריש״ ובחרו שלושה מקורות לשקף 4.","את ״קראתי ש…״ כותבות במילים שלכן, אחרי שפתחתן את המקור. לא מעתיקות את התקציר מהאתר.","ב״המסקנות שלי״ כותבות מה המקור אומר על קהל היעד שלכן.","בשקף 5: עונות לבד על כל השאלות. אחר כך מבקשות מקלוד שאלות המשך על שתיים מהתשובות (הפרומפט למטה), ומעמיקות את התשובות."],trace:"בשקף 4: שלושה קישורים, ולידם משפטים שלכן. בהערות הדובר של שקף 5: השאלות של קלוד."},
+{id:"t1",n:"D1",t:"חריש",bg:"var(--d1)",ink:"#1d3a4b",pages:"שקפים 4 עד 6",
+ must:[["שקף 4","מפת חשיבה סביב ״החוש החסר״: ידנית ומצולמת, בלי בינה"],["שקף 5","תיאור הבעיה: אני רוצה ליצור…, קהל היעד…, בחרתי כי…"],["שקף 5","שלושה מקורות. לכל אחד: קראתי ש… / המסקנות שלי"],["שקף 6","הגדרת הבעיה: תשובה לכל שאלה בשקף (מה מציק, מה מלהיב, אילו הזדמנויות, מה לשמר, מה לשפר)"],["שקף 28","פותחות את יומן ההכרעות בנספחים. השורה הראשונה: מפת החשיבה נעשתה ביד, ולמה"]],
+ task:{h:"שלושה מקורות, והמסקנה שלכן",steps:["בעמוד הנושא שלכן באתר, סננו ל״חריש״ ובחרו שלושה מקורות לשקף 5.","את ״קראתי ש…״ כותבות במילים שלכן, אחרי שפתחתן את המקור. לא מעתיקות את התקציר מהאתר.","ב״המסקנות שלי״ כותבות מה המקור אומר על קהל היעד שלכן.","בשקף 6: עונות לבד על כל השאלות. אחר כך מבקשות מכלי הבינה שאלות המשך על שתיים מהתשובות (הפרומפט למטה), ומעמיקות את התשובות."],trace:"בשקף 5: שלושה קישורים, ולידם משפטים שלכן. בהערות הדובר של שקף 6: השאלות שהבינה שאלה."},
  prompt:"אני בשלב החריש בפרויקט עיצוב מוצר בנושא [הנושא]. אלה התשובות שלי לשאלות ״מה מציק?״ ו״מה מלהיב?״: [התשובות]. אל תציע פתרונות ואל תשכתב את מה שכתבתי. שאל אותי שתי שאלות המשך שיעזרו לי להבין את הבעיה לעומק.",
  rub:[["מפת חשיבה עשירה וידנית",4],["תיאור הבעיה ושלושה מקורות עם מסקנות אישיות",6],["הגדרת בעיה מעמיקה",5]]},
-{id:"t2",n:"D2",t:"זריעה",bg:"var(--d2)",ink:"#0f3442",pages:"שקפים 6 עד 18",
- must:[["שקף 6","שאלת המחקר: כיצד נוכל ל… עבור… ובכך…?"],["שקף 7","פרסונה: שם, גיל, מאפיינים, מצב מצוי ורצוי, תמונה, ומטרות ושאלות לחקר המשתמשים"],["שקף 8","מסע לקוחה בשלוש סצנות: פתיחה, בעיה, פתרון"],["שקפים 9 עד 14","שיטת מחקר אחת: ראיון, סקר או תצפית. בפרק רק מסקנות וציטוטים, והחומר המלא בנספחים"],["שקף 15","מחקר טרנדים: 6 שורות של קישור, מה יש בו, איך זה רלוונטי לי, ומכאן למדתי או החלטתי"],["שקף 16","דף השראה חזותי"],["שקף 17","סיכום לקראת עשייה: במה אתמקד, מסר, נימוק, מה ירגישו, אווירה"],["שקף 18","סיכום שפה עיצובית"]],
- task:{h:"שש שורות: ארבע מהאתר ושתיים משלכן",steps:["לשקף 6: בנו את שאלת המחקר בבונה שבעמוד הנושא, ובקשו מקלוד לבקר אותה בלי לשכתב. את הגרסה הסופית אתן מנסחות.","לשקף 15: בחרו ארבעה מקורות מעמוד הנושא או מגלריית ההשראה, והוסיפו שניים שמצאתן בעצמכן. אלה לא מהאתר ולא מקלוד.","בעמודה ״איך רלוונטי לי״, כתבו את שם הפרסונה משקף 7. ככה ברור שהמקור נבחר בשבילה.","לשקפים 9 עד 14: כתבו לבד את שאלות הראיון או הסקר, ובקשו מקלוד לבדוק אותן (הפרומפט למטה)."],trace:"שש שורות בשקף 15, כל אחת עם ״מכאן למדתי״ במילים שלכן. שתי השורות שמצאתן לבד מסומנות ״מצאתי בעצמי״."},
- prompt:"אני מתכננת [ראיון / סקר / תצפית] עם [מי] לפרויקט עיצוב מוצר בנושא [הנושא]. אלה השאלות שכתבתי: [השאלות]. אל תכתוב שאלות חדשות במקומן. אמור אילו מהשאלות שלי מכוונות לתשובה מסוימת או סגורות מדי, ושאל אותי מה אני הכי רוצה לגלות.",
+{id:"t2",n:"D2",t:"זריעה",bg:"var(--d2)",ink:"#0f3442",pages:"שקפים 7 עד 19",
+ must:[["שקף 7","שאלת המחקר: כיצד נוכל ל… עבור… ובכך…? הגרסה הראשונה נשארת ליד הסופית, עם משפט: מה גרם לשינוי"],["שקף 8","פרסונה: שם, גיל, מאפיינים, מצב מצוי ורצוי, תמונה, ומטרות ושאלות לחקר המשתמשים"],["שקף 9","מסע לקוחה בשלוש סצנות: פתיחה, בעיה, פתרון"],["שקפים 10 עד 15","שיטת מחקר אחת: ראיון, סקר או תצפית, עם שני אנשים לפחות מקהל היעד, ועדיף מסוגים שונים: מי שמשתמש, ומי שנמצא סביבו ומושפע (הורה, מורה, חבר, מטפלת). בפרק רק מסקנות וציטוטים, והחומר המלא בנספחים"],["שקף 28","אישור המרואיינים לשימוש במידע, רשום בנספחים ליד הראיון"],["שקף 16","מחקר טרנדים: 6 שורות של קישור, מה יש בו, איך זה רלוונטי לי, ומכאן למדתי או החלטתי"],["שקף 17","דף השראה חזותי"],["שקף 18","סיכום לקראת עשייה: במה אתמקד, מסר, נימוק, מה ירגישו, אווירה"],["שקף 19","סיכום שפה עיצובית"]],
+ consent:{h:"אישור המרואיינים לשימוש במידע",p:"לפני כל ראיון או תצפית מבקשות אישור על שלושה דברים: להקליט, לצטט, ולצלם. רושמות את האישור בנספחים (שקף 28) ליד הראיון. לפני שמדביקות משהו לכלי בינה, מורידות שמות, כתובות ופרטים שאפשר לזהות מהם מישהו."},
+ task:{h:"שש שורות: ארבע מהאתר ושתיים משלכן",steps:["לשקף 7: בנו את שאלת המחקר בבונה שבעמוד הנושא, ובקשו מכלי הבינה לבקר אותה בלי לשכתב. את הגרסה הסופית אתן מנסחות, והראשונה נשארת לידה.","לשקף 16: בחרו ארבעה מקורות מעמוד הנושא או מגלריית ההשראה, והוסיפו שניים שמצאתן בעצמכן. אלה לא מהאתר ולא מבינה.","בעמודה ״איך רלוונטי לי״, כתבו את שם הפרסונה משקף 8. ככה ברור שהמקור נבחר בשבילה.","לשקפים 10 עד 15: כתבו לבד את שאלות הראיון או הסקר, ובקשו מכלי הבינה לבדוק אותן (הפרומפט למטה)."],trace:"שש שורות בשקף 16, כל אחת עם ״מכאן למדתי״ במילים שלכן. שתי השורות שמצאתן לבד מסומנות ״מצאתי בעצמי״."},
+ prompt:"אני מתכננת [ראיון / סקר / תצפית] עם [מי, בלי שמות ופרטים מזהים] לפרויקט עיצוב מוצר בנושא [הנושא]. אלה השאלות שכתבתי: [השאלות]. אל תכתוב שאלות חדשות במקומן. אמור אילו מהשאלות שלי מכוונות לתשובה מסוימת או סגורות מדי, ושאל אותי מה אני הכי רוצה לגלות.",
  warn:"הפרסונה, הציטוטים, תשובות הסקר והתצפית מגיעים רק מאנשים אמיתיים. פרסונה שבינה המציאה אינה מחקר.",
- rub:[["שאלת מחקר מדויקת בתבנית",4],["פרסונה ומסע לקוחה שמבוססים על המחקר",7],["שיטת מחקר: מסקנות וציטוטים אמיתיים",8],["מחקר טרנדים: 6 שורות עם מסקנות",6],["השראה חזותית, סיכום לקראת עשייה ושפה עיצובית",5]]},
-{id:"t3",n:"D3",t:"נביטה",bg:"var(--d3)",ink:"#fff",pages:"שקף 19",nosol:true,
- must:[["שקף 19","לפחות 10 רעיונות וסקיצות מגוונים, כל אחד עם הסבר"],["שקף 19","לכל רעיון: יתרונות וחסרונות"],["שקף 19","התנסות בחומרים, מתועדת בצילום"],["שקף 19","כל הסקיצות מתועדות, גם אלה שנפסלו"],["ארגז הכלים","בחינת הרעיונות דרך חמש האינטליגנציות ו-STEAM, מהשקפים בתחילת המצגת"]],
- task:{h:"הרעיונות שלכן, השאלות של קלוד",steps:["כבו מסכים. שימו טיימר ל-10 דקות ושרטטו ביד כמה שיותר רעיונות. אחר כך עוד סבב.","בחרו חמישה רעיונות. לכל אחד, בקשו מקלוד שאלה אחת לפי אחת האינטליגנציות (הפרומפט למטה). קלוד לא מציע רעיונות בשלב הזה.","מהתשובות שלכן כותבות את היתרונות והחסרונות בשקף 19."],trace:"עמודי הסקיצות מצולמים בשקף 19, ושאלות קלוד בגופן קטן לידם."},
+ rub:[["שאלת מחקר מדויקת בתבנית, עם הגרסה הראשונה",4],["פרסונה ומסע לקוחה שמבוססים על המחקר",7],["שיטת מחקר: מסקנות וציטוטים אמיתיים (שני אנשים לפחות)",8],["מחקר טרנדים: 6 שורות עם מסקנות",6],["השראה חזותית, סיכום לקראת עשייה ושפה עיצובית",5]]},
+{id:"t3",n:"D3",t:"נביטה",bg:"var(--d3)",ink:"#1d3a4b",pages:"שקפים 20 ו-21",nosol:true,
+ must:[["שקף 20","לפחות 10 רעיונות וסקיצות מגוונים, כל אחד עם הסבר"],["שקף 20","לכל רעיון: יתרונות וחסרונות"],["שקף 20","התנסות בחומרים, מתועדת בצילום"],["שקף 20","כל הסקיצות מתועדות, גם אלה שנפסלו, עם הסיבה"],["שקף 21","בחינת הרעיונות דרך ארגז הכלים לנביטה: חמש האינטליגנציות ו-STEAM"]],
+ task:{h:"הרעיונות שלכן, השאלות של הבינה",steps:["כבו מסכים. שימו טיימר ל-10 דקות ושרטטו ביד כמה שיותר רעיונות. אחר כך עוד סבב. רשמו את זה ביומן ההכרעות כבחירה בלי בינה, עם נימוק.","בחרו חמישה רעיונות. לכל אחד, בקשו מכלי הבינה שאלה אחת לפי אחת האינטליגנציות (הפרומפט למטה). בשלב הזה הבינה לא מציעה רעיונות.","מהתשובות שלכן כותבות את היתרונות והחסרונות בשקף 20.","אם השתמשתן בהדמיה שבינה יצרה, היא מסומנת ומונחת ליד הסקיצה שלכן."],trace:"עמודי הסקיצות מצולמים בשקף 20, ושאלות הבינה בגופן קטן לידם."},
  prompt:"אני בשלב רעיונאות בפרויקט עיצוב מוצר בנושא [הנושא]. אסור לך להציע רעיונות, פתרונות או דוגמאות למוצרים. זה הרעיון שלי במשפט: [הרעיון]. שאל אותי שאלה אחת בלבד מנקודת המבט של האינטליגנציה ה[יישומית / קוגניטיבית / חברתית / יצירתית / רגשית] של עזרי טרזי, וחכה לתשובה שלי.",
  rub:[["לפחות 10 רעיונות שונים באמת",6],["יתרונות, חסרונות וחמש האינטליגנציות",5],["התנסות בחומרים",4]]},
-{id:"t4",n:"D4",t:"הנצה",bg:"var(--d4)",ink:"#fff",pages:"שקפים 20 עד 22",nosol:true,
- must:[["שקף 20","בחירת כיוון אחד מהנביטה ופיתוחו, עם נימוק"],["שקף 20","מודל מהיר שנבדק בידיים של משתמש אמיתי, ומה שיניתן בעקבותיו"],["שקף 21","תרחישי שימוש במוצר: לפני, תוך כדי, אחרי"],["שקף 22","אפיון סופי: חומרים, מידות, צבעים, מנגנון, והמשמעויות"]],
- task:{h:"המודל מדבר",steps:["בנו מודל מקרטון או מנייר לפני כל הדמיה במחשב.","הניחו אותו בידיים של משתמש אמיתי. תעדו שלושה ציטוטים: מה היה לא נוח? מה הפתיע?","לשקף 20, השתמשו בקלוד רק כדי לנסח קריטריונים לבחירה (הפרומפט למטה). את ההחלטה אתן מקבלות."],trace:"בשקף 20: צילום של המשתמש עם המודל (באישורו), שלושת הציטוטים, ומודל לפני ואחרי המשוב."},
+{id:"t4",n:"D4",t:"הנצה",bg:"var(--red-ink)",ink:"#fff",pages:"שקפים 22 עד 24",nosol:true,
+ must:[["שקף 22","בחירת כיוון אחד מהנביטה ופיתוחו, עם נימוק"],["שקף 22","מודל מהיר שנבדק בידיים של משתמש אמיתי: המודל לפני המשוב ואחריו"],["שקף 23","תרחישי שימוש במוצר: לפני, תוך כדי, אחרי"],["שקף 24","אפיון סופי: חומרים, מידות, צבעים, מנגנון, והמשמעויות"],["שקף 24","שאלה אחת: מי עוד עלול להיות מושפע מהמוצר?"]],
+ task:{h:"המודל מדבר",steps:["בנו מודל מקרטון או מנייר לפני כל הדמיה במחשב.","הניחו אותו בידיים של משתמש אמיתי. תעדו שלושה ציטוטים: מה היה לא נוח? מה הפתיע?","לשקף 22, השתמשו בכלי הבינה רק כדי לנסח קריטריונים לבחירה (הפרומפט למטה). את ההחלטה אתן מקבלות."],trace:"בשקף 22: צילום של המשתמש עם המודל (באישורו), שלושת הציטוטים, ומודל לפני ואחרי המשוב."},
  prompt:"אני בוחרת בין כמה כיווני קונספט בפרויקט עיצוב מוצר בנושא [הנושא]. אל תדרג אותם, אל תמליץ ואל תציע כיוון חדש. עזור לי לנסח ארבעה קריטריונים לבחירה, ושאל אותי מה הכי חשוב למשתמש שלי.",
  rub:[["בחירה מנומקת ובדיקת מודל עם משתמש",5],["תרחישי שימוש",5],["אפיון סופי ומשמעויות",5]]},
-{id:"t5",n:"D5",t:"פריחה",bg:"#215068",ink:"#fff",pages:"שקפים 23 ו-24",
- must:[["שקף 23","דף הכנה לפרזנטציה: כל ההשלמות מלאות"],["שקף 24","התוצר הסופי: צילומים טובים, ותמונה מהתערוכה"],["שקף 24","מבחן שלוש השניות: משתמש מבין מה לעשות בלי לקרוא מילה"],["שקף 1","עכשיו ממלאות את כותרת הפרויקט בשער"]],
- task:{h:"בוחן קשוח",steps:["כתבו בעצמכן את ההשלמות בשקף 23.","בקשו מקלוד לשחק בוחן ולמצוא שלוש חולשות בטקסט (הפרומפט למטה). הוא לא כותב אותו מחדש.","החליטו בעצמכן מה לתקן ומה להשאיר.","אם השתמשתן בהדמיה או בתמונה שבינה יצרה, הציגו אותה ליד הסקיצה שלכן, ומסמנות אותה."],trace:"בהערות הדובר של שקף 23: הטקסט לפני ואחרי, ומה קיבלתן מהביקורת ומה דחיתן."},
+{id:"t5",n:"D5",t:"פריחה",bg:"#215068",ink:"#fff",pages:"שקפים 25 ו-26",
+ must:[["שקף 25","דף הכנה לפרזנטציה: כל ההשלמות מלאות"],["שקף 26","התוצר הסופי: צילומים טובים, ותמונה מהתערוכה"],["שקף 26","מבחן שלוש השניות: משתמש מבין מה לעשות בלי לקרוא מילה"],["שקף 2","עכשיו ממלאות את כותרת הפרויקט בשער"]],
+ task:{h:"בוחן קשוח",steps:["כתבו בעצמכן את ההשלמות בשקף 25.","בקשו מכלי הבינה לשחק בוחן ולמצוא שלוש חולשות בטקסט (הפרומפט למטה). הוא לא כותב אותו מחדש.","החליטו בעצמכן מה לתקן ומה להשאיר, ורשמו ביומן ההכרעות.","אם השתמשתן בהדמיה או בתמונה שבינה יצרה, הציגו אותה ליד הסקיצה שלכן, ומסמנות אותה."],trace:"בהערות הדובר של שקף 25: הטקסט לפני ואחרי, ומה אימצתן, שיניתן או פסלתן מהביקורת."},
  prompt:"אתה בוחן בפרזנטציה של פרויקט עיצוב מוצר. זו שאלת המחקר שלי: [השאלה]. וזה הטקסט שהכנתי לפרזנטציה: [הטקסט]. מצא שלוש חולשות בטקסט. אל תכתוב אותו מחדש ואל תציע רעיון אחר.",
  rub:[["דף הכנה לפרזנטציה",5],["תיעוד התוצר הסופי ומבחן שלוש השניות",7]]},
-{id:"t6",n:"סיכום",t:"רפלקציה ונספחים",bg:"var(--fg)",ink:"var(--bg)",pages:"שקפים 25 ו-26",
- must:[["שקף 25","רפלקציה: תשובה מלאה לכל שמונה השאלות שבשקף"],["שקף 25","שלוש שאלות הבינה (למטה), בנוסף לשאלות שבשקף"],["שקף 26","נספחים: הראיון, הסקר או התצפית המלאים, וסקיצות נוספות"],["שקף 26","יומן הבינה, מלא מהחריש ועד הפריחה"]],
- extra:{h:"שלוש שאלות בינה, שמוסיפים לשמונה שבשקף 25",q:["באיזה שלב הבינה עזרה לי הכי הרבה, ובמה בדיוק?","איפה היא טעתה, הסיטה אותי או נתנה תשובה כללית מדי, ואיך שמתי לב?","מה בפרויקט הוא לגמרי שלי, בלי בינה בכלל?"]},
- task:{h:"יומן בינה",steps:["מהיום הראשון, מחזיקות בנספחים (שקף 26) טבלה בשם ״יומן בינה״. בכל שימוש רושמות: תאריך, שקף, מה שאלתי, מה קיבלתי, ומה עשיתי עם זה (קיבלתי, שיניתי או דחיתי).","בסוף עונות על שלוש שאלות הבינה בשקף 25 בעזרת היומן.","אפשר לבקש מקלוד שאלות על היומן (הפרומפט למטה). את הרפלקציה כותבות לבד."],trace:"היומן בשקף 26, ותשובות לשלוש שאלות הבינה בשקף 25."},
- prompt:"זה יומן השימוש שלי בבינה מלאכותית לאורך פרויקט עיצוב מוצר: [היומן]. אל תכתוב לי רפלקציה. שאל אותי שלוש שאלות שיעזרו לי לראות איפה סמכתי על הבינה יותר מדי, ואיפה השיקול שלי שינה את התוצאה.",
- rub:[["רפלקציה כנה ומלאה",5],["שאלות הבינה ויומן הבינה",3],["נספחים",2]]}
+{id:"t6",n:"סיכום",t:"רפלקציה ונספחים",bg:"var(--fg)",ink:"var(--bg)",pages:"שקפים 27 ו-28",
+ must:[["שקף 27","רפלקציה: תשובה מלאה לכל שמונה השאלות שבשקף"],["שקף 27","ארבע שאלות הכנות (למטה), מתחת לשמונה השאלות"],["שקף 28","דף קרדיטים בראש הנספחים: אנשים (מי עזר ובמה), מקורות עם קישור, תמונות ופונטים שלא שלכן ומאיפה הם, וכלי בינה (איזה כלי ובאיזה שלב)"],["שקף 28","נספחים: הראיון, הסקר או התצפית המלאים, אישורי המרואיינים, וסקיצות נוספות"],["שקף 28","יומן ההכרעות, מלא מהחריש ועד הפריחה"]],
+ extra:{h:"ארבע שאלות הכנות, מתחת לשמונה שבשקף 27",q:["מה עשיתי בעצמי, מה קיבלתי מאחרים ומכלי בינה, ומאיפה הגיע כל מקור?","איפה בינה הייתה יכולה לעזור לי, ולמה בחרתי שלא?","איזו החלטה אחת ביומן הכי שינתה את הפרויקט?","מי עוד עלול להיות מושפע מהמוצר שלי, גם כשהוא עובד מצוין?"],note:"שימוש מדווח בבינה לא מוריד ציון. מה שחשוב הוא שרואים את השיקול שלכן."},
+ task:{h:"יומן הכרעות",steps:["מהיום הראשון, בנספחים (שקף 28). רושמות רק רגעים שבהם הצעה הזיזה החלטה, מכל מקור: אדם (מרואיינת, מורה, חברה, משפחה), בינה מלאכותית, או חיפוש ומקורות.","בכל שורה: תאריך ושלב, מאיפה זה הגיע, מה הוצע, מה עשיתי (אימצתי, שיניתי או פסלתי), ולמה. מצבעות את המקור: כחול לאדם, כתום לבינה, אפור לחיפוש.","גם ״בלי בינה״ זו הכרעה. שרטטתן ביד לפני מסך? ראיינתן במקום לבקש מבינה לדמיין? רשמו שורה בצבע חרדל, עם משפט אחד: למה הדרך הזו מתאימה לשלב הזה.","בסוף עונות על ארבע שאלות הכנות בשקף 27 בעזרת היומן. אפשר לבקש מכלי הבינה שאלות על היומן (הפרומפט למטה), אבל את הרפלקציה כותבות לבד."],trace:"היומן בשקף 28, ותשובות לארבע שאלות הכנות בשקף 27."},
+ prompt:"זה יומן ההכרעות שלי מפרויקט עיצוב מוצר: [היומן]. אל תכתוב לי רפלקציה. שאל אותי שלוש שאלות שיעזרו לי לראות איפה סמכתי על הבינה יותר מדי, ואיפה השיקול שלי שינה את התוצאה.",
+ rub:[["רפלקציה כנה ומלאה",5],["ארבע שאלות הכנות ויומן ההכרעות",3],["דף קרדיטים ונספחים",2]]}
 ];
-const PDFCHECK = ["כותרת הפרויקט בשער מולאה","מספרי השקפים בתוכן העניינים נכונים","כל השקפים באותו גריד, עם אותם שוליים ואותה היררכיה טיפוגרפית","כל טקסט שהגיע מבינה מסומן, ולידו משפט שלכן","לכל תמונה שלא צילמתן יש קרדיט או קישור","צילומי הסקיצות, המודלים והתוצר חדים ומוארים","ייצוא: קובץ ← הורדה ← מסמך PDF, קובץ אחד","שם הקובץ: שם-הפרויקט_שמות-התלמידות.pdf","פתחתן את ה-PDF ובדקתן שהעברית והגופנים לא נשברו","אין שגיאות כתיב (הקריאו בקול שקף אחרי שקף)"];
+const PDFCHECK = ["כותרת הפרויקט בשער מולאה","מספרי השקפים בתוכן העניינים נכונים","כל השקפים באותו גריד, עם אותם שוליים ואותה היררכיה טיפוגרפית","כל טקסט או תמונה שהגיעו מבינה מסומנים, ולידם משפט שלכן","יש דף קרדיטים, ולכל תמונה שלא צילמתן יש קרדיט או קישור","צילומי הסקיצות, המודלים והתוצר חדים ומוארים","ייצוא: קובץ ← הורדה ← מסמך PDF, קובץ אחד","שם הקובץ: שם-הפרויקט_שמות-התלמידות.pdf","פתחתן את ה-PDF ובדקתן שהעברית והגופנים לא נשברו","אין שגיאות כתיב (הקריאו בקול שקף אחרי שקף)"];
 const OFFICIAL = [
  {t:"תרשים שלבי 7D (מפמ״ר אמנויות העיצוב)",u:"https://meyda.education.gov.il/files/MadaTech/Megamat_Omanuiot_haitzuv/tohniot_limudim/gimel/2019_20/Diagram_D7.pdf",s:"מה משרד החינוך מצפה לראות בכל שלב, מהחריש ועד ההבשלה."},
  {t:"מתווה הערכה חלופית: מיני-פרויקטים (מפמ״ר)",u:"https://meyda.education.gov.il/files/Pop/0files/omanot-itzuv/high-school/mitve-hit-tashpaz.pdf",s:"הדרישות הרשמיות: שיטת מחקר, תיק תהליך כקובץ PDF אחד, רפלקציה ומחוון."},
@@ -777,22 +825,24 @@ function tik(){
   const sum = TIK.reduce((a,c)=>a+c.rub.reduce((x,r)=>x+r[1],0),0);
   return `<div class="crumb"><a href="#home">כל הנושאים</a> · מלווה לתיק</div>
   <h2 class="ptitle">מלווה לתיק התהליך</h2>
-  <p class="sec-sub" style="margin-top:10px">התיק הוא המצגת שלכן, ״מיני פרויקט ניגודים: חושים״. היא גדלה לאורך הפרויקט, ובסוף יוצאת כקובץ PDF אחד. כאן הכול לפי סדר השקפים במצגת: מה חייב להופיע בכל שקף, משימה שמחברת בין האתר, קלוד והמצגת, וטיוטת מחוון. סמנו מה כבר נמצא בתיק. הסימון נשמר רק בדפדפן שלכן.</p>
+  <p class="sec-sub" style="margin-top:10px">התיק הוא העותק שלכן של המצגת, ״החוש החסר | מיני־פרויקט בעיצוב מוצר״. הוא גדל לאורך הפרויקט, ובסוף יוצא כקובץ PDF אחד. כאן הכול לפי סדר השקפים: מה חייב להופיע בכל שקף, משימה שמחברת בין האתר, כלי הבינה והמצגת, וטיוטת מחוון. מספרי השקפים הם המספרים שרואים בצד שמאל של העורך ב-Google Slides. לא מוסיפים ולא מוחקים שקפים. סמנו מה כבר נמצא בתיק. הסימון נשמר רק בדפדפן שלכן.</p>
   <div class="tprog" aria-live="polite"><div class="bar"><span id="tik-bar"></span></div><b id="tik-count"></b></div>
-  <div class="airules"><h3>שלושה כללים לעבודה עם קלוד בתיק</h3><ol>
-    <li><b>קלוד שואל, אתן עונות.</b> בנביטה ובהנצה הוא לא מציע רעיונות או פתרונות.</li>
-    <li><b>כל טקסט מבינה מסומן.</b> תווית ״בינה״ או צבע אחר, ולידו משפט שלכן: מה שיניתן ולמה.</li>
+  <div class="airules"><h3>ארבעה כללים לעבודה עם בינה בתיק</h3><ol>
+    <li><b>משתמשות רק בכלי שהמורה אישרה לכן בבית הספר.</b></li>
+    <li><b>הבינה שואלת, אתן עונות.</b> בנביטה ובהנצה היא לא מציעה רעיונות או פתרונות.</li>
+    <li><b>כל טקסט או תמונה מבינה מסומנים.</b> תווית ״בינה״ או צבע כתום, ולידם משפט שלכן: מה שיניתן ולמה.</li>
     <li><b>המשתמשים אמיתיים.</b> ציטוטים, ראיונות, תצפיות וצילומים מגיעים רק מהעולם.</li></ol>
-    <p class="note" style="color:inherit;opacity:.85;margin-top:8px">את כל השימושים רושמות ב״יומן בינה״, השקף האחרון בתיק (פרק הסיכום).</p></div>
+    <p style="margin-top:10px">כל הצעה שהזיזה החלטה, מאדם, מבינה או מחיפוש, נרשמת ב״יומן הכרעות״ בנספחים (שקף 28): אימצתי, שיניתי או פסלתי, ולמה. <a href="#habits" style="color:var(--yellow);font-weight:700">לשבעה הרגלים לתיק ←</a></p></div>
   <nav class="tjump" aria-label="פרקי התיק">${TIK.map(c=>`<a href="#tik" data-jump="${c.id}" style="background:${c.bg};color:${c.ink}">${c.n==="פתיחה"||c.n==="סיכום"?esc(c.n):c.n+" "+esc(c.t)}</a>`).join("")}<a href="#tik" data-jump="pdf" style="border:2px solid var(--fg)">ייצוא PDF</a></nav>
   ${TIK.map(c=>`<section class="stage tk" id="${c.id}"><aside style="background:${c.bg};color:${c.ink}"><div class="n">${c.n.length<4?c.n:""}</div><div class="t">${esc(c.t)}</div><small>${esc(c.pages)}</small></aside><div>
-    ${c.nosol?`<div class="nosol"><b>כאן אין פתרונות.</b>לא מהאתר ולא מקלוד. הרעיונות שלכן בלבד.</div>`:""}
+    ${c.nosol?`<div class="nosol"><b>כאן אין פתרונות.</b>לא מהאתר ולא מכלי הבינה. הרעיונות שלכן בלבד.</div>`:""}
     <div><h3>מה חייב להופיע בתיק</h3><ul class="chk">${c.must.map((m,i)=>box(c.id+"-"+i,m)).join("")}</ul></div>
     ${c.warn?`<p class="warnl">${esc(c.warn)}</p>`:""}
-    ${c.extra?`<div class="xq"><h3>${esc(c.extra.h)}</h3><ol>${c.extra.q.map(q=>`<li>${esc(q)}</li>`).join("")}</ol></div>`:""}
-    ${c.task?`<div class="mix"><span class="k">משימה משולבת: אתר · קלוד · מצגת</span><h3>${esc(c.task.h)}</h3><ol>${c.task.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>
+    ${c.consent?`<div class="consent"><h3>${esc(c.consent.h)}</h3><p>${esc(c.consent.p)}</p></div>`:""}
+    ${c.extra?`<div class="xq"><h3>${esc(c.extra.h)}</h3><ol>${c.extra.q.map(q=>`<li>${esc(q)}</li>`).join("")}</ol>${c.extra.note?`<p class="okn">${esc(c.extra.note)}</p>`:""}</div>`:""}
+    ${c.task?`<div class="mix"><span class="k">משימה משולבת: אתר · בינה · מצגת</span><h3>${esc(c.task.h)}</h3><ol>${c.task.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>
       <p class="trace"><b>מה רואים בתיק:</b> ${esc(c.task.trace)}</p></div>
-    <div class="prm"><h4>פרומפט לקלוד</h4><p class="note">החליפו את מה שבסוגריים המרובעים. הפרומפט מבקש שאלות, לא תשובות.</p><blockquote id="pr-${c.id}">${esc(c.prompt)}</blockquote>
+    <div class="prm"><h4>פרומפט לכלי הבינה</h4><p class="note">החליפו את מה שבסוגריים המרובעים. הפרומפט מבקש שאלות, לא תשובות.</p><blockquote id="pr-${c.id}">${esc(c.prompt)}</blockquote>
       <div class="row"><button class="btn" type="button" data-copy="pr-${c.id}">העתקה</button><span class="note" data-msg="pr-${c.id}"></span></div></div>`:""}
     <details class="rub"><summary>טיוטת מחוון לפרק · ${c.rub.reduce((x,r)=>x+r[1],0)} נק׳</summary><table><tbody>${c.rub.map(r=>`<tr><td>${esc(r[0])}</td><td>${r[1]}</td></tr>`).join("")}</tbody></table></details>
   </div></section>`).join("")}
@@ -815,10 +865,84 @@ function wireTik(){
   }));
 }
 
+/* ---------- שבעה הרגלים לתיק ---------- */
+const SRC = {p:{n:"אדם",c:"#2f6fb5"},ai:{n:"בינה מלאכותית",c:"var(--orange)"},s:{n:"חיפוש ומקורות",c:"#8a9aa3"},no:{n:"בחרתי בלי בינה",c:"#c9a227"}};
+const dot = k => `<span class="dot" style="background:${SRC[k].c}" aria-hidden="true"></span>`;
+function habits(){
+  nav("habits");
+  const H=(n,id,t,sub,where,body)=>`<section class="hb" id="${id}"><div class="hn">0${n}</div><div><h3>${t}</h3><p class="hsub">${sub}</p><p class="where">${where}</p>${body}</div></section>`;
+  const row=(st,k,src,what,did,why)=>`<tr><td>${st}</td><td>${dot(k)} ${src}</td>${what===null?"":`<td>${what}</td>`}<td><b>${did}</b></td><td>${why}</td></tr>`;
+  return `<div class="crumb"><a href="#home">כל הנושאים</a> · שבעה הרגלים</div>
+  <h2 class="ptitle">שבעה הרגלים לתיק</h2>
+  <p class="lead2">לא רק מה עשיתן. <mark>איך החלטתן.</mark></p>
+  <p class="sec-sub" style="margin-top:10px">שבעה הרגלים קטנים שהופכים תיק תהליך טוב לתיק של מעצבת. כל אחד לוקח כמה דקות. הכול נכנס לשקפים שכבר יש במצגת שלכן, בעיקר לנספחים (שקף 28) ולרפלקציה (שקף 27). לא מוסיפים שקפים.</p>
+  <div class="legend">${Object.keys(SRC).map(k=>`<span>${dot(k)} ${SRC[k].n}</span>`).join("")}</div>
+  <div class="why"><h3>למה זה חשוב?</h3><p>כל אחת יכולה היום לקבל מבינה מלאכותית עשרה רעיונות בשנייה. מה שהופך אתכן למעצבות זה לא כמות הרעיונות, אלא ההחלטות: מה לקחתן, מה שיניתן, מה זרקתן, ולמה. ההרגלים כאן עוזרים להראות את ההחלטות האלה בתיק, בלי עבודה כפולה.</p>
+  <p style="margin-top:8px"><b>משתמשות רק בכלי הבינה שהמורה אישרה לכן בבית הספר.</b></p></div>
+  <nav class="tjump" aria-label="ההרגלים">${["יומן הכרעות","גם ״בלי בינה״ זו החלטה","מה השתנה","שני אנשים","אישור לשימוש במידע","דף קרדיטים","שאלות הכנות","מה מוסיפים בכל שלב"].map((t,i)=>`<a href="#habits" data-jump="h${i+1}" style="border:2px solid var(--line)">${i<7?(i+1)+". ":""}${t}</a>`).join("")}</nav>
+
+  ${H(1,"h1","יומן הכרעות","לא יומן של כל מה שעשיתן. רק הרגעים שבהם משהו הזיז החלטה.","בנספחים (שקף 28), מהיום הראשון ועד הפריחה",
+  `<p>הצעה יכולה להגיע מכל מקום: ממרואיינת, מהמורה, מחברה, מאמא, מחיפוש בגוגל או מבינה מלאכותית. בכל פעם שהצעה כזו שינתה משהו בפרויקט, רושמות שורה אחת, ומצבעות את המקור.</p>
+  <div class="ashaf"><div><b>א</b><span>אימצתי</span><small>לקחתי את ההצעה כמו שהיא, ואני יודעת להסביר למה היא מתאימה.</small></div><div><b>ש</b><span>שיניתי</span><small>לקחתי חלק, או התאמתי אותה לקהל היעד שלי.</small></div><div><b>פ</b><span>פסלתי</span><small>החלטתי שלא. וזה בדיוק המקום לכתוב למה.</small></div></div>
+  <p class="note">שלוש המילים מתחילות באותיות א, ש, פ. קל לזכור: אשף.</p>
+  <div class="tscroll"><table class="jt"><thead><tr><th>תאריך ושלב</th><th>מאיפה זה הגיע</th><th>מה הוצע</th><th>מה עשיתי</th><th>למה</th></tr></thead><tbody>
+  ${row("זריעה","p","מרואיינת מקהל היעד","״הבעיה היא לא המכשיר, זה שאני מתביישת לבקש שיחזרו על משהו.״","שיניתי","שאלת המחקר עברה מ״לשמוע טוב יותר״ ל״לבקש בלי מבוכה״.")}
+  ${row("זריעה","ai","בינה מלאכותית","שתיים משאלות הראיון שלי מכוונות לתשובה.","שיניתי","ניסחתי אותן מחדש בעצמי, כשאלות פתוחות.")}
+  ${row("זריעה","s","חיפוש: מוצר קיים","צמיד שמתרגם צליל לרטט.","אימצתי חלק","לקחתי את עיקרון הרטט, לא את הצורה. הצמיד בולט מדי לקהל שלי.")}
+  ${row("נביטה","ai","בינה מלאכותית","הדמיה של המוצר בחומר מבריק.","פסלתי","במודל מקרטון ראיתי שמשטח מבריק מחליק מהיד.")}
+  </tbody></table></div>
+  <p class="note">הדוגמאות כאן להמחשה בלבד. אפשר לנהל את היומן בכל דרך: טבלה בנספחים, דף בכתב יד מצולם, או צ׳אט עם עצמכן. מה שחשוב הן שלוש העמודות האחרונות.</p>`)}
+
+  ${H(2,"h2","גם ״בלי בינה״ זו החלטה","לבחור דרך אחרת זו הכרעה, בדיוק כמו להשתמש בכלי. רק צריך לדעת למה.","ביומן ההכרעות, בשורה בצבע חרדל",
+  `<p>שרטטתן עשרה רעיונות ביד לפני שפתחתן מסך? ראיינתן אדם אמיתי במקום לבקש מבינה ״לדמיין״ את קהל היעד? בניתן מודל מקרטון לפני הדמיה? אלה החלטות מקצועיות. רשמו אותן ביומן, עם משפט אחד: למה הדרך הזו מתאימה לשלב הזה.</p>
+  <div class="tscroll"><table class="jt"><thead><tr><th>תאריך ושלב</th><th>מאיפה זה הגיע</th><th>מה עשיתי</th><th>למה</th></tr></thead><tbody>
+  ${row("נביטה","no","בחרתי בלי בינה",null,"שרטטתי 10 רעיונות ביד, עם טיימר","רציתי שהרעיונות יהיו שלי לפני שאני שומעת הצעות של אחרים.")}
+  </tbody></table></div>
+  <p class="pull">״איפה בינה הייתה יכולה לעזור לי כאן, ולמה בחרתי שלא?״</p>`)}
+
+  ${H(3,"h3","מה השתנה, לא רק מה הוגש","תוצר יפה בסוף מראה מה הגשתן. לפני ואחרי מראה מה למדתן בדרך.","פעם אחת לפחות בכל שלב",
+  `<p>בכל שלב בחרו רגע אחד שבו משהו השתנה: שאלת המחקר, הפרסונה, הסקיצה, המודל. שימו את הגרסה הקודמת ליד החדשה, וכתבו מה גרם לשינוי. גם גרסה שנפסלה היא חלק מהתיק.</p>
+  <div class="ba"><div><small>לפני</small>כיצד נוכל לעזור לכבדי שמיעה לשמוע טוב יותר בכיתה?</div><div class="arr" aria-hidden="true">←</div><div><small>אחרי</small>כיצד נוכל לאפשר לתלמידה כבדת שמיעה לבקש חזרה בלי מבוכה?</div></div>
+  <p class="note"><b>מה גרם לשינוי:</b> הראיון השני. שתי המרואיינות דיברו על מבוכה, אף אחת לא דיברה על עוצמת הקול.</p>
+  <ul class="q"><li>בשאלת המחקר (שקף 7): הגרסה הראשונה מול הסופית.</li><li>בהנצה (שקף 22): המודל לפני המשוב של המשתמש, ואחריו.</li><li>בדף ההכנה לפרזנטציה (שקף 25): הטקסט לפני הביקורת, ואחריה.</li></ul>`)}
+
+  ${H(4,"h4","שני אנשים, שתי זוויות","אדם אחד נותן סיפור. שניים כבר נותנים תמונה.","בזריעה: בחקר המשתמשים (שקפים 10 עד 15) ובפרסונה (שקף 8)",
+  `<p>הקשיבו לפחות לשני אנשים אמיתיים מקהל היעד, ועדיף מסוגים שונים. כשמה ששמעתן מהם לא מסתדר, זה בדיוק המקום שבו מתחילה תובנה.</p>
+  <div class="two"><div><b>מי שמשתמש</b><p>מי שחווה את החוש החסר בעצמו. מה הוא עושה היום, מה מתסכל אותו, מה הוא כבר המציא לעצמו.</p></div><div><b>מי שנמצא סביבו</b><p>הורה, מורה, חבר, מטפלת, מוכר בחנות. מה הוא רואה מבחוץ, ואיך המצב משפיע גם עליו.</p></div></div>
+  <p class="warnl">הפרסונה נשענת על אנשים אמיתיים. פרסונה שבינה מלאכותית המציאה אינה מחקר. מותר להיעזר בבינה כדי לבדוק את השאלות שכתבתן, לא כדי לענות עליהן.</p>`)}
+
+  ${H(5,"h5","אישור לשימוש במידע","מי שסיפר לכן משהו אישי צריך לדעת איפה זה יופיע.","בתחילת כל ראיון או תצפית, ובנספחים (שקף 28)",
+  `<p>לפני שמתחילות, מבקשות אישור על שלושה דברים: להקליט, לצטט, ולצלם. אם מישהו מסכים לחלק, מכבדות את החלק. רושמות את האישור בנספחים, ליד הראיון.</p>
+  <p class="pull">״אני עובדת על פרויקט עיצוב בבית הספר. אפשר להקליט את השיחה כדי שלא אפספס? אשמח לצטט משפטים ממנה בתיק, בלי השם המלא שלך. ואם נצלם את המודל בידיים שלך, זה בסדר שהתמונה תופיע בתערוכה?״</p>
+  <div class="prm"><h4>לפני שמדביקות משהו לכלי בינה</h4><ul class="q"><li>מורידות שמות, כתובות, טלפונים ופרטים שאפשר לזהות מהם מישהו.</li><li>במקום ״רותי בת 67 מקריית ביאליק״ כותבות ״מרואיינת בשנות השישים״.</li><li>לא מעלות תמונות של אנשים בלי שהם הסכימו לכך.</li></ul></div>`)}
+
+  ${H(6,"h6","דף קרדיטים","מעצבות מקצועיות אומרות מאיפה הגיע כל מה שאינו שלהן. זה לא מקטין את העבודה, זה מראה שאתן יודעות מה עשיתן.","בראש שקף הנספחים (שקף 28)",
+  `<div class="cred"><div><b>אנשים</b><p>מי עזר, ובמה. מרואיינים, מי שבדק את המודל, מי שצילם.</p></div><div><b>מקורות</b><p>כתבות, סרטונים, מחקרים. עם קישור.</p></div><div><b>תמונות ופונטים</b><p>כל מה שלא צילמתן או ציירתן, ומאיפה הוא.</p></div><div><b>כלי בינה</b><p>באיזה כלי השתמשתן, ובאיזה שלב. הפירוט המלא ביומן.</p></div></div>
+  <p class="note">וכל טקסט או תמונה שהגיעו מבינה מלאכותית מסומנים גם במקום שבו הם מופיעים בתיק, ולידם משפט שלכן: מה שיניתן ולמה.</p>`)}
+
+  ${H(7,"h7","שאלות הכנות","בסוף הדרך, מסתכלות על היומן ועונות בכנות. במילים שלכן.","ברפלקציה (שקף 27), מתחת לשמונה השאלות שבשקף",
+  `<ol class="honest"><li>מה עשיתי בעצמי, מה קיבלתי מאחרים ומכלי בינה, ומאיפה הגיע כל מקור?</li><li>איפה בינה הייתה יכולה לעזור לי, ולמה בחרתי שלא?</li><li>איזו החלטה אחת ביומן הכי שינתה את הפרויקט?</li><li>מי עוד עלול להיות מושפע מהמוצר שלי, גם כשהוא עובד מצוין?</li></ol>
+  <p class="okay"><b>שימוש מדווח בבינה לא מוריד ציון.</b> מה שחשוב הוא שרואים את השיקול שלכן. דיווח כנה הוא חלק מעבודה מקצועית.</p>`)}
+
+  <section class="hb" id="h8"><div class="hn">✓</div><div><h3>מה מוסיפים בכל שלב</h3><p class="hsub">רוב הדברים כבר נמצאים בתיק שלכן. צריך רק להוסיף להם שורה.</p>
+  <div class="stagelist">
+  <div style="border-color:var(--d1)"><b>חריש</b><small>שקפים 4 עד 6</small><ul><li>פותחות את יומן ההכרעות. השורה הראשונה: מפת החשיבה נעשתה ביד, ולמה.</li><li>לכל מקור: קישור, ומה הוא שינה אצלכן.</li></ul></div>
+  <div style="border-color:var(--d2)"><b>זריעה</b><small>שקפים 7 עד 19</small><ul><li>שני אנשים לפחות מקהל היעד, מסוגים שונים.</li><li>אישור להקליט, לצטט ולצלם, רשום בנספחים.</li><li>שאלת המחקר: גרסה ראשונה ליד הגרסה הסופית.</li></ul></div>
+  <div style="border-color:var(--d3)"><b>נביטה</b><small>שקפים 20 ו-21</small><ul><li>גם רעיונות שנפסלו נשארים בתיק, עם סיבה.</li><li>כל הדמיה מבינה מסומנת בכתום, ליד הסקיצה שלכן.</li></ul></div>
+  <div style="border-color:var(--red-ink)"><b>הנצה</b><small>שקפים 22 עד 24</small><ul><li>המודל לפני ואחרי המשוב של המשתמש.</li><li>שאלה אחת: מי עוד עלול להיות מושפע מהמוצר?</li></ul></div>
+  <div style="border-color:var(--navy)"><b>פריחה וסיכום</b><small>שקפים 25 עד 28</small><ul><li>דף קרדיטים בראש הנספחים.</li><li>היומן המלא בנספחים.</li><li>ארבע שאלות הכנות ברפלקציה.</li></ul></div>
+  </div>
+  <p style="margin-top:16px"><a class="btn" href="#tik" style="text-decoration:none;display:inline-block">למלווה לתיק, שקף אחרי שקף ←</a></p></div></section>`;
+}
+function wireHabits(){
+  document.querySelectorAll("[data-jump]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();document.getElementById(a.dataset.jump).scrollIntoView();}));
+}
+
 function route(){
   const id=(location.hash||"#home").slice(1);
   const p=PROJECTS.find(x=>x.id===id);
   const app=document.getElementById("app");
+  if(id==="habits"){app.innerHTML=habits();wireHabits();document.title="שבעה הרגלים לתיק · החוש החסר";window.scrollTo(0,0);return;}
   if(id==="tik"){app.innerHTML=tik();wireTik();document.title="מלווה לתיק · החוש החסר";window.scrollTo(0,0);return;}
   if(id==="gallery"){app.innerHTML=gallery();wireGallery();document.title="גלריית השראה · החוש החסר";window.scrollTo(0,0);return;}
   app.innerHTML = p ? project(p) : home();
