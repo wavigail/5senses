@@ -10,7 +10,7 @@
 <style>
 /* Layout: flat colour blocks on a clean white field, like the school's signage. A hard-edged grid, no rounded cards; colour = stage of the 7D process. */
 :root{
-  --navy:#215068; --teal:#4bc3c0; --orange:#f18215; --yellow:#f6ad0c; --red:#ea3144; --red-ink:#c8243a; --teal-ink:#1d7d7a;
+  --navy:#215068; --teal:#4bc3c0; --orange:#f18215; --yellow:#f6ad0c; --red:#ea3144; --teal-ink:#1d7d7a;
   --bg:#ffffff; --fg:#1d3a4b; --muted:#5b7482; --line:#d6e2e8; --soft:#f2f7f9;
   --ink-on-color:#ffffff; --ink-on-yellow:#1d3a4b;
   --d1:var(--yellow); --d2:var(--teal); --d3:var(--orange); --d4:var(--red); --d5:var(--navy);
@@ -65,9 +65,9 @@ section{scroll-margin-top:16px}
 @media (max-width:820px){.phases{grid-template-columns:repeat(2,1fr)}}
 .ph{padding:14px;color:var(--ink-on-color);min-width:0}
 .ph .n{font-family:var(--display);font-size:26px;line-height:1}
-.ph .t{font-weight:700}
+.ph .t{font-weight:700;font-size:19px}
 .ph small{display:block;font-size:14px;opacity:.95;line-height:1.4;margin-top:4px}
-.ph.d1{background:var(--d1);color:var(--ink-on-yellow)}.ph.d2{background:var(--d2);color:#0f3442}.ph.d3{background:var(--d3);color:#1d3a4b}.ph.d4{background:var(--red-ink)}.ph.d5{background:#215068}
+.ph.d1{background:var(--d1);color:var(--ink-on-yellow)}.ph.d2{background:var(--d2);color:#0f3442}.ph.d3{background:var(--d3);color:#1d3a4b}.ph.d4{background:var(--red)}.ph.d5{background:#215068}
 .ph.dim{opacity:.55}
 
 h2.sec{font-size:30px;margin:48px 0 6px}
@@ -107,11 +107,11 @@ h2.sec{font-size:30px;margin:48px 0 6px}
 @media (max-width:720px){.stage{grid-template-columns:1fr;gap:10px}}
 .stage>aside{padding:12px;min-width:0}
 .stage>aside .n{font-family:var(--display);font-size:34px;line-height:1}
-.stage>aside .t{font-family:var(--display);font-size:20px}
+.stage>aside .t{font-family:var(--display);font-size:24px}
 .stage>aside small{display:block;font-size:13px;line-height:1.35;margin-top:4px}
 .stage.d1>aside{background:var(--d1);color:#1d3a4b}
 .stage.d2>aside{background:var(--d2);color:#0f3442}
-.stage.d34>aside{background:var(--d3);color:#1d3a4b;border-bottom:12px solid var(--red-ink)}
+.stage.d34>aside{background:var(--d3);color:#1d3a4b;border-bottom:12px solid var(--red)}
 .stage>div{min-width:0;display:grid;gap:22px}
 .stage h3{font-size:23px;margin-bottom:8px}
 .stage h4{font-size:18px;margin-bottom:6px}
@@ -161,8 +161,8 @@ ol.links p{font-size:16px}
 ol.links .use{font-size:15px;color:var(--muted);margin-top:4px}
 ol.links .use b{color:var(--fg)}
 
-.nosol{background:var(--red-ink);color:#fff;padding:14px 16px;font-weight:700}
-.nosol b{font-family:var(--display);font-weight:400;font-size:20px;display:block}
+.nosol{background:var(--red);color:#fff;padding:14px 16px;font-weight:700;font-size:19px}
+.nosol b{font-family:var(--display);font-weight:400;font-size:24px;display:block}
 .iq{display:grid;gap:8px}
 .iq details{border:2px solid var(--line);padding:0}
 .iq summary{cursor:pointer;padding:12px 14px;font-family:var(--display);font-size:19px;list-style:none;display:flex;justify-content:space-between;gap:10px}
@@ -194,7 +194,7 @@ ol.links .use b{color:var(--fg)}
 .airules h3{font-size:22px;color:var(--yellow);margin-bottom:8px}
 .airules ol{margin:0;padding-inline-start:22px;display:grid;gap:6px}
 .tjump{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
-.tjump a{text-decoration:none;font-weight:700;font-size:15px;padding:6px 12px}
+.tjump a{text-decoration:none;font-weight:700;font-size:19px;padding:6px 12px}
 .stage.tk{margin-top:36px}
 ul.chk{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 ul.chk label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
@@ -296,8 +296,8 @@ links:[
 {t:"Brains of deaf people rewire to “hear” music",u:"https://www.washington.edu/news/2001/11/27/brains-of-deaf-people-rewire-to-hear-music/",p:"d2",k:"מחקר",lang:"EN",s:"מחקר מאוניברסיטת וושינגטון (2001): אצל חרשים, רטט מעובד באזור השמיעה במוח. בסיס מדעי לכך שרטט הוא ״שמיעה״.",use:"שורה בטבלת התובנות: מה בדקנו → מה גילינו."},
 {t:"Pacinian corpuscle",u:"https://en.wikipedia.org/wiki/Pacinian_corpuscle",p:"d2",k:"STEM",lang:"EN",s:"קולטני הלחץ והרטט בעור, הרגישים במיוחד לתדרים של כ-250 הרץ. היכן הם מרוכזים בגוף?",use:"מחקר טכנולוגי-חומרי: מיפוי אזורי רגישות בגוף."},
 {t:"Bone conduction",u:"https://en.wikipedia.org/wiki/Bone_conduction",p:"d2",k:"STEM",lang:"EN",s:"הסבר על הולכת קול דרך עצמות הגולגולת, ההבדל מהולכת אוויר, ועל מי זה עובד ועל מי לא.",use:"שימו לב: לא מתאים לכל סוגי החירשות. זו תובנה חשובה."},
-{t:"SubPac",u:"https://subpac.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"אפוד/גב כיסא שמעביר באסים לגוף. תוכנן במקור למפיקי מוזיקה שומעים.",use:"בנצ׳מרקינג: למי הוא תוכנן? מה המחיר? מה הוא לא נותן למשתמש חרש?"},
-{t:"Neosensory",u:"https://neosensory.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"צמיד שמתרגם צלילים מהסביבה לדפוסי רטט על פרק היד, פרי מחקר של דייוויד איגלמן.",use:"בנצ׳מרקינג: ממשק, ארגונומיה, שפה חזותית."},
+{t:"SubPac",u:"https://subpac.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"אפוד/גב כיסא שמעביר באסים לגוף. תוכנן במקור למפיקי מוזיקה שומעים.",use:"מחקר שוק: למי הוא תוכנן? מה המחיר? מה הוא לא נותן למשתמש חרש?"},
+{t:"Neosensory",u:"https://neosensory.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"צמיד שמתרגם צלילים מהסביבה לדפוסי רטט על פרק היד, פרי מחקר של דייוויד איגלמן.",use:"מחקר שוק: ממשק, ארגונומיה, שפה חזותית."},
 {t:"Cymatics",u:"https://en.wikipedia.org/wiki/Cymatics",p:"d2",k:"השראה",lang:"EN",s:"תבניות שנוצרות כשחול או מים רוטטים בתדר מסוים (צורות חלדני). צליל שהופך לצורה נראית.",use:"לוח השראה (מודבורד) ונספח החריש."},
 {t:"But what is the Fourier Transform? (3Blue1Brown)",u:"https://www.youtube.com/watch?v=spUNpyF58BY",p:"d2",k:"STEM",lang:"EN",s:"סרטון ויזואלי שמסביר איך מפרקים צליל מורכב לתדרים בודדים. בהיר גם בלי רקע במתמטיקה.",use:"פרק ה-STEM: איך מכונה ״מבינה״ מוזיקה."},
 {t:"David Eagleman: Can we create new senses for humans? (TED)",u:"https://www.ted.com/talks/david_eagleman_can_we_create_new_senses_for_humans",p:"d1",k:"וידאו",lang:"EN",s:"חוקר מוח מסביר החלפה חושית: המוח לומד לפענח מידע מכל ערוץ שמגיע אליו.",use:"מושג מפתח לכל פרויקטי ״החוש החסר״."}
@@ -316,8 +316,8 @@ links:[
 {t:"Israeli Sign Language",u:"https://en.wikipedia.org/wiki/Israeli_Sign_Language",p:"d1",k:"רקע",lang:"EN",s:"סקירת שפת הסימנים הישראלית: מקורה, מספר המשתמשים, ומדוע היא שפה עצמאית ולא ״עברית בידיים״.",use:"מבוא: עובדות על הקהילה."},
 {t:"כל זכות: חירשים וכבדי שמיעה",u:"https://www.kolzchut.org.il/he/%D7%97%D7%99%D7%A8%D7%A9%D7%99%D7%9D_%D7%95%D7%9B%D7%91%D7%93%D7%99_%D7%A9%D7%9E%D7%99%D7%A2%D7%94",p:"d1",k:"רקע",lang:"HE",s:"ריכוז הזכויות והשירותים לחירשים בישראל, כולל שירותי תרגום ונגישות. מראה מה המדינה כבר נותנת.",use:"הצגת המצב הקיים (מה לא עובד כרגע)."},
 {t:"כל זכות: אגודת החרשים בישראל",u:"https://www.kolzchut.org.il/he/%D7%90%D7%92%D7%95%D7%93%D7%AA_%D7%94%D7%97%D7%A8%D7%A9%D7%99%D7%9D_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C",p:"d1",k:"ארגון",lang:"HE",s:"מידע על הארגון המרכזי של הקהילה (בית הלן קלר). דרך טובה ליצור קשר לראיון.",use:"מקור לראיון עומק / עיצוב משתף."},
-{t:"Why Sign-Language Gloves Don’t Help Deaf People (The Atlantic)",u:"https://www.theatlantic.com/technology/archive/2017/11/why-sign-language-gloves-dont-help-deaf-people/545441/",p:"d2",k:"ביקורת",lang:"EN",s:"כתבה שמסבירה למה הקהילה החירשת דחתה ״כפפות מתרגמות״: הן מתעלמות מהבעות פנים ומעמיסות את המאמץ דווקא על החרש.",use:"חובה לטבלת הבנצ׳מרקינג: למה מוצר ״חכם״ נכשל רגשית."},
-{t:"Live Transcribe (Google)",u:"https://www.android.com/accessibility/live-transcribe/",p:"d2",k:"מוצר קיים",lang:"EN",s:"אפליקציית תמלול דיבור בזמן אמת. כדאי לבדוק אותה בעצמכן בעברית ובמקום רועש.",use:"ניסוי שטח קצר + שורה בטבלת הבנצ׳מרקינג."},
+{t:"Why Sign-Language Gloves Don’t Help Deaf People (The Atlantic)",u:"https://www.theatlantic.com/technology/archive/2017/11/why-sign-language-gloves-dont-help-deaf-people/545441/",p:"d2",k:"ביקורת",lang:"EN",s:"כתבה שמסבירה למה הקהילה החירשת דחתה ״כפפות מתרגמות״: הן מתעלמות מהבעות פנים ומעמיסות את המאמץ דווקא על החרש.",use:"חובה לטבלת מחקר השוק: למה מוצר ״חכם״ נכשל רגשית."},
+{t:"Live Transcribe (Google)",u:"https://www.android.com/accessibility/live-transcribe/",p:"d2",k:"מוצר קיים",lang:"EN",s:"אפליקציית תמלול דיבור בזמן אמת. כדאי לבדוק אותה בעצמכן בעברית ובמקום רועש.",use:"ניסוי שטח קצר + שורה בטבלת מחקר השוק."},
 {t:"Al-Sayyid Bedouin Sign Language",u:"https://en.wikipedia.org/wiki/Al-Sayyid_Bedouin_Sign_Language",p:"d1",k:"השראה",lang:"EN",s:"כפר בנגב שבו חירשות נפוצה, ולכן גם רבים מהשומעים יודעים שפת סימנים. קהילה שבה ״הפער״ כמעט לא קיים.",use:"שאלה למבוא: מה הופך קהילה לנגישה?"},
 {t:"Martha’s Vineyard Sign Language",u:"https://en.wikipedia.org/wiki/Martha%27s_Vineyard_Sign_Language",p:"d1",k:"השראה",lang:"EN",s:"אי באמריקה שבו במשך דורות כולם, חרשים ושומעים, דיברו בסימנים. דוגמה היסטורית לחיבור מלא.",use:"מודבורד וחשיבה על הנושא ״חיבורים״."},
 {t:"Nicaraguan Sign Language",u:"https://en.wikipedia.org/wiki/Nicaraguan_Sign_Language",p:"d2",k:"מחקר",lang:"EN",s:"שפה שנולדה מעצמה בין ילדים חרשים בבית ספר אחד. מראה ששפה נוצרת מתוך צורך לתקשר.",use:"תובנה: תקשורת צומחת מלמטה, לא מוכתבת."},
@@ -339,8 +339,8 @@ links:[
 {t:"מדריך היערכות לחירום לאנשים עם מוגבלות שמיעה (מערכות)",u:"https://www.maarachot.idf.il/media/akefmvfu/%D7%9E%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-%D7%A2%D7%95%D7%A8%D7%A3-3-%D7%90%D7%97%D7%A8%D7%99%D7%95%D7%AA-%D7%9E%D7%A9%D7%95%D7%AA%D7%A4%D7%AA-%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%94%D7%99%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-%D7%9C%D7%9E%D7%A6%D7%91%D7%99-%D7%97%D7%99%D7%A8%D7%95%D7%9D-%D7%A2%D7%91%D7%95%D7%A8-%D7%90%D7%A0%D7%A9%D7%99%D7%9D-%D7%A2%D7%9D-%D7%9E%D7%95%D7%92%D7%91%D7%9C%D7%95%D7%AA-%D7%A9%D7%9E%D7%99%D7%A2%D7%94.pdf",p:"d1",k:"מסמך רשמי",lang:"HE",s:"מדריך בעברית (סדרת ״מערכות עורף״) להיערכות לחירום עבור אנשים עם מוגבלות שמיעה. מתאר את המצב הקיים ואת ההמלצות.",use:"הצגת הבעיה והמצב הקיים בישראל."},
 {t:"פיקוד העורף",u:"https://www.oref.org.il/",p:"d1",k:"רשמי",lang:"HE",s:"האתר הרשמי: הנחיות, זמני התגוננות לפי אזור, ואמצעי ההתרעה הקיימים.",use:"נתון לאילוץ הזמן: כמה שניות יש בכל אזור?"},
 {t:"כל זכות: חירשים וכבדי שמיעה",u:"https://www.kolzchut.org.il/he/%D7%97%D7%99%D7%A8%D7%A9%D7%99%D7%9D_%D7%95%D7%9B%D7%91%D7%93%D7%99_%D7%A9%D7%9E%D7%99%D7%A2%D7%94",p:"d1",k:"רקע",lang:"HE",s:"זכויות, מכשירים מסובסדים ושירותים. אילו אמצעי התרעה כבר מגיעים לבית של אדם חרש?",use:"מבוא ותיאור המצב הקיים."},
-{t:"Bellman & Symfon – Bed Shaker",u:"https://shop.bellman.com/products/bed-shaker",p:"d2",k:"מוצר קיים",lang:"EN",s:"רוטט שמונח מתחת לכרית ומחובר למערכת התראות ביתית (פעמון, טלפון, גלאי עשן).",use:"בנצ׳מרקינג: מה הוא עושה טוב? האם הוא מבדיל בין סוגי אירועים?"},
-{t:"iOS 14 lets deaf users set alerts for important sounds (TechCrunch)",u:"https://techcrunch.com/2020/06/25/ios-14-lets-deaf-users-set-alerts-for-important-sounds-among-other-clever-accessibility-perks",p:"d2",k:"מוצר קיים",lang:"EN",s:"על תכונת ״זיהוי צלילים״ באייפון: הטלפון מקשיב לסירנות, דפיקות בדלת ובכי תינוק ומתריע.",use:"בנצ׳מרקינג: מה קורה כשהטלפון בטעינה בחדר אחר?"},
+{t:"Bellman & Symfon – Bed Shaker",u:"https://shop.bellman.com/products/bed-shaker",p:"d2",k:"מוצר קיים",lang:"EN",s:"רוטט שמונח מתחת לכרית ומחובר למערכת התראות ביתית (פעמון, טלפון, גלאי עשן).",use:"מחקר שוק: מה הוא עושה טוב? האם הוא מבדיל בין סוגי אירועים?"},
+{t:"iOS 14 lets deaf users set alerts for important sounds (TechCrunch)",u:"https://techcrunch.com/2020/06/25/ios-14-lets-deaf-users-set-alerts-for-important-sounds-among-other-clever-accessibility-perks",p:"d2",k:"מוצר קיים",lang:"EN",s:"על תכונת ״זיהוי צלילים״ באייפון: הטלפון מקשיב לסירנות, דפיקות בדלת ובכי תינוק ומתריע.",use:"מחקר שוק: מה קורה כשהטלפון בטעינה בחדר אחר?"},
 {t:"Fire alarm notification appliance",u:"https://en.wikipedia.org/wiki/Fire_alarm_notification_appliance",p:"d2",k:"תקנים",lang:"EN",s:"סוגי מתריעי אש: צופרים, מהבהבים, ותקנים לעוצמת אור ולקצב הבהוב בבניינים ציבוריים.",use:"מחקר טכנולוגי: מה התקן כבר יודע?"},
 {t:"Photosensitive epilepsy",u:"https://en.wikipedia.org/wiki/Photosensitive_epilepsy",p:"d2",k:"STEM",lang:"EN",s:"באילו תדירויות הבהוב אור עלול לגרום להתקף. גבול בטיחות שכל אור מהבהב צריך לכבד.",use:"אילוץ טכני חשוב לגבולות הגזרה."},
 {t:"Haptic technology",u:"https://en.wikipedia.org/wiki/Haptic_technology",p:"d2",k:"STEM",lang:"EN",s:"סקירת טכנולוגיות משוב מגע: מנועי רטט, LRA, פיזו. מה ההבדל בתחושה ובצריכת חשמל.",use:"מחקר חומרים ומנגנונים."},
@@ -387,8 +387,8 @@ links:[
 {t:"“Sound doesn’t matter underwater – everyone’s Deaf down there” (Lonely Planet)",u:"https://www.lonelyplanet.com/articles/deaf-scuba-diving-aqua-hands",p:"d1",k:"כתבה",lang:"EN",s:"מדריך צלילה חרש שמסביר שמתחת למים כולם ״חרשים״. היפוך מעניין של היתרון והחיסרון.",use:"ציטוט חזק למבוא ולנושא ״ניגודים״."},
 {t:"Hearing impaired Mentawai charter (Swellnet)",u:"https://www.swellnet.com/photos/swellnet-sessions/hearing-impaired-mentawai-charter",p:"d1",k:"כתבה",lang:"EN",s:"טיול גלישה של קבוצת גולשים כבדי שמיעה. תמונות ותיאור של החוויה מבפנים.",use:"מודבורד ותיעוד משתמשים."},
 {t:"Deaflympics",u:"https://www.deaflympics.com/",p:"d1",k:"ארגון",lang:"EN",s:"האולימפיאדה של ספורטאים חרשים. איך ספורט תחרותי מותאם בלי זינוק בקול.",use:"השראה: איך ספורט מוותר על צליל."},
-{t:"The complete directory of adaptive surfing organizations (SurferToday)",u:"https://www.surfertoday.com/surfing/13658-the-complete-directory-of-adaptive-surfing-organizations",p:"d2",k:"מאגר",lang:"EN",s:"רשימה של ארגוני גלישה מותאמת בעולם. מקום טוב למצוא אנשי קשר וגישות.",use:"בנצ׳מרקינג ומציאת מרואיינים."},
-{t:"Irish tow surf rescue club – emergency signal signs (Carve)",u:"https://www.carvemag.com/2018/09/irish-tow-surf-rescue-club-produce-emergency-signal-signs-for-popular-surf-spots/",p:"d2",k:"מוצר קיים",lang:"EN",s:"שלטים בחופים שמלמדים אותות ידיים לחירום בין גולשים. שפה חזותית קיימת.",use:"בנצ׳מרקינג: מה עובד בשפה חזותית במים?"},
+{t:"The complete directory of adaptive surfing organizations (SurferToday)",u:"https://www.surfertoday.com/surfing/13658-the-complete-directory-of-adaptive-surfing-organizations",p:"d2",k:"מאגר",lang:"EN",s:"רשימה של ארגוני גלישה מותאמת בעולם. מקום טוב למצוא אנשי קשר וגישות.",use:"מחקר שוק ומציאת מרואיינים."},
+{t:"Irish tow surf rescue club – emergency signal signs (Carve)",u:"https://www.carvemag.com/2018/09/irish-tow-surf-rescue-club-produce-emergency-signal-signs-for-popular-surf-spots/",p:"d2",k:"מוצר קיים",lang:"EN",s:"שלטים בחופים שמלמדים אותות ידיים לחירום בין גולשים. שפה חזותית קיימת.",use:"מחקר שוק: מה עובד בשפה חזותית במים?"},
 {t:"Diver communications",u:"https://en.wikipedia.org/wiki/Diver_communications",p:"d2",k:"מחקר",lang:"EN",s:"כל הדרכים שבהן צוללים מתקשרים: אותות ידיים, משיכות בחבל, אור, לוחות כתיבה.",use:"מילון של פתרונות שכבר קיימים בעולם המים."},
 {t:"Underwater acoustics",u:"https://en.wikipedia.org/wiki/Underwater_acoustics",p:"d2",k:"STEM",lang:"EN",s:"קול נע במים מהר פי ארבעה בערך מאשר באוויר, אבל האוזן האנושית לא בנויה לקלוט אותו שם.",use:"פרק STEM: פיזיקה של קול במים."},
 {t:"Vestibular system",u:"https://en.wikipedia.org/wiki/Vestibular_system",p:"d2",k:"STEM",lang:"EN",s:"מערכת שיווי המשקל באוזן הפנימית. אצל חלק מהחרשים היא נפגעת, וזה משפיע על הגלישה.",use:"תובנה פיזיולוגית לפרסונה."},
@@ -412,9 +412,9 @@ links:[
 {t:"Daniel Kish: How I use sonar to navigate the world (TED)",u:"https://www.ted.com/talks/daniel_kish_how_i_use_sonar_to_navigate_the_world",p:"d1",k:"וידאו",lang:"EN",s:"אדם עיוור שמנווט בעזרת נקישות לשון, כמו עטלף. משנה את ההבנה מה עיוורים ״יכולים״.",use:"שבירת הנחות בשלב החריש."},
 {t:"״דיאלוג בחשכה״ במוזיאון הילדים בחולון (מעריב)",u:"https://www.maariv.co.il/news/israel/article-1328927",p:"d1",k:"חוויה",lang:"HE",s:"כתבה על התערוכה בחולון שבה מדריכים עיוורים מובילים את המבקרים בחושך מוחלט.",use:"סיור כיתתי מומלץ לתיעוד שטח."},
 {t:"Tactile paving",u:"https://en.wikipedia.org/wiki/Tactile_paving",p:"d1",k:"רקע",lang:"EN",s:"מרצפות המישוש: הומצאו ביפן ב-1965. סוגי בליטות (נקודות לעצירה, פסים לכיוון) והתקנים.",use:"מה כבר קיים במרחב הציבורי."},
-{t:"RightHear",u:"https://www.right-hear.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מערכת ישראלית שמשמיעה לעיוורים בטלפון היכן הם נמצאים בתוך מבנה, בעזרת משדרים קטנים.",use:"בנצ׳מרקינג (ואולי אפילו מרואיינים מהחברה)."},
-{t:"Microsoft Soundscape",u:"https://www.microsoft.com/en-us/research/product/soundscape/",p:"d2",k:"מחקר",lang:"EN",s:"פרויקט מחקר שהשתמש בצליל תלת-ממדי באוזניות כדי ״לצייר״ את הסביבה סביב המשתמש.",use:"בנצ׳מרקינג: למה הפרויקט נסגר?"},
-{t:"WeWALK",u:"https://wewalk.io/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מקל לבן עם חיישן מכשולים בגובה הראש וחיבור לטלפון.",use:"בנצ׳מרקינג: משקל, מחיר, מה המשתמשים אומרים."},
+{t:"RightHear",u:"https://www.right-hear.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מערכת ישראלית שמשמיעה לעיוורים בטלפון היכן הם נמצאים בתוך מבנה, בעזרת משדרים קטנים.",use:"מחקר שוק (ואולי אפילו מרואיינים מהחברה)."},
+{t:"Microsoft Soundscape",u:"https://www.microsoft.com/en-us/research/product/soundscape/",p:"d2",k:"מחקר",lang:"EN",s:"פרויקט מחקר שהשתמש בצליל תלת-ממדי באוזניות כדי ״לצייר״ את הסביבה סביב המשתמש.",use:"מחקר שוק: למה הפרויקט נסגר?"},
+{t:"WeWALK",u:"https://wewalk.io/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מקל לבן עם חיישן מכשולים בגובה הראש וחיבור לטלפון.",use:"מחקר שוק: משקל, מחיר, מה המשתמשים אומרים."},
 {t:"Be My Eyes",u:"https://www.bemyeyes.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"אפליקציה שמחברת עיוור למתנדב רואה בשיחת וידאו. חיבור אנושי ולא רק טכנולוגי.",use:"השוואה: עזרה אנושית מול עזרה ממוחשבת."},
 {t:"Wayfinding",u:"https://en.wikipedia.org/wiki/Wayfinding",p:"d2",k:"עקרונות עיצוב",lang:"EN",s:"התחום שעוסק באיך אנשים מוצאים את דרכם: נקודות ציון, מסלולים, צמתים (קווין לינץ׳).",use:"מסגרת לניתוח מפת הקניון."},
 {t:"Human echolocation",u:"https://en.wikipedia.org/wiki/Human_echolocation",p:"d2",k:"STEM",lang:"EN",s:"המדע של אקולוקציה אצל בני אדם: איך הד מקירות וחפצים מספר על המרחב.",use:"פרק STEM: אקוסטיקה של חללים."},
@@ -436,10 +436,10 @@ links:[
 {t:"Blind artist relies on touch and texture (My Modern Met)",u:"https://mymodernmet.com/john-bramblitt-blind-painter/",p:"d1",k:"אמן",lang:"EN",s:"ג׳ון ברמבליט, צייר שהתעוור, ומשתמש בצבע עם טקסטורה כדי ״לראות״ באצבעות.",use:"תיעוד שיטת עבודה אמיתית."},
 {t:"Neil Harbisson: I listen to color (TED)",u:"https://www.ted.com/talks/neil_harbisson_i_listen_to_color",p:"d1",k:"וידאו",lang:"EN",s:"אמן עיוור צבעים ששומע צבעים דרך חיישן. מה זה אומר על הקשר בין חושים?",use:"השראה לחשיבה על צבע מעבר לראייה."},
 {t:"Molyneux’s problem",u:"https://en.wikipedia.org/wiki/Molyneux%27s_problem",p:"d1",k:"פילוסופיה",lang:"EN",s:"שאלה פילוסופית בת 300 שנה: אם עיוור יחזור לראות, האם יזהה בעין כדור שהכיר רק במגע?",use:"שאלה מעוררת למבוא."},
-{t:"DRAFTSMAN Tactile Drawing Board (APH)",u:"https://aph.org/product/draftsman-tactile-drawing-board",p:"d2",k:"מוצר קיים",lang:"EN",s:"לוח שעליו ציור בעט רגיל יוצר קו בולט שאפשר למשש מיד.",use:"בנצ׳מרקינג מרכזי."},
+{t:"DRAFTSMAN Tactile Drawing Board (APH)",u:"https://aph.org/product/draftsman-tactile-drawing-board",p:"d2",k:"מוצר קיים",lang:"EN",s:"לוח שעליו ציור בעט רגיל יוצר קו בולט שאפשר למשש מיד.",use:"מחקר שוק מרכזי."},
 {t:"Tactile literacy tools (APH Blog)",u:"https://aph.org/blog/tactile-literacy-tools",p:"d2",k:"מאגר",lang:"EN",s:"סקירה של כלים לאוריינות מישושית: ערכות שרטוט, סרגלים, ניירות מיוחדים.",use:"מיפוי שוק רחב."},
 {t:"DIY Raised Line Drawing (Paths to Literacy)",u:"https://pathstoliteracy.org/wp-content/uploads/2024/08/DIYRaisedLineDrawing2024.pdf",p:"d2",k:"מדריך",lang:"EN",s:"מדריך לייצור ביתי של משטחי ציור בקו בולט מחומרים זמינים.",use:"השראה לניסויים מהירים בחומר."},
-{t:"Art Materials for students with visual impairments",u:"https://teachingvisuallyimpaired.com/art-materials.html",p:"d2",k:"מאגר",lang:"EN",s:"רשימת חומרי אמנות מותאמים, ממורה לבעלי לקויות ראייה.",use:"בנצ׳מרקינג + רעיונות לחקר חומרים."},
+{t:"Art Materials for students with visual impairments",u:"https://teachingvisuallyimpaired.com/art-materials.html",p:"d2",k:"מאגר",lang:"EN",s:"רשימת חומרי אמנות מותאמים, ממורה לבעלי לקויות ראייה.",use:"מחקר שוק + רעיונות לחקר חומרים."},
 {t:"Tactile graphic",u:"https://en.wikipedia.org/wiki/Tactile_graphic",p:"d2",k:"STEM",lang:"EN",s:"איך מייצרים תמונות למישוש: נייר מתנפח בחום, הדפסה בולטת, תלת-ממד. ומה המגבלות.",use:"מחקר טכנולוגי-חומרי."},
 {t:"Haptic perception",u:"https://en.wikipedia.org/wiki/Haptic_perception",p:"d2",k:"STEM",lang:"EN",s:"איך אנחנו מזהים צורה בתנועה של היד: חקירה אקטיבית מול מגע פסיבי.",use:"פרק STEM: מה היד יודעת."},
 {t:"EyeMusic (National Geographic)",u:"https://www.nationalgeographic.com/culture/article/140403-eyemusic-ssd-visual-impairment-software-science",p:"d2",k:"מחקר",lang:"EN",s:"האפליקציה של פרופ׳ אמיר אמדי מהאוניברסיטה העברית שמתרגמת צורות וצבעים לצלילים.",use:"מחקר ישראלי על החלפה חושית."}
@@ -460,12 +460,12 @@ links:[
 {t:"Night writing",u:"https://en.wikipedia.org/wiki/Night_writing",p:"d1",k:"היסטוריה",lang:"EN",s:"״כתב לילה״ של צבא נפוליאון לקריאה בחושך, שממנו נולד הברייל. דוגמה לחיבור בין עולמות.",use:"נושא השנה: חיבור בין צבא לנגישות."},
 {t:"כל זכות: הספרייה המרכזית לעיוורים",u:"https://www.kolzchut.org.il/he/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%94_%D7%94%D7%9E%D7%A8%D7%9B%D7%96%D7%99%D7%AA_%D7%9C%D7%A2%D7%99%D7%95%D7%95%D7%A8%D7%99%D7%9D,_%D7%9B%D7%91%D7%93%D7%99_%D7%A8%D7%90%D7%99%D7%99%D7%94_%D7%95%D7%9E%D7%95%D7%92%D7%91%D7%9C%D7%99%D7%9D",p:"d1",k:"ארגון",lang:"HE",s:"מידע על הספרייה בנתניה שמפיקה ומשאילה ספרים בברייל, בקול ובהגדלה.",use:"מקור לראיון ולנתונים בעברית."},
 {t:"Hebrew Braille",u:"https://en.wikipedia.org/wiki/Hebrew_Braille",p:"d2",k:"רקע",lang:"EN",s:"איך ברייל עובד בעברית: קריאה משמאל לימין, ניקוד, אותיות סופיות.",use:"פרט ייחודי לישראל."},
-{t:"Les Doigts Qui Rêvent – tactile books (Paths to Literacy)",u:"https://www.pathstoliteracy.org/resource/les-doigts-qui-revent-dreaming-fingers-tactile-books",p:"d2",k:"מוצר קיים",lang:"EN",s:"הוצאה צרפתית שמייצרת ספרי ילדים מאוירים במרקמים: בד, עץ, נייר זכוכית.",use:"בנצ׳מרקינג והשראה חומרית."},
+{t:"Les Doigts Qui Rêvent – tactile books (Paths to Literacy)",u:"https://www.pathstoliteracy.org/resource/les-doigts-qui-revent-dreaming-fingers-tactile-books",p:"d2",k:"מוצר קיים",lang:"EN",s:"הוצאה צרפתית שמייצרת ספרי ילדים מאוירים במרקמים: בד, עץ, נייר זכוכית.",use:"מחקר שוק והשראה חומרית."},
 {t:"Designing Tactile Illustrated Books (NFB)",u:"https://nfb.org/images/nfb/publications/jbir/jbir14/jbir040101.html",p:"d2",k:"מחקר",lang:"EN",s:"מאמר מחקרי על איך ילדים עיוורים מבינים איורים מישושיים, ומה עובד ומה מבלבל.",use:"מקור אקדמי לטבלת התובנות."},
 {t:"Refreshable braille display",u:"https://en.wikipedia.org/wiki/Refreshable_braille_display",p:"d2",k:"STEM",lang:"EN",s:"איך עובד צג שבו פינים קטנים עולים ויורדים (בדרך כלל במנגנון פיזואלקטרי). למה הוא יקר כל כך.",use:"מחקר מנגנונים."},
-{t:"Dot Inc.",u:"https://www.dotincorp.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"חברה שפיתחה שעון ומכשירים עם ברייל דינמי בעלות נמוכה יותר.",use:"בנצ׳מרקינג."},
+{t:"Dot Inc.",u:"https://www.dotincorp.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"חברה שפיתחה שעון ומכשירים עם ברייל דינמי בעלות נמוכה יותר.",use:"מחקר שוק."},
 {t:"Moon type",u:"https://en.wikipedia.org/wiki/Moon_type",p:"d2",k:"השראה",lang:"EN",s:"כתב מישוש חלופי שמבוסס על צורות פשוטות של אותיות. קל יותר למי שהתעוור בגיל מבוגר.",use:"השוואה: עוד דרך לקרוא במגע."},
-{t:"NLS – National Library Service for the Blind (Library of Congress)",u:"https://www.loc.gov/nls/",p:"d2",k:"ארגון",lang:"EN",s:"שירות הספרייה הלאומית האמריקאית לספרי שמע וברייל, כולל מכשירי השמעה ייעודיים.",use:"בנצ׳מרקינג של ספרי שמע."}
+{t:"NLS – National Library Service for the Blind (Library of Congress)",u:"https://www.loc.gov/nls/",p:"d2",k:"ארגון",lang:"EN",s:"שירות הספרייה הלאומית האמריקאית לספרי שמע וברייל, כולל מכשירי השמעה ייעודיים.",use:"מחקר שוק של ספרי שמע."}
 ],
 intel:{app:"איך מחזיקים את הספר, איפה האצבעות, איך מדפדפים ואיך מוצאים את המקום שבו עצרו?",cog:"איך הקורא יודע מה קורה בתמונה? כמה מידע אפשר להעביר באצבע לפני שזה מבלבל?",soc:"האם רואה ועיוור יכולים לחוות את אותו ספר יחד? ספר כזה יעמוד במדף רגיל בספרייה?",cre:"מה אם הסיפור לא ״מתורגם״ לברייל אלא נולד במגע? מה אם הרואים יקראו בעיניים עצומות?",emo:"סקרנות, הנאה, עצמאות. מה מרגיש ילד שמגלה בעצמו את סוף הסיפור?"}},
 
@@ -485,11 +485,11 @@ links:[
 {t:"Ishihara test",u:"https://en.wikipedia.org/wiki/Ishihara_test",p:"d2",k:"STEM",lang:"EN",s:"מבחן הנקודות הצבעוניות שמגלה עיוורון צבעים. איך הוא בנוי ולמה הוא עובד.",use:"השראה גרפית + ניסוי כיתתי."},
 {t:"Coblis – Color Blindness Simulator",u:"https://www.color-blindness.com/coblis-color-blindness-simulator/",p:"d2",k:"כלי ניסוי",lang:"EN",s:"מעלים תמונה ורואים איך היא נראית לכל סוג של עיוורון צבעים.",use:"לוח השוואה ״לפני / אחרי״."},
 {t:"Sim Daltonism",u:"https://michelf.ca/projects/sim-daltonism/",p:"d2",k:"כלי ניסוי",lang:"EN",s:"אפליקציה למק ולאייפון שמציגה בזמן אמת דרך המצלמה איך נראה העולם.",use:"תיעוד שטח בסופר או ברחוב."},
-{t:"ColorADD",u:"https://www.coloradd.net/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מערכת סמלים פורטוגזית שמייצגת צבעים בצורות פשוטות. בשימוש בתחבורה ובבתי ספר.",use:"בנצ׳מרקינג: שפה חזותית חלופית."},
-{t:"EnChroma",u:"https://enchroma.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"משקפיים שמגבירים את ההבדל בין צבעים לחלק מהאנשים. כדאי לחפש גם ביקורות מדעיות עליהם.",use:"בנצ׳מרקינג ביקורתי: מה מבטיחים ומה באמת."},
+{t:"ColorADD",u:"https://www.coloradd.net/",p:"d2",k:"מוצר קיים",lang:"EN",s:"מערכת סמלים פורטוגזית שמייצגת צבעים בצורות פשוטות. בשימוש בתחבורה ובבתי ספר.",use:"מחקר שוק: שפה חזותית חלופית."},
+{t:"EnChroma",u:"https://enchroma.com/",p:"d2",k:"מוצר קיים",lang:"EN",s:"משקפיים שמגבירים את ההבדל בין צבעים לחלק מהאנשים. כדאי לחפש גם ביקורות מדעיות עליהם.",use:"מחקר שוק ביקורתי: מה מבטיחים ומה באמת."},
 {t:"WCAG: Use of Color",u:"https://www.w3.org/WAI/WCAG21/Understanding/use-of-color.html",p:"d2",k:"תקנים",lang:"EN",s:"התקן הבינלאומי לנגישות: אסור שצבע יהיה הדרך היחידה להעביר מידע.",use:"עיקרון מנחה לגבולות הגזרה."},
 {t:"Viz Palette",u:"https://projects.susielu.com/viz-palette",p:"d2",k:"כלי ניסוי",lang:"EN",s:"כלי לבדיקה אם פלטת צבעים מובחנת גם לעיוורי צבעים.",use:"בדיקת פלטת ה-CMF בהמשך."},
-{t:"Traffic light",u:"https://en.wikipedia.org/wiki/Traffic_light",p:"d2",k:"רקע",lang:"EN",s:"היסטוריה ותקנים של רמזורים, כולל סידור קבוע של האורות ופתרונות שננקטו לעיוורי צבעים.",use:"מקרה בוחן לבנצ׳מרקינג."}
+{t:"Traffic light",u:"https://en.wikipedia.org/wiki/Traffic_light",p:"d2",k:"רקע",lang:"EN",s:"היסטוריה ותקנים של רמזורים, כולל סידור קבוע של האורות ופתרונות שננקטו לעיוורי צבעים.",use:"מקרה בוחן למחקר שוק."}
 ],
 intel:{app:"באיזה רגע המשתמש צריך להבחין באדום? כמה זמן יש לו? מה הוא עושה בידיים באותו רגע?",cog:"איזה מידע האדום נושא: סכנה, מצב, דירוג? איך עוד אפשר לקודד את המידע הזה?",soc:"האם הפתרון עוזר רק לו, או משנה את המערכת לכולם? האם הוא בולט כ״מיוחד״?",cre:"מה אם הרואים-הכל הם אלה שמפספסים משהו? מה אם צבע הוא לא הדרך היחידה לראות?",emo:"מבוכה מטעות, חשש מסכנה. מה ייתן ביטחון בלי להזכיר כל הזמן את החיסרון?"}},
 
@@ -579,7 +579,7 @@ const GALLERY = [
 {n:"Dot Watch",sense:"see",how:"touch",u:"https://www.dotincorp.com/",s:"שעון חכם שמציג שעה והודעות בנקודות ברייל שעולות ויורדות.",why:"מוצר יפה שלא נראה כמו ״מכשיר עזר״."},
 {n:"EyeMusic",sense:"see",how:"sound",u:"https://www.nationalgeographic.com/culture/article/140403-eyemusic-ssd-visual-impairment-software-science",s:"אפליקציה מהאוניברסיטה העברית שמתרגמת תמונה לצלילים: גובה הצליל הוא המיקום, וכלי הנגינה הוא הצבע.",why:"מחקר ישראלי שמראה איך צבע יכול להפוך למוזיקה."},
 {n:"ColorADD",sense:"see",how:"shape",u:"https://www.coloradd.net/",s:"מערכת סמלים פשוטים לעיוורי צבעים: משולש, קו ושילובים שלהם מייצגים צבעים.",why:"שפה גרפית קטנה שמוסיפה מידע בלי לשנות את הצבע."},
-{n:"משקפי EnChroma",sense:"see",how:"light",u:"https://enchroma.com/",s:"עדשות שמסננות אורכי גל כדי להגדיל את ההבדל בין אדום לירוק אצל חלק מעיוורי הצבעים.",why:"כדאי לחפש גם את הביקורת המדעית עליהן. דוגמה טובה לבנצ׳מרקינג ביקורתי."},
+{n:"משקפי EnChroma",sense:"see",how:"light",u:"https://enchroma.com/",s:"עדשות שמסננות אורכי גל כדי להגדיל את ההבדל בין אדום לירוק אצל חלק מעיוורי הצבעים.",why:"כדאי לחפש גם את הביקורת המדעית עליהן. דוגמה טובה למחקר שוק ביקורתי."},
 {n:"כפית תינוק שמשנה צבע",sense:"touch",how:"light",u:"https://patents.google.com/patent/US6865815",s:"פטנט על כלי אוכל לתינוקות עם חומר תרמוכרומי שמשנה צבע כשהאוכל חם מדי.",why:"חום שאי אפשר להרגיש הופך לצבע שרואים."},
 {n:"ספל Ember",sense:"touch",how:"touch",u:"https://ember.com/",s:"ספל שמחזיק את המשקה בטמפרטורה קבועה שבוחרים מראש.",why:"נבנה בשביל טעם, לא בשביל בטיחות. איפה הפער?"},
 {n:"צילום תרמי",sense:"touch",how:"light",u:"https://en.wikipedia.org/wiki/Thermography",s:"מצלמה שקולטת קרינת אינפרא-אדום ומציגה חום כצבעים.",why:"טכנולוגיה שהופכת חום לתמונה."}
@@ -611,7 +611,7 @@ function gallery(){
   </div>
   <div class="gal" id="gal">${GALLERY.map(g=>`<article class="gi" data-sense="${g.sense}" data-how="${g.how}">
     <div class="pic" style="background:color-mix(in srgb, ${HOW[g.how].c} 14%, var(--bg))">${glyph(g.how)}</div>
-    <div class="gb"><div class="tags"><span class="tag" style="background:${g.sense==="touch"?"var(--red-ink)":GSENSES[g.sense].color};color:${g.sense==="hear"||g.sense==="see"?"#1d3a4b":"#fff"}">${GSENSES[g.sense].name}</span><span class="tag kind">${HOW[g.how].n}</span></div>
+    <div class="gb"><div class="tags"><span class="tag" style="background:${g.sense==="touch"?"var(--red)":GSENSES[g.sense].color};color:${g.sense==="hear"||g.sense==="see"?"#1d3a4b":"#fff"}">${GSENSES[g.sense].name}</span><span class="tag kind">${HOW[g.how].n}</span></div>
     <h3>${esc(g.n)}</h3><p>${esc(g.s)}</p><p class="use"><b>למה זה מעניין:</b> ${esc(g.why)}</p>
     <a class="more" href="${esc(g.u)}" target="_blank" rel="noopener">לתמונות ולמוצר ←</a></div></article>`).join("")}</div>
   <p class="note" id="gal-empty" hidden>אין דוגמאות בצירוף הזה. נסו סינון אחר.</p>`;
@@ -721,9 +721,9 @@ function project(p){
   </div></section>
 
   <section class="stage d2" id="d2-${p.id}"><aside><div class="n">D2</div><div class="t">זריעה</div><small>מחקר עיצוב מבוסס STEM · 4–6 עמודים</small></aside><div>
-    <div><h3>שלושת כלי המחקר</h3><p class="note" style="margin-bottom:8px">חובה לפחות שניים. סמנו מה בחרתן.</p>
+    <div><h3>שלושת כלי המחקר</h3><p class="note" style="margin-bottom:8px">אלה הצעות שלי, נקודת פתיחה לחשיבה בלבד. המחקר שלכן יכול להיראות אחרת לגמרי: אנשים אחרים, מוצרים אחרים, שאלות אחרות. מה שמחייב הוא מה שמופיע במצגת. סמנו מה מתאים לכן.</p>
     <div class="tools">
-      ${[["persona","מחקר משתמשים משתף",p.d2.persona],["bench","מחקר שוק (בנצ׳מרקינג): מה למפות",p.d2.bench],["stem","מחקר טכנולוגי-חומרי (STEM)",p.d2.stem]].map(([k,n,arr])=>`
+      ${[["persona","מחקר משתמשים משתף",p.d2.persona],["bench","מחקר שוק: מה למפות",p.d2.bench],["stem","מחקר טכנולוגי-חומרי (STEM)",p.d2.stem]].map(([k,n,arr])=>`
       <div class="tool"><h4><input type="checkbox" id="tool-${p.id}-${k}" data-tool="${k}" ${done[k]?"checked":""}><label for="tool-${p.id}-${k}">${n}</label></h4><ul>${arr.map(x=>`<li>${esc(x)}</li>`).join("")}${k==="persona"?"<li><b>לפחות שני אנשים, מסוגים שונים.</b></li>":""}</ul></div>`).join("")}
     </div></div>
     <div><h3>עמוד התובנות (חובה)</h3><p>לכל מקור שבחרתן: <b>מה בדקנו ← מה גילינו ← מה המסקנה העיצובית?</b> ובסוף, 2–3 ״הזדמנויות לפעולה״.</p></div>
@@ -793,7 +793,7 @@ const TIK = [
  task:{h:"הרעיונות שלכן, השאלות של הבינה",steps:["כבו מסכים. שימו טיימר ל-10 דקות ושרטטו ביד כמה שיותר רעיונות. אחר כך עוד סבב. רשמו את זה ביומן ההכרעות כבחירה בלי בינה, עם נימוק.","בחרו חמישה רעיונות. לכל אחד, בקשו מכלי הבינה שאלה אחת לפי אחת האינטליגנציות (הפרומפט למטה). בשלב הזה הבינה לא מציעה רעיונות.","מהתשובות שלכן כותבות את היתרונות והחסרונות בשקף 20.","אם השתמשתן בהדמיה שבינה יצרה, היא מסומנת ומונחת ליד הסקיצה שלכן."],trace:"עמודי הסקיצות מצולמים בשקף 20, ושאלות הבינה בגופן קטן לידם."},
  prompt:"אני בשלב רעיונאות בפרויקט עיצוב מוצר בנושא [הנושא]. אסור לך להציע רעיונות, פתרונות או דוגמאות למוצרים. זה הרעיון שלי במשפט: [הרעיון]. שאל אותי שאלה אחת בלבד מנקודת המבט של האינטליגנציה ה[יישומית / קוגניטיבית / חברתית / יצירתית / רגשית] של עזרי טרזי, וחכה לתשובה שלי.",
  rub:[["לפחות 10 רעיונות שונים באמת",6],["יתרונות, חסרונות וחמש האינטליגנציות",5],["התנסות בחומרים",4]]},
-{id:"t4",n:"D4",t:"הנצה",bg:"var(--red-ink)",ink:"#fff",pages:"שקפים 22 עד 24",nosol:true,
+{id:"t4",n:"D4",t:"הנצה",bg:"var(--red)",ink:"#fff",pages:"שקפים 22 עד 24",nosol:true,
  must:[["שקף 22","בחירת כיוון אחד מהנביטה ופיתוחו, עם נימוק"],["שקף 22","מודל מהיר שנבדק בידיים של משתמש אמיתי: המודל לפני המשוב ואחריו"],["שקף 23","תרחישי שימוש במוצר: לפני, תוך כדי, אחרי"],["שקף 24","אפיון סופי: חומרים, מידות, צבעים, מנגנון, והמשמעויות"],["שקף 24","שאלה אחת: מי עוד עלול להיות מושפע מהמוצר?"]],
  task:{h:"המודל מדבר",steps:["בנו מודל מקרטון או מנייר לפני כל הדמיה במחשב.","הניחו אותו בידיים של משתמש אמיתי. תעדו שלושה ציטוטים: מה היה לא נוח? מה הפתיע?","לשקף 22, השתמשו בכלי הבינה רק כדי לנסח קריטריונים לבחירה (הפרומפט למטה). את ההחלטה אתן מקבלות."],trace:"בשקף 22: צילום של המשתמש עם המודל (באישורו), שלושת הציטוטים, ומודל לפני ואחרי המשוב."},
  prompt:"אני בוחרת בין כמה כיווני קונספט בפרויקט עיצוב מוצר בנושא [הנושא]. אל תדרג אותם, אל תמליץ ואל תציע כיוון חדש. עזור לי לנסח ארבעה קריטריונים לבחירה, ושאל אותי מה הכי חשוב למשתמש שלי.",
@@ -929,7 +929,7 @@ function habits(){
   <div style="border-color:var(--d1)"><b>חריש</b><small>שקפים 4 עד 6</small><ul><li>פותחות את יומן ההכרעות. השורה הראשונה: מפת החשיבה נעשתה ביד, ולמה.</li><li>לכל מקור: קישור, ומה הוא שינה אצלכן.</li></ul></div>
   <div style="border-color:var(--d2)"><b>זריעה</b><small>שקפים 7 עד 19</small><ul><li>שני אנשים לפחות מקהל היעד, מסוגים שונים.</li><li>אישור להקליט, לצטט ולצלם, רשום בנספחים.</li><li>שאלת המחקר: גרסה ראשונה ליד הגרסה הסופית.</li></ul></div>
   <div style="border-color:var(--d3)"><b>נביטה</b><small>שקפים 20 ו-21</small><ul><li>גם רעיונות שנפסלו נשארים בתיק, עם סיבה.</li><li>כל הדמיה מבינה מסומנת בכתום, ליד הסקיצה שלכן.</li></ul></div>
-  <div style="border-color:var(--red-ink)"><b>הנצה</b><small>שקפים 22 עד 24</small><ul><li>המודל לפני ואחרי המשוב של המשתמש.</li><li>שאלה אחת: מי עוד עלול להיות מושפע מהמוצר?</li></ul></div>
+  <div style="border-color:var(--red)"><b>הנצה</b><small>שקפים 22 עד 24</small><ul><li>המודל לפני ואחרי המשוב של המשתמש.</li><li>שאלה אחת: מי עוד עלול להיות מושפע מהמוצר?</li></ul></div>
   <div style="border-color:var(--navy)"><b>פריחה וסיכום</b><small>שקפים 25 עד 28</small><ul><li>דף קרדיטים בראש הנספחים.</li><li>היומן המלא בנספחים.</li><li>ארבע שאלות הכנות ברפלקציה.</li></ul></div>
   </div>
   <p style="margin-top:16px"><a class="btn" href="#tik" style="text-decoration:none;display:inline-block">למלווה לתיק, שקף אחרי שקף ←</a></p></div></section>`;
