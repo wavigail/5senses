@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Verse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700;900&family=Rubik:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="verse.css">
+<style>
+.hero{padding-top:44px}
+.hero-text{text-align:center;display:grid;gap:14px;justify-items:center;padding-bottom:34px}
+.hero h1 em{font-style:normal;color:var(--lamp)}
+.hero p{max-width:44ch;color:var(--muted);font-size:1.08rem}
+.hero .ctas{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hint{text-align:center;padding:18px 0 40px;color:var(--muted);font-size:1rem}
+
+/* try it */
+.try{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:28px;align-items:start;margin-top:28px}
+@media (max-width:860px){.try{grid-template-columns:1fr}}
+.dock{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.zone{border:2px dashed var(--line);border-radius:18px;padding:14px;min-height:120px;display:grid;place-items:center;text-align:center;gap:6px;background:var(--night2);cursor:pointer;font:inherit;color:inherit;transition:border-color .2s,background .2s}
+.zone svg{width:46px;height:46px;stroke:var(--muted);fill:none;stroke-width:1.6}
+.zone b{font-size:.98rem}.zone span{font-size:.82rem;color:var(--muted)}
+.zone.over,.zone:hover{border-color:var(--lamp);background:var(--night3)}
+.zone.on{border-style:solid;border-color:var(--lamp)}
+.dragfig{display:grid;justify-items:center;gap:6px;padding:14px;border-radius:18px;background:radial-gradient(circle at 50% 70%,#e9a23b22,transparent 65%)}
+.dragfig img{width:120px !important;cursor:grab;touch-action:none;filter:drop-shadow(0 12px 10px #0009);user-select:none;-webkit-user-drag:none}
+.ghostfig{position:fixed;z-index:80;pointer-events:none;width:110px;display:block;transform:rotate(-4deg)}.ghostfig img{width:100%;display:block;filter:drop-shadow(0 18px 14px #000a)}
+.screen{background:var(--paper);color:var(--ink);border-radius:22px;padding:22px;min-height:330px;position:relative;box-shadow:0 30px 60px -20px #000c;display:grid;align-content:start;gap:12px;border:10px solid #0d1022}
+.screen .bar{display:flex;justify-content:space-between;font-size:.8rem;color:#6a6d85}
+.screen h3{font:700 1.35rem/1.2 var(--f-head);color:var(--ink)}
+.screen .page{font-family:var(--f-text);font-size:1.02rem;line-height:1.85;color:#2b2f48}
+.screen .pill{display:inline-block;background:var(--c-prince);color:#fff;border-radius:999px;padding:3px 12px;font-size:.8rem}
+.screen .eq{display:flex;gap:4px;align-items:flex-end;height:50px}
+.screen .eq i{width:8px;background:var(--c-prince);border-radius:4px;animation:eq 1s ease-in-out infinite}
+.screen .eq i:nth-child(2n){animation-delay:.2s}.screen .eq i:nth-child(3n){animation-delay:.45s}
+@keyframes eq{0%,100%{height:12px}50%{height:46px}}
+.screen .say{font-family:var(--f-text);font-size:1.1rem;color:var(--c-prince)}
+.screen .empty{display:grid;place-items:center;text-align:center;min-height:260px;color:#6a6d85;gap:10px}
+.uses{margin-top:34px}
+.use{background:var(--night2);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:6px}
+.use b{font-size:1rem}
+.use p{font-size:.9rem;color:var(--muted)}
+.use small{font-size:.78rem;color:var(--lamp)}
+
+/* feed */
+.feed{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}
+@media (max-width:900px){.feed{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.feed{grid-template-columns:1fr}}
+.post{border-radius:18px;overflow:hidden;background:var(--night2);border:1px solid var(--line);display:grid;text-decoration:none;color:inherit;transition:transform .2s}
+.post:hover{transform:translateY(-4px)}
+.post .art{aspect-ratio:4/3;display:grid;place-items:center;font:700 1.4rem var(--f-text);color:#fff;padding:16px;text-align:center;position:relative}
+.post .kind{position:absolute;top:10px;right:10px;background:#0008;color:#fff;font:500 .72rem var(--f-text);padding:2px 9px;border-radius:999px}
+.post .meta{padding:12px 14px;display:grid;gap:2px}
+.post .meta b{font-size:.95rem}.post .meta span{font-size:.8rem;color:var(--muted)}
+.collide{margin-top:22px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;background:linear-gradient(90deg,#2f8a4a33,#16161a 60%,#a3262a33);border:1px solid var(--line);border-radius:20px;padding:16px 20px}
+.collide img{height:90px}
+.collide .lv{height:10px;background:var(--night);border-radius:99px;overflow:hidden;margin-top:8px}
+.collide .lv i{display:block;height:100%;width:66%;background:linear-gradient(90deg,var(--c-prince2),var(--lamp))}
+@media (max-width:600px){.collide{grid-template-columns:1fr;text-align:center}.collide .pair{justify-self:center}}
+
+.steps{counter-reset:s}
+.step{counter-increment:s}
+.step::before{content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--lamp);color:var(--lamp-ink);font:900 1.3rem var(--f-head)}
+.muse-fig{display:grid;grid-template-columns:120px minmax(0,1fr);gap:18px;align-items:center}
+.blank{width:120px;height:170px;position:relative;margin:auto}
+.blank i{position:absolute;left:50%;transform:translateX(-50%);background:#ece7dc}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Verse, לעמוד הבית"><svg role="img" aria-label="Verse" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 639.63 346.85" xmlns:c2pa="http://c2pa.org/manifest">
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="ns0aLl.tif">
+      <g>
+        <g>
+          <g>
+            <path d="M590.53,253.51c19.09,2.14,33.78-6.17,43.19-22.57,2.26.33,4.13,1.71,5.92,3.44-9.59,21.34-25.96,35.71-49.97,37.45-17.99,1.3-37.06-5.23-48.95-19.11-4.17-4.87-7.58-9.89-10.18-15.78-5.21-11.82-7.51-24.43-7.01-37.34.81-20.85,6.99-39.36,22.37-53.79,6.87-6.45,14.92-10.5,23.84-13.06,5.79-1.66,11.27-2.13,17.33-2.09,8.9.07,17.6,1.21,25.38,5.41s14.66,10.19,19.01,18.34c4.27,7.98,6.65,16.39,7.47,25.42.35,3.89,1.18,7.57.01,11.31l-87.44.03c-.09,3.38-.34,6.51.05,9.65l1.05,8.45c2.54,20.32,15.68,41.76,37.93,44.25ZM608.18,182.15c1.3,0,2.18-.84,2.2-1.77.35-15.55-3.84-39.76-23.31-41.1-6.71-.46-13.7.92-18.9,5.22-8.3,6.87-13.11,16.79-14.91,27.26-.61,3.54-1.42,6.65-.92,10.42l55.84-.04Z"/>
+            <path d="M232.58,249.57c13.03,6.79,30.21,5.47,42.48-3.01,5.88-4.06,10.01-9.58,13.81-15.65,2.33.53,4.25,1.71,6.06,3.44-2.88,5.72-5.86,10.95-9.7,15.92-9.84,12.77-24.2,20.39-40.26,21.54-19.57,1.4-38.95-5.81-51.15-21.45-15.01-19.24-18-45.32-12.95-68.66,2.57-11.86,7.79-22.36,15.83-31.51,11.8-13.42,29.21-20.34,47.03-19.51,3.94.18,7.25.13,10.98.94,11.32,2.47,21.31,8.14,28.39,17.41,8.27,11.21,12.6,28.64,10.82,42.1l-87.14.03c-.76,4.05.27,7.77.2,11.63-.05,2.59.47,4.69.87,7.16,2.53,15.69,10.13,32.01,24.72,39.61ZM265.37,182.13c.18-5.2.46-9.04-.41-13.26-1.28-12.03-6.7-26.44-20.15-29.14-7.95-1.59-16.64.32-22.74,5.9-8.77,8.02-13.1,19.26-14.25,30.91-.19,1.91-1.47,3.9-.15,5.62l57.71-.03Z"/>
+            <path d="M417.17,263.04c-2.02-.8-2.66-1.91-2.69-3.79l-.32-24.26-.21-11.19c2.25-.35,4.46-.29,6.84-.14,3.98,15.82,11.45,31.82,27.55,37.99,9.86,3.77,24.67,2.25,31.86-5.74,7.8-8.68,8.13-23.63-1.62-32.1-3.45-3-7.31-5.2-11.57-6.96l-12.73-5.25c-16.63-6.85-35.52-14.3-38.9-34.79-1.73-10.51.43-22.79,7.77-30.89,9.6-10.58,22.43-14.89,36.5-15.25,11.67-.3,22.78,1.2,33.7,5.12,2.54.91,5.11,1.37,7.33,3.1l.48,12.76.47,20.88c-2.48.28-4.28.53-6.43.39-4.33-17.82-14.42-34.73-35.05-33.8-5.93.27-11.65,1.53-16.25,5.57-8.29,7.29-8.46,19.84-1.1,28.14,3.4,3.83,7.76,6.42,12.58,8.44l26.04,10.94c12.83,5.39,24.8,14.14,27.54,28.64,1.65,8.72,1.12,17.77-2.37,26.06-9.11,21.67-35.71,27.08-56.93,24.5-11.26-1.37-21.87-4.17-32.49-8.38Z"/>
+            <path d="M306.12,263.05c6.74-.38,13.91-3.33,15.61-10.42.72-2.99,1.24-5.7,1.24-8.93l.07-74.25c0-4.37-.02-8.59-1.83-12.43-2.4-5.11-9.69-7.14-14.94-8.18-.27-1.72-.05-3.38.38-4.81l36.76-11.76c1.99-.64,4.2-1.8,5.94-.14,1.6,8.83-.6,19.29,1.12,28.46,7.48-11.64,10.22-19.06,21.69-26.09,8.86-5.6,25.5-6.25,30.95,4.84,2.76,5.63,1.92,12-2.01,17.1-4.72,6.11-13.68,6.23-19.36.86-2.45-2.32-5.32-4.87-9.03-5.07-4.14-.23-8.12,2.33-10.77,5.4-5.8,6.71-8.55,14.95-9.93,23.62-.48,3.01-.89,5.93-.88,9.14l.09,55.17c.01,9.22,5.57,15.61,14.73,16.68l6.97.82c.39,1.78.39,3.56-.13,5.54l-62.9.08c-1.18,0-3.01.84-3.55-.35-.66-1.44-.05-3.26-.22-5.28Z"/>
+          </g>
+          <g>
+            <path d="M.48,61.36l81.48.02c.33,2.11.48,4.09-.12,6.18-4.94.23-9.91.97-14.16,3.62-8.12,5.06-4.79,18.03-1.97,25.42l7.35,19.21,10.61,26.8,14.48,36.43,18.1,45.7c3.81-11.71,6.04-22.25,10.4-32.78,3.26-10.67,7.7-20.35,12.51-30.4,6.75-14.41,19.19-33.29,30.05-44.75,4.12-4.35,7.96-8.49,12.48-12.48,14.25-12.59,29.73-22.74,47.08-30.76s36.08-14.61,55.17-18.58l14.49-3.01c3.67-.76,6.28-1.16,9.78-1.98-.5,2.1-1.8,3.07-2.95,4.67l-30.19,42.11-12.83,18.52,6.3-23.49c-20.46,2.47-40.26,8.52-58.27,18.45-14.5,8-26.57,18.31-37.63,30.49-8.13,8.96-14.78,18.61-20.87,29.11-11.73,20.25-22.27,46.74-29.36,69.09l-10.17,32.02c-3.36.18-6.39.16-9.61-.11-1.24-.1-1.95-1.2-2.42-2.37l-20.14-50.19L28.12,88.65c-2.41-6-6.06-10.93-10.71-15.05s-10.66-5.55-16.79-6.14c-.89-1.93-.72-4.01-.14-6.1Z"/>
+            <path d="M139.06,147.2c-4.54,8.88-8.6,17.49-12.13,26.84-2.25,5.97-4.54,11.57-6.16,17.73-.28,1.05-.93,2.13-1.52,3.17-.15-2.7.78-5.04,1.36-7.69,5.13-23.66,14.4-50.94,27.04-71.61,4.08-6.67,8.09-12.92,12.84-19.12,13.88-18.1,30.55-33.96,49.54-46.72,19.68-13.6,41.43-23.87,64.56-32.29l-8.09,30.86c-.69,2.63-1.5,4.52-4.55,4.73-3.91,1.21-7.94,2.37-11.93,3.93l3.25-15.53c-14.12,5.42-26.27,12.31-38.42,19.95-9.85,6.2-18.43,13.19-27.06,21-19.95,18.04-36.46,40.79-48.71,64.76Z"/>
+            <path d="M172.54,54.24c-22.15,25.36-36.76,54.47-46.35,86.67-3.7,12.41-6.53,24.41-8.74,37.14-.64,3.71-.9,7.2-2.13,11.01-1.13-2.95.06-5.74.13-8.69.21-8.83,1.14-17.05,2.32-25.87C126.8,87.32,160.92,36.72,217.15,0l1.69,24.91c.24,3.47.62,6.73.6,10.21-3.85,2.27-7.38,4.46-10.84,7.07-2.16,1.62-1.18-3.7-1.78-6.84-.68-3.54-.64-6.95-1.08-10.64-2.37.46-3.42,1.79-4.88,2.85-8.13,5.93-21.61,19-28.31,26.68Z"/>
+          </g>
+        </g>
+        <g>
+          <path d="M189.07,318.92c1.06,7.2-2.1,14.52-8.44,16.79-5.51,1.97-10.44.75-14.94-3.31-1.37,4.9.17,9.16-.8,13.63-.24,1.08-3.21,1.06-4.12.11l.08-38.78c1.38-.46,3.48-.66,4.09.49.56,1.05-.36,2.42.65,3.58,2.58-3.18,5.77-4.54,9.8-4.59,7.12-.08,12.65,5.1,13.67,12.07ZM180.04,331.07c6.35-3.74,5.96-14.39.75-18.21-2.28-1.67-5.12-2.05-8.05-1.49-5.19.99-7.9,6.06-7.42,11.13.35,3.73,1.86,6.77,4.79,8.41,3.11,1.74,6.56,2.15,9.94.16Z"/>
+          <path d="M526.73,329.82c4.74,4.19,11.25,2.86,15.43-.99,1.42-.14,2.97,2.71,1.91,3.78-4.94,4.93-12.37,5.17-18.24,1.76-4.6-2.67-6.86-7.35-6.99-12.69s2.55-10.16,6.84-12.78c4.68-2.86,10.76-2.73,15.15.56s5.98,8.22,5.39,13.49l-15.2.4c-1.93.05-5.26-1.23-6.75.51-1.35,1.59.97,4.65,2.45,5.96ZM541.91,319.5c-.66-5.37-3.99-8.21-8.36-8.38-5.11-.68-9.52,2.88-10.09,8.28,6.34.35,12.27.63,18.45.1Z"/>
+          <path d="M319.52,335.81c-.91-5.81-.24-11.43-.42-17.11-.15-4.59-3.4-7.53-7.84-7.59-4.91-.07-8.93,3.31-8.96,8.39l-.12,16.2c-.37,1.05-3.33,1.1-4.22.23l-.06-40.07c1.35-.67,2.68-.5,4.14-.19l.47,14.93c4.7-3.88,10.72-4.91,15.67-2.18,3.63,2.01,5.17,6.21,5.37,10.24.28,5.75,0,11.11-.17,16.92-.03,1.04-3.68,1.33-3.85.23Z"/>
+          <path d="M335.32,323.15c-1.31,0-.1,7.48,7.77,9.1,4.15.86,7.45-.87,10.45-3.77l2.63,3.43c-3.99,4.03-8.94,5.54-14.74,4.32-7.95-1.67-13.38-10.59-10.52-19.55,1.28-4.01,4.53-7.52,7.91-8.78,4.54-1.69,9.35-1.35,12.88,1.27,4.5,3.34,6.59,8.6,5.67,13.87l-22.05.11ZM353.04,319.67c-.28-5.67-4.31-8.78-9.29-8.63-7.55.23-9.19,7.01-8.6,7.89.96,1.43,14.49.67,17.89.74Z"/>
+          <path d="M123.34,319.85l-13.48.43c-1.11.04-3.9-1-4.35.5l-.78,14.92c-.06,1.15-3.8,1.09-4.29-.01l-.05-9.5-.02-16c0-3.69.28-7.18-.1-10.85-.05-.46.18-1.01.33-1.23.2-.29.86-.63,1.44-.56,2.83.36,5.49.02,8.35.05l15.41.16c.54,1.4.45,2.66.15,4.1l-20.74.18c-.11,4.71-.37,9.04.16,13.6l17.81.28c.87.68,1.01,3.09.14,3.92Z"/>
+          <path d="M402,319.67c-2.99,1.53-13.75-.42-18.47.41l-.3,15.54c-.02,1.1-3.66,1.27-3.99.21-.45-2.79-.32-6.2-.33-9.15l-.11-26.99c0-.65.19-1.32.46-1.69.21-.29.82-.49,1.48-.47l23.37.43c1.02.02,1.05,3.01.31,3.76l-20.86.35-.12,13.55,18.58.3c.57.64.89,3.28,0,3.74Z"/>
+          <path d="M256.37,321.7c0,8.09-6.56,14.65-14.66,14.65s-14.66-6.56-14.66-14.65,6.56-14.65,14.66-14.65,14.66,6.56,14.66,14.65ZM247.75,330.35c3.49-2.57,3.92-6.97,3.52-10.79-.53-5.03-4.04-8.22-8.97-8.5-4.98-.27-8.78,2.57-10.04,7.31-1.54,5.79,1.28,11.72,6.04,13.44,3.12,1.13,6.61.63,9.46-1.46Z"/>
+          <path d="M435.99,324.41c.04,3.93.1,7.47-.29,11.1-.14,1.3-3.73,1.24-3.94.19l-.66-3.28c-3.29,3.89-8.14,4.95-12.94,3.58-11.51-3.29-7.23-19.11-8.15-28.43,1.58-.7,3.05-.76,4.74-.23l.12,17.31c.02,3.45,1.95,6.31,5.24,7.25,2.61.75,5.03.52,7.54-.93,1.79-1.03,3.69-3.59,3.72-6.3l.19-17.09c1.32-.67,2.63-.76,4.23-.24l.19,17.05Z"/>
+          <path d="M491.8,307.54l.1,27.12c0,.56-.04,1.01-.25,1.32-.32.48-2.79.92-3.88-.13-.6-.58.04-1.28-.54-2.98-5.09,4.4-11.58,5.01-17.1,1.14-2.78-1.95-4.1-5.49-4.1-8.99v-17.47c1.12-.89,3.03-.62,4.25-.04l.26,17.67c.02,1.3.6,3.09,1.43,4.15,2.91,3.69,8.85,4.25,12.29.97,2.01-1.92,3.1-4.87,3.14-7.6l.22-15.16c.76-.85,2.71-.54,4.19,0Z"/>
+          <path d="M458.34,331.46c.92-.4,2.37,2.44,1.8,3.27-3.87,3.2-10.29,2.35-12.87-2.01-.9-1.52-1.13-3.51-1.15-5.21l-.14-16.05c-1.43-.66-2.88,0-4.14-.67-.76-.4-.77-2.8-.04-3.25,1.06-.65,2.57.03,3.64-.5,1.38-1.58.31-3.92,1.08-5.69.4-.93,3.66-.92,3.76.02l.6,5.67c2.38.37,5.27-.2,7.53.53.79.26.72,2.9-.08,3.19-2.21.8-4.71.41-7.61.7l.24,18.23c.02,1.57,1.68,2.25,2.61,2.57,1.37.48,2.98-.02,4.77-.8Z"/>
+          <path d="M290.15,331.2c1.13.76,1.38,1.96,2.03,2.8-1.28,1.85-3.25,2.35-5.37,2.56-5.04.5-9.04-2.83-9.23-7.92-.22-5.65.31-11.25-.28-16.86-.78-1.09-2.92-.38-4.08-.75-.92-.3-.96-2.92-.2-3.43,1.09-.72,2.89.02,4.07-.57l.72-5.84c.6-.71,3.26-.72,3.69.13l.73,5.88c2.48.33,5.06-.32,7.46.28.68.57.39,2.46.16,3.37-2.49.81-4.9.24-7.8.72l-.12,16.11c-.01,1.89,1.04,3.67,2.34,4.33,1.85.93,3.87.57,5.87-.81Z"/>
+          <path d="M222.47,331.54c1.36-.55,2.92,2.16,1.84,3.18-2.55,2.39-6.47,2.32-9.58.9-2.75-1.25-4.08-4.02-4.14-7.05l-.29-17.18-3.88-.54c-.85-.12-.81-3.21.03-3.33l3.73-.54.52-5.64c.41-.94,3.67-.94,3.76.01l.55,5.68c2.41.61,4.85-.04,7.33.32,1.11.16,1.2,1.7,1.11,2.43-.4,3.23-6.04.16-8.6,1.87,1.18,6.3-2.4,17.69,2.51,20.38,1.76.96,3.21.28,5.12-.49Z"/>
+          <rect x="132.7" y="295.45" width="4.63" height="40.95" transform="translate(-.36 .15) rotate(-.06)"/>
+          <path d="M515.18,311.31c-13.66.27-8.18,16.05-9.6,24.46-.59.97-3.27.95-4.29.16l-.02-28.22c.47-.99,3.27-.97,3.81-.13.63.98-.19,2.52.97,3.38,2.61-2.54,5.69-4.63,9.16-3.65.95.47.59,3.04-.03,4Z"/>
+          <path d="M151.55,334.38c.11.72-.35,1.37-.57,1.65-.26.35-3.05.85-3.88-.23-.31-.4-.59-25.04.07-27.97.69-.94,3.17-.84,4.01.04.09,5.76.54,11.91.34,17.78-.1,2.99-.46,5.62.03,8.72Z"/>
+          <path d="M149.91,301.65c-1.9.92-3.67-1.37-3.74-2.82-.1-2.35,1.79-3.95,4.07-3.33,1.4.38,1.93,1.8,1.98,2.95.06,1.27-.63,2.37-2.32,3.2Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpjNTE5N2Q1MS02NjAxLTQ4ZDctODNlOC0xYjFiMjI0NjVjNTIAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaGXP0SFwpZ2GQnGJSKlv80QAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo3Yzc5MDljMC0yZTlhLTQ1Y2EtOTNlNi0xNWVkODc3NzljNTNscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoVZfA+l08Cx8psIR60pHkPQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggkSg0Y4a/QnuXC752r6Lf/TfK3lj2Wz1uxJH6Nvk05EikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaHf9fsoG2aSdm47kU3f2EZUAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIPZAueK4VkchkxWxWXYL5QL3GYtzqPeNl6j78kc/ghO0ZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GSXkZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmM1MTk3ZDUxLTY2MDEtNDhkNy04M2U4LTFiMWIyMjQ2NWM1Mi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmM5OTMwNGQ0LWMwNWQtNDJmYy1iMDM0LWRmNjgxNzA1NTIzM3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCRKDRjhr9Ce5cLvnavot/9N8reWPZbPW7Ekfo2+TTkSKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggAUxXlHIUoSMDOzrMven5BXULkuvkMhOzL5BVEkSm306iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggUQ+LR0lKF3BW0SdgrZmLuH7Ztt1msMCQlgPdEZz+BS90Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQJea5GK9ugpGVgmtNHra2hfxcac8PW0iN5x+SIXm6bSmtqDNuJtRD08jO4NewXndsklg4ATzTWq9IKj8XROoJFs=</c2pa:manifest></metadata></svg></a>
+  <nav class="nav" aria-label="ראשי">
+    <a href="index.html" aria-current="page">המדף</a>
+    <a href="prince.html">הנסיך הקטן</a>
+    <a href="studio.html">הסטודיו</a>
+    <a href="build.html">אזור הבנייה</a>
+    <a href="lab.html">מעבדת הדמויות</a>
+    <a href="shop.html">חנות</a>
+  </nav>
+  <a class="btn btn-lamp" href="#try">לסרוק דמות</a>
+  <a class="me" href="me.html" aria-label="המדף שלי">נ</a>
+</div></header>
+
+<main>
+<section class="room hero">
+  <div class="wrap hero-text">
+    <span class="eyebrow">Verse · Flip to the Future</span>
+    <h1>כל דמות על המדף <em>היא דלת.</em></h1>
+    <p>בוחרים דמות ונכנסים לעולם של הספר: יצירות של קוראים, משחקים, מפגשים בין דמויות, וחברים שאוהבים את אותו ספר כמוכם.</p>
+    <div class="ctas"><a class="btn btn-lamp" href="prince.html">להיכנס לנסיך הקטן</a><a class="btn btn-ghost" href="#try">מה הדמות יודעת לעשות?</a></div>
+  </div>
+  <div class="shelf" id="shelf"></div>
+  <div class="plank"></div>
+  <p class="hint hand wrap">רחפו מעל דמות. לחצו כדי להיכנס לעמוד ה־Avatar שלה.</p>
+</section>
+
+<section class="band" id="try"><div class="wrap">
+  <span class="eyebrow">מה הדמות שלך יודעת לעשות</span>
+  <h2>בבסיס יש שבב קטן בלי סוללה</h2>
+  <p class="lead" style="margin-top:10px"><b>נסו בעצמכם:</b> גררו את הנסיך הקטן אל אחד המכשירים (או לחצו עליו), ותראו מה קורה. במציאות זה עובד בעזרת NFC: שבב שמתעורר כשמקרבים אליו טלפון או מכשיר.</p>
+  <div class="try">
+    <div>
+      <div class="dragfig"><span class="fig" style="pointer-events:none;width:120px;position:relative;display:block;cursor:default"><span class="plate" style="z-index:2"><span><b>הנסיך הקטן</b><small>סנט־אכזופרי</small></span></span><img id="dragImg" src="img/prince.png" alt="הדמות של הנסיך הקטן. גררו אותה אל מכשיר" draggable="false" style="pointer-events:auto"></span><span class="hand muted">גררו אותי</span></div>
+      <div class="dock" role="group" aria-label="מכשירים">
+        <button class="zone" data-z="phone"><svg viewBox="0 0 48 48"><rect x="14" y="5" width="20" height="38" rx="4"/><path d="M21 38h6"/></svg><b>טלפון</b><span>מקרבים לבסיס</span></button>
+        <button class="zone" data-z="tablet"><svg viewBox="0 0 48 48"><rect x="7" y="9" width="34" height="30" rx="4"/><circle cx="24" cy="35" r="1"/></svg><b>טאבלט</b><span>מניחים עליו</span></button>
+        <button class="zone" data-z="stand"><svg viewBox="0 0 48 48"><ellipse cx="24" cy="34" rx="16" ry="5"/><path d="M8 34v4c0 3 7 5 16 5s16-2 16-5v-4"/><path d="M19 20a7 7 0 0 1 10 0M15 16a12 12 0 0 1 18 0"/></svg><b>עמדת Verse</b><span>הספר נשמע בחדר</span></button>
+        <button class="zone" data-z="friend"><svg viewBox="0 0 48 48"><circle cx="18" cy="17" r="6"/><circle cx="32" cy="19" r="5"/><path d="M7 40c1-7 6-11 11-11s10 4 11 11M27 40c1-5 3-8 6-8s7 3 8 8"/></svg><b>חברה סורקת</b><span>אצלה בבית</span></button>
+      </div>
+    </div>
+    <div class="screen" id="screen" aria-live="polite">
+      <div class="empty"><svg width="70" height="70" viewBox="0 0 48 48" fill="none" stroke="#9a9db5" stroke-width="1.4"><path d="M10 30c4-3 8-3 14 0s10 3 14 0"/><path d="M14 22c3-2 6-2 10 0s7 2 10 0" opacity=".6"/></svg><p class="hand" style="font-size:1.1rem">המסך מחכה לדמות.</p></div>
+    </div>
+  </div>
+
+  <div class="uses grid g4">
+    <div class="use"><b>לסרוק בטלפון</b><p>מקרבים את הטלפון לבסיס, ועמוד ה־Avatar נפתח.</p><small>כל טלפון עם NFC</small></div>
+    <div class="use"><b>להמשיך מאיפה שעצרתם</b><p>מניחים על הטאבלט, והספר נפתח בעמוד שבו עצרתם.</p><small>טאבלט עם NFC, או עמדת Verse</small></div>
+    <div class="use"><b>להשמיע בחדר</b><p>מניחים על העמדה והספר נשמע. מרימים, והקריאה עוצרת.</p><small>עמדת Verse</small></div>
+    <div class="use"><b>לעבור חדר</b><p>ממשיכים מאותו משפט באוזניות.</p><small>החשבון זוכר איפה עצרתם</small></div>
+    <div class="use"><b>Collide</b><p>שתי דמויות יחד פותחות סיפור או משחק שמפגיש ביניהן.</p><small>עמדה עם שני מקומות, או סריקה כפולה</small></div>
+    <div class="use"><b>לשייך יצירה</b><p>מי שסורק את הדמות שלכם רואה גם את ״הפרקים שלי״.</p><small>כפתור ״לשייך לדמות שלי״</small></div>
+    <div class="use"><b>לתת לחברה</b><p>היא סורקת ורואה רק את מה שבחרתם לשתף.</p><small>״מה רואים כשסורקים אותי״</small></div>
+    <div class="use"><b>בלי סוללה, בלי מטען</b><p>השבב מתעורר רק כשמכשיר מתקרב. הדמות היא קודם כל דמות.</p><small>NFC פסיבי</small></div>
+  </div>
+</div></section>
+
+<section class="band" style="background:#12162b"><div class="wrap">
+  <span class="eyebrow">עכשיו ב־Verse</span>
+  <h2>מה קוראים יוצרים השבוע</h2>
+  <p style="margin-top:10px"><span class="demo-note">כל השמות והיצירות כאן הם דוגמה</span></p>
+  <div class="feed">
+    <a class="post" href="prince.html#story"><div class="art" style="background:linear-gradient(135deg,#2f8a4a,#16161a)"><span class="kind">סיפור · Collide</span>הנסיך הקטן פוגש את הארי פוטר</div><div class="meta"><b>פרק 2: שני כוכבים, משקפיים אחד</b><span>כוכבית_15 · 214 ״עוד פרק!״</span></div></a>
+    <a class="post" href="prince.html#game"><div class="art" style="background:linear-gradient(135deg,#1f2a5a,#8a6fd1)"><span class="kind">משחק</span>בין הכוכבים</div><div class="meta"><b>לאסוף את הוורד לפני הבאובבים</b><span>שועל.לילה · 1,302 שחקנים</span></div></a>
+    <a class="post" href="avatar.html#alice"><div class="art" style="background:linear-gradient(135deg,#5d9bd5,#f3eee2);color:#1c2036"><span class="kind">שיר</span>״ומה אם הארנב פשוט איחר בכוונה?״</div><div class="meta"><b>אליס, שנה אחרי</b><span>דף_42 · 88 ״הלב שלי״</span></div></a>
+    <a class="post" href="avatar.html#sherlock"><div class="art" style="background:linear-gradient(135deg,#7a5a3c,#16161a)"><span class="kind">חדר בריחה</span>התיק של בייקר 221ב</div><div class="meta"><b>3 חידות, ארטיפקט אחד</b><span>מילים.בכיס · 640 פתרו</span></div></a>
+  </div>
+  <div class="collide">
+    <div class="pair"><img src="img/prince.png" alt=""><img src="img/harry.png" alt=""></div>
+    <div><b style="font-family:var(--f-head);font-size:1.3rem">Collide החם השבוע: הנסיך הקטן × הארי פוטר</b><p class="muted" style="font-size:.92rem">שלב 2 מתוך 3. עוד 14 פרקים, והדמות החדשה (new Verse) נולדת.</p><div class="lv" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"><i></i></div></div>
+    <a class="btn btn-lamp" href="prince.html#collide">להצטרף ל־Collide</a>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <span class="eyebrow">איך זה עובד</span>
+  <h2>שלושה צעדים, ואתם בפנים</h2>
+  <div class="grid g3 steps" style="margin-top:26px">
+    <div class="card step"><h3>בוחרים דמות</h3><p>מהמדף כאן, או מהחנות. כל דמות מודפסת ונצבעת ביד, על בסיס עץ עם שם הספר.</p></div>
+    <div class="card step"><h3>מניחים או סורקים</h3><p>טלפון, טאבלט או עמדת Verse. הדמות פותחת את הספר ואת הקהילה שלו.</p></div>
+    <div class="card step"><h3>יוצרים ומשתפים</h3><p>סיפור, משחק, סטורי או ציור. כל מה שמתפרסם נכנס לעמוד של הדמות.</p></div>
+  </div>
+</div></section>
+
+<section class="band" style="background:#12162b"><div class="wrap grid g2" style="gap:22px">
+  <div class="card">
+    <span class="eyebrow">מי הדמות הבאה?</span>
+    <h3 class="h-sub">הקהילה מחליטה איזה ספר יקבל דמות</h3>
+    <div class="vote" id="vote"></div>
+    <p class="hand" id="voteMsg" style="color:var(--lamp)"></p>
+  </div>
+  <div class="card">
+    <span class="eyebrow">הדמות הריקה</span>
+    <div class="muse-fig">
+      <div class="blank" aria-hidden="true"><i style="top:0;width:46px;height:46px;border-radius:50%"></i><i style="top:44px;width:56px;height:76px;border-radius:24px 24px 10px 10px"></i><i style="top:116px;width:46px;height:26px;border-radius:6px"></i><i style="bottom:0;width:110px;height:22px;border-radius:50%;background:#c9a679"></i></div>
+      <div style="display:grid;gap:8px"><h3 class="h-sub">לצבוע, לעצב, להמציא</h3><p>דמות לבנה בלי פנים, על בסיס עץ. הסיפור שלכם, הצבעים שלכם. רוצים לעצב דמות חדשה מאפס? יש מעבדה בשביל זה.</p><a class="btn btn-ghost" href="lab.html" style="justify-self:start">למעבדת הדמויות</a></div>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer class="footer"><div class="wrap" style="display:grid;gap:6px">
+  <p>Verse · אב־טיפוס של פרויקט גמר במגמת אמנויות העיצוב, האקתון 24.11.2026. על בסיס פרויקט הגמר של מיכל אלג׳ם, ורעיונות של צילה משנקר.</p>
+  <p>יצירות מעריצים, לא למכירה. הדמויות והספרים שייכים ליוצריהם. כל המשתמשים והיצירות באתר הם דוגמה.</p>
+</div></footer>
+
+<script>
+const FIGS=[
+ {id:'walk',t:'ללכת בדרכך',a:"ג׳וג׳ו מויס",say:'פריז מחכה'},
+ {id:'harry',t:'הארי פוטר',a:'ג׳.ק. רולינג',say:'יש פה קסם?'},
+ {id:'prince',t:'הנסיך הקטן',a:'סנט־אכזופרי',say:'תאלפו אותי?'},
+ {id:'alice',t:'אליס בארץ הפלאות',a:'לואיס קרול',say:'לאן הארנב רץ?'},
+ {id:'sherlock',t:'שרלוק הולמס',a:'ארתור קונן דויל',say:'יש לי חידה'},
+ {id:'anne',t:'אן מהחווה הירוקה',a:'לוסי מוד מונטגומרי',say:'כל כך הרבה מקום לדמיון'},
+ {id:'oz',t:'הקוסם מארץ עוץ',a:'פרנק באום',say:'בדרך הלבנים הצהובות'},
+ {id:'hunger',t:'משחקי הרעב',a:'סוזן קולינס',say:'מי בצוות שלי?'},
+ {id:'demo',t:'דברים מוזרים',a:'הדמוגורגון',say:'משהו לא בסדר בהוקינס',pl:'bottom:0;height:10.5%;left:15%;right:15%'},
+];
+const shelf=document.getElementById('shelf');
+FIGS.forEach(f=>{const a=document.createElement('a');a.className='fig';a.href=f.id==='prince'?'prince.html':'avatar.html#'+f.id;a.setAttribute('aria-label',f.t+', '+f.a);
+  a.innerHTML=`<span class="bubble">${f.say}</span><span class="scan"></span><img src="img/${f.id}.png" alt=""><span class="plate"${f.pl?` style="${f.pl}"`:''}><span><b>${f.t}</b><small>${f.a}</small></span></span>`;shelf.appendChild(a);});
+
+// try-it
+const screen=document.getElementById('screen');
+const R={
+ phone:`<div class="bar"><span>Verse</span><span>סריקה</span></div><span class="pill">נסרק עכשיו</span><h3>היי, הנסיך הקטן חזר.</h3><p class="page">עמוד ה־Avatar נפתח: 1,204 קוראים, 312 יצירות, ו־Collide פתוח עם הארי פוטר.</p><a class="btn btn-lamp" href="prince.html" style="justify-self:start">להיכנס לעמוד</a>`,
+ tablet:`<div class="bar"><span>הנסיך הקטן · פרק 21</span><span>עמוד 42</span></div><p class="say">שמרנו לכם את העמוד. ממשיכים?</p><p class="page">השועל הופיע ביום שהנסיך כבר כמעט ויתר. ״בוא נשחק,״ אמר לו הנסיך. ״אני לא יכול,״ ענה השועל. ״עוד לא אילפו אותי.״ והנסיך, שלא ידע מה זה לאלף, התיישב קרוב יותר. רק קצת. וחיכה.</p><span class="demo-note" style="justify-self:start">טקסט לדוגמה בניסוח שלנו</span>`,
+ stand:`<div class="bar"><span>עמדת Verse · החדר של נועה</span><span>נשמע עכשיו</span></div><h3>הנסיך הקטן</h3><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p class="page">פרק 21, דקה 3:12. מרימים את הדמות מהעמדה, והקריאה עוצרת בדיוק כאן.</p><p class="say">טיק. (הצליל של דמות שמונחת על עץ)</p>`,
+ friend:`<div class="bar"><span>הטלפון של מאיה</span><span>סריקה</span></div><h3>הנסיך הקטן של נועה</h3><p class="page">נועה בחרה לשתף איתך:</p><ul class="page" style="margin:0;padding-inline-start:1.2em"><li>הספר עצמו</li><li>״הפרקים שלי״: Collide עם הארי, פרק 2</li><li>הארטיפקטים שהיא אספה (4 מתוך 6)</li></ul><p class="say">מה שנועה לא בחרה לשתף, נשאר אצלה.</p>`
+};
+const zones=[...document.querySelectorAll('.zone')];
+function show(z){zones.forEach(b=>b.classList.toggle('on',b.dataset.z===z));screen.innerHTML=R[z];}
+zones.forEach(b=>b.addEventListener('click',()=>show(b.dataset.z)));
+const img=document.getElementById('dragImg');let ghost=null;
+img.addEventListener('pointerdown',e=>{e.preventDefault();ghost=img.parentElement.cloneNode(true);ghost.removeAttribute('style');ghost.classList.add('ghostfig');ghost.querySelector('img').removeAttribute('id');document.body.appendChild(ghost);move(e);img.parentElement.style.opacity=.3;img.setPointerCapture(e.pointerId);});
+function zoneAt(x,y){return zones.find(b=>{const r=b.getBoundingClientRect();return x>r.left&&x<r.right&&y>r.top&&y<r.bottom});}
+function move(e){if(!ghost)return;ghost.style.left=(e.clientX-55)+'px';ghost.style.top=(e.clientY-90)+'px';const z=zoneAt(e.clientX,e.clientY);zones.forEach(b=>b.classList.toggle('over',b===z));}
+img.addEventListener('pointermove',move);
+img.addEventListener('pointerup',e=>{if(!ghost)return;const z=zoneAt(e.clientX,e.clientY);ghost.remove();ghost=null;img.parentElement.style.opacity=1;zones.forEach(b=>b.classList.remove('over'));if(z)show(z.dataset.z);});
+img.addEventListener('click',()=>show('phone'));
+
+// vote (per-viewer, demo)
+const OPTS=[['פרסי ג׳קסון',412],['שומרת הערים האבודות',388],['גאווה ודעה קדומה',207],['מטילדה',164]];
+let mine=null;try{mine=localStorage.getItem('verse-vote')}catch(e){}
+const vote=document.getElementById('vote');
+function drawVote(){const tot=OPTS.reduce((s,o)=>s+o[1]+(mine===o[0]?1:0),0);vote.innerHTML='';
+  OPTS.forEach(o=>{const n=o[1]+(mine===o[0]?1:0);const b=document.createElement('button');if(mine===o[0])b.className='mine';
+   b.innerHTML=`<i style="width:${mine?Math.round(n/tot*100):0}%"></i><span>${o[0]}</span><b>${mine?Math.round(n/tot*100)+'%':''}</b>`;
+   b.onclick=()=>{mine=o[0];try{localStorage.setItem('verse-vote',mine)}catch(e){};drawVote();};vote.appendChild(b);});
+  document.getElementById('voteMsg').textContent=mine?`הצבעתם ל${mine}. התוצאות נסגרות ביום חמישי.`:'בחרו ספר אחד.';}
+drawVote();
+</script>
+</body>
+</html>

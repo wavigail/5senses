@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>הנסיך הקטן · Verse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700;900&family=Rubik:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="verse.css">
+<style>
+:root{--acc:var(--c-prince);--acc2:var(--c-prince2)}
+.av-hero{background:radial-gradient(ellipse 50% 80% at 75% 40%,#2f8a4a55,transparent 70%),radial-gradient(ellipse 40% 60% at 20% 20%,#f2c23022,transparent 70%),var(--night);padding-block:36px 0;overflow:hidden}
+.av-hero .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;align-items:end}
+@media (max-width:760px){.av-hero .wrap{grid-template-columns:1fr}.av-fig{width:min(190px,52%)}}
+
+.av-hero .who{display:grid;gap:14px;padding-bottom:36px}
+.stats{display:flex;gap:22px;flex-wrap:wrap}
+.stats div{display:grid}.stats b{font:700 1.4rem var(--f-head);color:var(--acc2)}.stats span{font-size:.82rem;color:var(--muted)}
+.av-fig{position:relative;justify-self:center;width:min(260px,70%);animation:float 5s ease-in-out infinite}
+.av-fig img{width:100%;display:block;filter:drop-shadow(0 24px 20px #000b)}
+@keyframes float{50%{transform:translateY(-10px) rotate(1deg)}}
+.av-fig .plate b{font-size:1rem}.av-fig .plate small{font-size:.78rem}
+.owned{display:inline-flex;align-items:center;gap:8px;background:#2f8a4a33;border:1px solid #2f8a4a;border-radius:999px;padding:4px 12px;font-size:.85rem;color:#bfe8c9}
+.tabs{position:sticky;top:calc(env(safe-area-inset-top,0px) + 63px);z-index:40;background:var(--night);border-bottom:1px solid #ffffff14}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
+.tabs a{white-space:nowrap;text-decoration:none;color:var(--muted);padding:8px 14px;border-radius:999px;font-size:.95rem}
+.tabs a:hover,.tabs a.on{background:var(--night2);color:var(--text)}
+.sec{padding-block:56px;border-bottom:1px solid #ffffff0d;scroll-margin-top:130px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sec-head p{color:var(--muted);max-width:56ch;margin-top:6px}
+
+/* reader */
+.reader{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px}
+@media (max-width:760px){.reader{grid-template-columns:1fr}}
+.toc{display:grid;gap:8px;align-content:start}
+.toc button{text-align:right;background:var(--night2);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:10px 14px;font:inherit;cursor:pointer;display:grid;gap:2px}
+.toc button small{color:var(--muted);font-size:.78rem}
+.toc button.on{border-color:var(--acc2);background:#2f8a4a2a}
+.page{background:var(--paper);color:var(--ink);border-radius:18px;padding:clamp(20px,4vw,44px);box-shadow:0 30px 60px -24px #000c;display:grid;gap:16px}
+.page h3{font:900 clamp(1.4rem,2.4vw,1.7rem)/1.2 var(--f-head);color:var(--ink)}
+.page .by{font-size:.85rem;color:#6a6d85;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.page .body p{font-size:1.08rem;line-height:1.95;color:#2b2f48;margin-bottom:14px;max-width:64ch}
+.page .chip{background:#1c203612;border-radius:999px;padding:2px 10px;font-size:.78rem;color:#41455f}
+.react{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid #1c203618;padding-top:14px}
+.react button{border:1px solid #1c203630;background:#fff8;border-radius:999px;padding:6px 14px;font:500 .9rem var(--f-text);cursor:pointer;color:var(--ink)}
+.react button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.trans{display:flex;height:8px;border-radius:99px;overflow:hidden;background:#ddd}
+.trans i{display:block;height:100%}
+.trans-key{font-size:.78rem;color:#6a6d85;display:flex;gap:14px;flex-wrap:wrap}
+.trans-key span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:5px;vertical-align:-1px;background:var(--c)}
+
+/* game */
+.game{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px}
+@media (max-width:800px){.game{grid-template-columns:1fr}}
+.stage{position:relative;border-radius:20px;overflow:hidden;background:#0c1024;aspect-ratio:4/3;border:1px solid var(--line)}
+.stage canvas{width:100%;height:100%;display:block;touch-action:none}
+.overlay{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:#0c1024cc;padding:20px}
+.overlay[hidden]{display:none}
+.overlay .in{display:grid;gap:12px;justify-items:center;max-width:36ch}
+.overlay h3{font:900 1.6rem var(--f-head)}
+.pad{display:flex;justify-content:space-between;margin-top:10px;gap:10px}
+.pad button{flex:1;background:var(--night2);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:14px;font:600 1.1rem var(--f-text);cursor:pointer;touch-action:manipulation}
+.side{display:grid;gap:12px;align-content:start}
+.hud{display:grid;gap:8px}
+.hud div{display:flex;justify-content:space-between;background:var(--night2);border-radius:12px;padding:8px 12px;font-size:.92rem}
+.board{background:var(--night2);border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:6px;font-size:.88rem}
+.board ol{margin:0;padding-inline-start:1.3em;color:var(--muted)}
+
+/* artifacts */
+.arts{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.arts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.art{background:var(--night2);border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;display:grid;gap:6px;justify-items:center;position:relative}
+.art svg{width:56px;height:56px}
+.art b{font-size:.92rem}.art small{font-size:.75rem;color:var(--muted)}
+.art.lock{opacity:.38;filter:grayscale(1)}
+.art .rar{position:absolute;top:8px;left:8px;font-size:.65rem;padding:1px 7px;border-radius:99px;background:var(--night3)}
+.art.rare{border-color:var(--acc2);box-shadow:0 0 0 1px var(--acc2),0 0 24px -6px var(--acc2)}
+.collide-box{margin-top:26px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;background:linear-gradient(120deg,#2f8a4a26,#16161a 55%,#a3262a26);border:1px solid var(--line);border-radius:22px;padding:22px}
+@media (max-width:800px){.collide-box{grid-template-columns:1fr}}
+.stages{display:grid;gap:10px;margin-top:14px}
+.stg{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;align-items:start;padding:12px;border-radius:14px;background:#0006}
+.stg i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--night3);font-style:normal;font-weight:700}
+.stg.done i{background:var(--acc2);color:var(--lamp-ink)}
+.stg p{font-size:.88rem;color:var(--muted)}
+.nv{border-radius:20px;padding:16px;background:radial-gradient(circle at 50% 30%,#f2c23044,transparent 60%),#0c1024;border:1.5px solid var(--acc2);display:grid;justify-items:center;gap:8px;text-align:center;position:relative}
+.nv .pair{position:relative;height:200px;width:200px}
+.nv .pair img{position:absolute;bottom:-32px;height:200px;clip-path:inset(0 0 16% 0)}
+.nv .pair img:first-child{right:20px}.nv .pair img:last-child{left:10px;opacity:.85;mix-blend-mode:screen}
+.nv.lock .pair{filter:brightness(0) drop-shadow(0 0 1px var(--acc2))}
+.nv b{font:900 1.4rem var(--f-head)}
+
+/* quiz */
+.quiz{max-width:720px;background:var(--night2);border:1px solid var(--line);border-radius:22px;padding:24px;display:grid;gap:14px}
+.quiz .q{font:700 1.3rem var(--f-head)}
+.quiz .opts{display:grid;gap:8px}
+.quiz .opts button{text-align:right;background:var(--night);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:12px 14px;font:inherit;cursor:pointer}
+.quiz .opts button:hover{border-color:var(--acc2)}
+.quiz .prog{height:6px;background:var(--night);border-radius:99px;overflow:hidden}.quiz .prog i{display:block;height:100%;background:var(--acc2);transition:width .3s}
+.result{background:radial-gradient(circle at 80% 0,#f2c23033,transparent 60%),var(--night);border-radius:18px;padding:20px;display:grid;gap:8px}
+.result b{font:900 1.8rem var(--f-head);color:var(--acc2)}
+
+/* letters */
+.letters{columns:4 220px;column-gap:14px}
+.note{break-inside:avoid;margin-bottom:14px;background:#fdf6c9;color:#2b2a1a;padding:16px 16px 12px;border-radius:4px 4px 14px 4px;font:400 1.02rem/1.6 var(--f-text);box-shadow:0 10px 18px -10px #000c;transform:rotate(var(--r,-1deg))}
+.note small{display:block;font:500 .75rem var(--f-text);color:#7a7550;margin-top:8px}
+.note.g{background:#dff1d9}.note.b{background:#dfe8fb}.note.p{background:#f8e0e6}
+.write{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.write input{flex:1 1 260px;min-width:0;background:var(--night2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--text);font:1rem var(--f-text)}
+
+/* creations grid + community */
+.crs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.crs{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:520px){.crs{grid-template-columns:1fr}}
+.cr{background:var(--night2);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid}
+.cr .cv{aspect-ratio:16/9;display:grid;place-items:center;font:700 1.15rem var(--f-text);text-align:center;padding:12px;color:#fff;position:relative}
+.cr .cv .k{position:absolute;top:8px;right:8px;background:#0008;font:500 .7rem var(--f-text);padding:2px 8px;border-radius:99px}
+.cr .cv.spoil{filter:blur(0)}
+.cr .spoiler{position:absolute;inset:0;backdrop-filter:blur(14px);background:#0c1024aa;display:grid;place-items:center;font:600 .9rem var(--f-text);cursor:pointer;border:0;color:#fff;width:100%}
+.cr .m{padding:12px 14px;display:grid;gap:2px}.cr .m span{font-size:.8rem;color:var(--muted)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{background:var(--night2);border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:5px 14px;font:inherit;font-size:.88rem;cursor:pointer}
+.filters button.on{color:var(--text);border-color:var(--acc2)}
+.comm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:800px){.comm{grid-template-columns:1fr}}
+.guard{display:flex;gap:10px;align-items:center}
+.av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#1c1406}
+.challenge{background:linear-gradient(135deg,#f2c23033,#2f8a4a22);border:1px solid var(--acc2)}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,120px);background:var(--paper);color:var(--ink);padding:12px 20px;border-radius:14px;font:600 1rem var(--f-text);box-shadow:0 18px 40px -10px #000c;transition:transform .35s;z-index:90;visibility:hidden;max-width:calc(100% - 32px)}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Verse, לעמוד הבית"><svg role="img" aria-label="Verse" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 639.63 346.85" xmlns:c2pa="http://c2pa.org/manifest">
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="ns0aLl.tif">
+      <g>
+        <g>
+          <g>
+            <path d="M590.53,253.51c19.09,2.14,33.78-6.17,43.19-22.57,2.26.33,4.13,1.71,5.92,3.44-9.59,21.34-25.96,35.71-49.97,37.45-17.99,1.3-37.06-5.23-48.95-19.11-4.17-4.87-7.58-9.89-10.18-15.78-5.21-11.82-7.51-24.43-7.01-37.34.81-20.85,6.99-39.36,22.37-53.79,6.87-6.45,14.92-10.5,23.84-13.06,5.79-1.66,11.27-2.13,17.33-2.09,8.9.07,17.6,1.21,25.38,5.41s14.66,10.19,19.01,18.34c4.27,7.98,6.65,16.39,7.47,25.42.35,3.89,1.18,7.57.01,11.31l-87.44.03c-.09,3.38-.34,6.51.05,9.65l1.05,8.45c2.54,20.32,15.68,41.76,37.93,44.25ZM608.18,182.15c1.3,0,2.18-.84,2.2-1.77.35-15.55-3.84-39.76-23.31-41.1-6.71-.46-13.7.92-18.9,5.22-8.3,6.87-13.11,16.79-14.91,27.26-.61,3.54-1.42,6.65-.92,10.42l55.84-.04Z"/>
+            <path d="M232.58,249.57c13.03,6.79,30.21,5.47,42.48-3.01,5.88-4.06,10.01-9.58,13.81-15.65,2.33.53,4.25,1.71,6.06,3.44-2.88,5.72-5.86,10.95-9.7,15.92-9.84,12.77-24.2,20.39-40.26,21.54-19.57,1.4-38.95-5.81-51.15-21.45-15.01-19.24-18-45.32-12.95-68.66,2.57-11.86,7.79-22.36,15.83-31.51,11.8-13.42,29.21-20.34,47.03-19.51,3.94.18,7.25.13,10.98.94,11.32,2.47,21.31,8.14,28.39,17.41,8.27,11.21,12.6,28.64,10.82,42.1l-87.14.03c-.76,4.05.27,7.77.2,11.63-.05,2.59.47,4.69.87,7.16,2.53,15.69,10.13,32.01,24.72,39.61ZM265.37,182.13c.18-5.2.46-9.04-.41-13.26-1.28-12.03-6.7-26.44-20.15-29.14-7.95-1.59-16.64.32-22.74,5.9-8.77,8.02-13.1,19.26-14.25,30.91-.19,1.91-1.47,3.9-.15,5.62l57.71-.03Z"/>
+            <path d="M417.17,263.04c-2.02-.8-2.66-1.91-2.69-3.79l-.32-24.26-.21-11.19c2.25-.35,4.46-.29,6.84-.14,3.98,15.82,11.45,31.82,27.55,37.99,9.86,3.77,24.67,2.25,31.86-5.74,7.8-8.68,8.13-23.63-1.62-32.1-3.45-3-7.31-5.2-11.57-6.96l-12.73-5.25c-16.63-6.85-35.52-14.3-38.9-34.79-1.73-10.51.43-22.79,7.77-30.89,9.6-10.58,22.43-14.89,36.5-15.25,11.67-.3,22.78,1.2,33.7,5.12,2.54.91,5.11,1.37,7.33,3.1l.48,12.76.47,20.88c-2.48.28-4.28.53-6.43.39-4.33-17.82-14.42-34.73-35.05-33.8-5.93.27-11.65,1.53-16.25,5.57-8.29,7.29-8.46,19.84-1.1,28.14,3.4,3.83,7.76,6.42,12.58,8.44l26.04,10.94c12.83,5.39,24.8,14.14,27.54,28.64,1.65,8.72,1.12,17.77-2.37,26.06-9.11,21.67-35.71,27.08-56.93,24.5-11.26-1.37-21.87-4.17-32.49-8.38Z"/>
+            <path d="M306.12,263.05c6.74-.38,13.91-3.33,15.61-10.42.72-2.99,1.24-5.7,1.24-8.93l.07-74.25c0-4.37-.02-8.59-1.83-12.43-2.4-5.11-9.69-7.14-14.94-8.18-.27-1.72-.05-3.38.38-4.81l36.76-11.76c1.99-.64,4.2-1.8,5.94-.14,1.6,8.83-.6,19.29,1.12,28.46,7.48-11.64,10.22-19.06,21.69-26.09,8.86-5.6,25.5-6.25,30.95,4.84,2.76,5.63,1.92,12-2.01,17.1-4.72,6.11-13.68,6.23-19.36.86-2.45-2.32-5.32-4.87-9.03-5.07-4.14-.23-8.12,2.33-10.77,5.4-5.8,6.71-8.55,14.95-9.93,23.62-.48,3.01-.89,5.93-.88,9.14l.09,55.17c.01,9.22,5.57,15.61,14.73,16.68l6.97.82c.39,1.78.39,3.56-.13,5.54l-62.9.08c-1.18,0-3.01.84-3.55-.35-.66-1.44-.05-3.26-.22-5.28Z"/>
+          </g>
+          <g>
+            <path d="M.48,61.36l81.48.02c.33,2.11.48,4.09-.12,6.18-4.94.23-9.91.97-14.16,3.62-8.12,5.06-4.79,18.03-1.97,25.42l7.35,19.21,10.61,26.8,14.48,36.43,18.1,45.7c3.81-11.71,6.04-22.25,10.4-32.78,3.26-10.67,7.7-20.35,12.51-30.4,6.75-14.41,19.19-33.29,30.05-44.75,4.12-4.35,7.96-8.49,12.48-12.48,14.25-12.59,29.73-22.74,47.08-30.76s36.08-14.61,55.17-18.58l14.49-3.01c3.67-.76,6.28-1.16,9.78-1.98-.5,2.1-1.8,3.07-2.95,4.67l-30.19,42.11-12.83,18.52,6.3-23.49c-20.46,2.47-40.26,8.52-58.27,18.45-14.5,8-26.57,18.31-37.63,30.49-8.13,8.96-14.78,18.61-20.87,29.11-11.73,20.25-22.27,46.74-29.36,69.09l-10.17,32.02c-3.36.18-6.39.16-9.61-.11-1.24-.1-1.95-1.2-2.42-2.37l-20.14-50.19L28.12,88.65c-2.41-6-6.06-10.93-10.71-15.05s-10.66-5.55-16.79-6.14c-.89-1.93-.72-4.01-.14-6.1Z"/>
+            <path d="M139.06,147.2c-4.54,8.88-8.6,17.49-12.13,26.84-2.25,5.97-4.54,11.57-6.16,17.73-.28,1.05-.93,2.13-1.52,3.17-.15-2.7.78-5.04,1.36-7.69,5.13-23.66,14.4-50.94,27.04-71.61,4.08-6.67,8.09-12.92,12.84-19.12,13.88-18.1,30.55-33.96,49.54-46.72,19.68-13.6,41.43-23.87,64.56-32.29l-8.09,30.86c-.69,2.63-1.5,4.52-4.55,4.73-3.91,1.21-7.94,2.37-11.93,3.93l3.25-15.53c-14.12,5.42-26.27,12.31-38.42,19.95-9.85,6.2-18.43,13.19-27.06,21-19.95,18.04-36.46,40.79-48.71,64.76Z"/>
+            <path d="M172.54,54.24c-22.15,25.36-36.76,54.47-46.35,86.67-3.7,12.41-6.53,24.41-8.74,37.14-.64,3.71-.9,7.2-2.13,11.01-1.13-2.95.06-5.74.13-8.69.21-8.83,1.14-17.05,2.32-25.87C126.8,87.32,160.92,36.72,217.15,0l1.69,24.91c.24,3.47.62,6.73.6,10.21-3.85,2.27-7.38,4.46-10.84,7.07-2.16,1.62-1.18-3.7-1.78-6.84-.68-3.54-.64-6.95-1.08-10.64-2.37.46-3.42,1.79-4.88,2.85-8.13,5.93-21.61,19-28.31,26.68Z"/>
+          </g>
+        </g>
+        <g>
+          <path d="M189.07,318.92c1.06,7.2-2.1,14.52-8.44,16.79-5.51,1.97-10.44.75-14.94-3.31-1.37,4.9.17,9.16-.8,13.63-.24,1.08-3.21,1.06-4.12.11l.08-38.78c1.38-.46,3.48-.66,4.09.49.56,1.05-.36,2.42.65,3.58,2.58-3.18,5.77-4.54,9.8-4.59,7.12-.08,12.65,5.1,13.67,12.07ZM180.04,331.07c6.35-3.74,5.96-14.39.75-18.21-2.28-1.67-5.12-2.05-8.05-1.49-5.19.99-7.9,6.06-7.42,11.13.35,3.73,1.86,6.77,4.79,8.41,3.11,1.74,6.56,2.15,9.94.16Z"/>
+          <path d="M526.73,329.82c4.74,4.19,11.25,2.86,15.43-.99,1.42-.14,2.97,2.71,1.91,3.78-4.94,4.93-12.37,5.17-18.24,1.76-4.6-2.67-6.86-7.35-6.99-12.69s2.55-10.16,6.84-12.78c4.68-2.86,10.76-2.73,15.15.56s5.98,8.22,5.39,13.49l-15.2.4c-1.93.05-5.26-1.23-6.75.51-1.35,1.59.97,4.65,2.45,5.96ZM541.91,319.5c-.66-5.37-3.99-8.21-8.36-8.38-5.11-.68-9.52,2.88-10.09,8.28,6.34.35,12.27.63,18.45.1Z"/>
+          <path d="M319.52,335.81c-.91-5.81-.24-11.43-.42-17.11-.15-4.59-3.4-7.53-7.84-7.59-4.91-.07-8.93,3.31-8.96,8.39l-.12,16.2c-.37,1.05-3.33,1.1-4.22.23l-.06-40.07c1.35-.67,2.68-.5,4.14-.19l.47,14.93c4.7-3.88,10.72-4.91,15.67-2.18,3.63,2.01,5.17,6.21,5.37,10.24.28,5.75,0,11.11-.17,16.92-.03,1.04-3.68,1.33-3.85.23Z"/>
+          <path d="M335.32,323.15c-1.31,0-.1,7.48,7.77,9.1,4.15.86,7.45-.87,10.45-3.77l2.63,3.43c-3.99,4.03-8.94,5.54-14.74,4.32-7.95-1.67-13.38-10.59-10.52-19.55,1.28-4.01,4.53-7.52,7.91-8.78,4.54-1.69,9.35-1.35,12.88,1.27,4.5,3.34,6.59,8.6,5.67,13.87l-22.05.11ZM353.04,319.67c-.28-5.67-4.31-8.78-9.29-8.63-7.55.23-9.19,7.01-8.6,7.89.96,1.43,14.49.67,17.89.74Z"/>
+          <path d="M123.34,319.85l-13.48.43c-1.11.04-3.9-1-4.35.5l-.78,14.92c-.06,1.15-3.8,1.09-4.29-.01l-.05-9.5-.02-16c0-3.69.28-7.18-.1-10.85-.05-.46.18-1.01.33-1.23.2-.29.86-.63,1.44-.56,2.83.36,5.49.02,8.35.05l15.41.16c.54,1.4.45,2.66.15,4.1l-20.74.18c-.11,4.71-.37,9.04.16,13.6l17.81.28c.87.68,1.01,3.09.14,3.92Z"/>
+          <path d="M402,319.67c-2.99,1.53-13.75-.42-18.47.41l-.3,15.54c-.02,1.1-3.66,1.27-3.99.21-.45-2.79-.32-6.2-.33-9.15l-.11-26.99c0-.65.19-1.32.46-1.69.21-.29.82-.49,1.48-.47l23.37.43c1.02.02,1.05,3.01.31,3.76l-20.86.35-.12,13.55,18.58.3c.57.64.89,3.28,0,3.74Z"/>
+          <path d="M256.37,321.7c0,8.09-6.56,14.65-14.66,14.65s-14.66-6.56-14.66-14.65,6.56-14.65,14.66-14.65,14.66,6.56,14.66,14.65ZM247.75,330.35c3.49-2.57,3.92-6.97,3.52-10.79-.53-5.03-4.04-8.22-8.97-8.5-4.98-.27-8.78,2.57-10.04,7.31-1.54,5.79,1.28,11.72,6.04,13.44,3.12,1.13,6.61.63,9.46-1.46Z"/>
+          <path d="M435.99,324.41c.04,3.93.1,7.47-.29,11.1-.14,1.3-3.73,1.24-3.94.19l-.66-3.28c-3.29,3.89-8.14,4.95-12.94,3.58-11.51-3.29-7.23-19.11-8.15-28.43,1.58-.7,3.05-.76,4.74-.23l.12,17.31c.02,3.45,1.95,6.31,5.24,7.25,2.61.75,5.03.52,7.54-.93,1.79-1.03,3.69-3.59,3.72-6.3l.19-17.09c1.32-.67,2.63-.76,4.23-.24l.19,17.05Z"/>
+          <path d="M491.8,307.54l.1,27.12c0,.56-.04,1.01-.25,1.32-.32.48-2.79.92-3.88-.13-.6-.58.04-1.28-.54-2.98-5.09,4.4-11.58,5.01-17.1,1.14-2.78-1.95-4.1-5.49-4.1-8.99v-17.47c1.12-.89,3.03-.62,4.25-.04l.26,17.67c.02,1.3.6,3.09,1.43,4.15,2.91,3.69,8.85,4.25,12.29.97,2.01-1.92,3.1-4.87,3.14-7.6l.22-15.16c.76-.85,2.71-.54,4.19,0Z"/>
+          <path d="M458.34,331.46c.92-.4,2.37,2.44,1.8,3.27-3.87,3.2-10.29,2.35-12.87-2.01-.9-1.52-1.13-3.51-1.15-5.21l-.14-16.05c-1.43-.66-2.88,0-4.14-.67-.76-.4-.77-2.8-.04-3.25,1.06-.65,2.57.03,3.64-.5,1.38-1.58.31-3.92,1.08-5.69.4-.93,3.66-.92,3.76.02l.6,5.67c2.38.37,5.27-.2,7.53.53.79.26.72,2.9-.08,3.19-2.21.8-4.71.41-7.61.7l.24,18.23c.02,1.57,1.68,2.25,2.61,2.57,1.37.48,2.98-.02,4.77-.8Z"/>
+          <path d="M290.15,331.2c1.13.76,1.38,1.96,2.03,2.8-1.28,1.85-3.25,2.35-5.37,2.56-5.04.5-9.04-2.83-9.23-7.92-.22-5.65.31-11.25-.28-16.86-.78-1.09-2.92-.38-4.08-.75-.92-.3-.96-2.92-.2-3.43,1.09-.72,2.89.02,4.07-.57l.72-5.84c.6-.71,3.26-.72,3.69.13l.73,5.88c2.48.33,5.06-.32,7.46.28.68.57.39,2.46.16,3.37-2.49.81-4.9.24-7.8.72l-.12,16.11c-.01,1.89,1.04,3.67,2.34,4.33,1.85.93,3.87.57,5.87-.81Z"/>
+          <path d="M222.47,331.54c1.36-.55,2.92,2.16,1.84,3.18-2.55,2.39-6.47,2.32-9.58.9-2.75-1.25-4.08-4.02-4.14-7.05l-.29-17.18-3.88-.54c-.85-.12-.81-3.21.03-3.33l3.73-.54.52-5.64c.41-.94,3.67-.94,3.76.01l.55,5.68c2.41.61,4.85-.04,7.33.32,1.11.16,1.2,1.7,1.11,2.43-.4,3.23-6.04.16-8.6,1.87,1.18,6.3-2.4,17.69,2.51,20.38,1.76.96,3.21.28,5.12-.49Z"/>
+          <rect x="132.7" y="295.45" width="4.63" height="40.95" transform="translate(-.36 .15) rotate(-.06)"/>
+          <path d="M515.18,311.31c-13.66.27-8.18,16.05-9.6,24.46-.59.97-3.27.95-4.29.16l-.02-28.22c.47-.99,3.27-.97,3.81-.13.63.98-.19,2.52.97,3.38,2.61-2.54,5.69-4.63,9.16-3.65.95.47.59,3.04-.03,4Z"/>
+          <path d="M151.55,334.38c.11.72-.35,1.37-.57,1.65-.26.35-3.05.85-3.88-.23-.31-.4-.59-25.04.07-27.97.69-.94,3.17-.84,4.01.04.09,5.76.54,11.91.34,17.78-.1,2.99-.46,5.62.03,8.72Z"/>
+          <path d="M149.91,301.65c-1.9.92-3.67-1.37-3.74-2.82-.1-2.35,1.79-3.95,4.07-3.33,1.4.38,1.93,1.8,1.98,2.95.06,1.27-.63,2.37-2.32,3.2Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpjNTE5N2Q1MS02NjAxLTQ4ZDctODNlOC0xYjFiMjI0NjVjNTIAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaGXP0SFwpZ2GQnGJSKlv80QAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo3Yzc5MDljMC0yZTlhLTQ1Y2EtOTNlNi0xNWVkODc3NzljNTNscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoVZfA+l08Cx8psIR60pHkPQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggkSg0Y4a/QnuXC752r6Lf/TfK3lj2Wz1uxJH6Nvk05EikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaHf9fsoG2aSdm47kU3f2EZUAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIPZAueK4VkchkxWxWXYL5QL3GYtzqPeNl6j78kc/ghO0ZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GSXkZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmM1MTk3ZDUxLTY2MDEtNDhkNy04M2U4LTFiMWIyMjQ2NWM1Mi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmM5OTMwNGQ0LWMwNWQtNDJmYy1iMDM0LWRmNjgxNzA1NTIzM3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCRKDRjhr9Ce5cLvnavot/9N8reWPZbPW7Ekfo2+TTkSKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggAUxXlHIUoSMDOzrMven5BXULkuvkMhOzL5BVEkSm306iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggUQ+LR0lKF3BW0SdgrZmLuH7Ztt1msMCQlgPdEZz+BS90Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQJea5GK9ugpGVgmtNHra2hfxcac8PW0iN5x+SIXm6bSmtqDNuJtRD08jO4NewXndsklg4ATzTWq9IKj8XROoJFs=</c2pa:manifest></metadata></svg></a>
+  <nav class="nav" aria-label="ראשי">
+    <a href="index.html">המדף</a>
+    <a href="prince.html" aria-current="page">הנסיך הקטן</a>
+    <a href="studio.html">הסטודיו</a>
+    <a href="build.html">אזור הבנייה</a>
+    <a href="lab.html">מעבדת הדמויות</a>
+    <a href="shop.html">חנות</a>
+  </nav>
+  <a class="btn btn-lamp" href="studio.html#write">ליצור</a>
+  <a class="me" href="me.html" aria-label="המדף שלי">נ</a>
+</div></header>
+
+<main>
+<section class="av-hero"><div class="wrap">
+  <div class="who">
+    <span class="eyebrow">Verse Avatar · אנטואן דה סנט־אכזופרי</span>
+    <h1>הנסיך הקטן</h1>
+    <p class="lead" style="max-width:48ch">ילד מכוכב קטן, ורד אחד, ושועל שלימד אותו מה זה להיות חברים. כאן קוראים כותבים לו המשך, בונים לו משחקים, ומפגישים אותו עם דמויות מספרים אחרים.</p>
+    <div class="stats"><div><b>1,204</b><span>קוראים כאן</span></div><div><b>312</b><span>יצירות</span></div><div><b>3</b><span>Collide פתוחים</span></div><div><b>6</b><span>ארטיפקטים</span></div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn btn-lamp" id="join">להצטרף ל־Avatar</button><span class="owned" id="owned" hidden>✓ יש לי אותו על המדף</span><button class="btn btn-ghost" id="scan">סריקה לדוגמה</button></div>
+    <span class="demo-note">עמוד לדוגמה. השמות והמספרים מומצאים</span>
+  </div>
+  <div class="av-fig"><img src="img/prince.png" alt="הדמות של הנסיך הקטן על בסיס עץ"><span class="plate"><span><b>הנסיך הקטן</b><small>סנט־אכזופרי</small></span></span></div>
+</div></section>
+
+<nav class="tabs" aria-label="בעמוד"><div class="wrap" id="tabs">
+  <a href="#story">סיפור</a><a href="#game">משחק</a><a href="#artifacts">ארטיפקטים ו־Collide</a><a href="#works">יצירות</a><a href="#quiz">מאיזה כוכב באת?</a><a href="#letters">מכתבים לנסיך</a><a href="#community">הקהילה</a>
+</div></nav>
+
+<!-- STORY -->
+<section class="sec" id="story"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">סיפור · Collide</span><h2>הנסיך הקטן פוגש את הארי פוטר</h2><p>סיפור מעריצים בשלושה פרקים. מתפרסם גם בעמוד של הארי פוטר.</p></div><a class="btn btn-ghost" href="studio.html#write">לכתוב את פרק 4</a></div>
+  <div class="reader">
+    <div class="toc" id="toc"></div>
+    <article class="page" id="page"></article>
+  </div>
+</div></section>
+
+<!-- GAME -->
+<section class="sec" id="game"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">משחק · נבנה ביוצר המשחקים</span><h2>בין הכוכבים</h2><p>הולכים מסביב לכוכב, אוספים ארטיפקטים ועוקרים באובבים לפני שהם גדלים. 60 שניות. כל ארטיפקט שנאסף נכנס לתיק.</p></div><span class="muted" style="font-size:.88rem">יצרה: שועל.לילה · 1,302 שחקנים</span></div>
+  <div class="game">
+    <div>
+      <div class="stage"><canvas id="cv" width="800" height="600" aria-label="משחק בין הכוכבים"></canvas>
+        <div class="overlay" id="ov"><div class="in"><h3>בין הכוכבים</h3><p class="muted">חצים ימינה ושמאלה, או הכפתורים למטה. נוגעים בנבט של באובב כדי לעקור אותו. נוגעים בארטיפקט כדי לאסוף.</p><button class="btn btn-lamp" id="play">לשחק</button></div></div>
+      </div>
+      <div class="pad"><button id="bR" aria-label="ימינה">→</button><button id="bL" aria-label="שמאלה">←</button></div>
+    </div>
+    <div class="side">
+      <div class="hud"><div><span>זמן</span><b id="hT">60</b></div><div><span>באובבים שנעקרו</span><b id="hB">0</b></div><div><span>חיים</span><b id="hH">♥♥♥</b></div><div><span>ארטיפקטים</span><b id="hA">0/6</b></div></div>
+      <div class="board"><b>טבלת השבוע</b><ol><li>מדליקת_פנסים · 41</li><li>כוכבית_15 · 37</li><li>B612 · 33</li><li id="myScore" hidden></li></ol></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ARTIFACTS -->
+<section class="sec" id="artifacts"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">התיק שלי</span><h2>ארטיפקטים</h2><p>שישה חפצים מהספר. אוספים אותם במשחקים, באתגרים ובכתיבה. הארטיפקט הנדיר נפתח רק ב־Collide.</p></div><button class="btn btn-ghost" id="resetArts">לאפס את התיק</button></div>
+  <div class="arts" id="arts"></div>
+  <div class="collide-box">
+    <div>
+      <span class="eyebrow">Collide · הנסיך הקטן × הארי פוטר</span>
+      <h3 class="h-sub">ככל שהמפגש מעמיק, נולדים חפצים חדשים</h3>
+      <div class="stages" id="stages"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><a class="btn btn-lamp" href="studio.html#write">לכתוב פרק ב־Collide</a><button class="btn btn-ghost" id="addCh">פרסמתי פרק (הדגמה)</button></div>
+    </div>
+    <div class="nv lock" id="nv"><div class="pair"><img src="img/prince.png" alt=""><img src="img/harry.png" alt=""></div><b id="nvName">new Verse נעול</b><p class="muted" id="nvText" style="font-size:.88rem">מגיעים לשלב 3 כדי לגלות מי נולד מהמפגש.</p></div>
+  </div>
+</div></section>
+
+<!-- WORKS -->
+<section class="sec" id="works"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">יצירות</span><h2>מה קוראים יצרו כאן</h2></div><div class="filters" id="filters"><button class="on" data-f="all">הכול</button><button data-f="סיפור">סיפורים</button><button data-f="ציור">ציורים</button><button data-f="משחק">משחקים</button><button data-f="פסקול">פסקול</button><button data-f="סטורי">סטוריז</button></div></div>
+  <div class="crs" id="crs"></div>
+</div></section>
+
+<!-- QUIZ -->
+<section class="sec" id="quiz"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">שאלון · 6 שאלות</span><h2>מאיזה כוכב באת?</h2><p>בסוף מקבלים כוכב, וכרטיס שאפשר להפוך לסטורי.</p></div></div>
+  <div class="quiz" id="qz"></div>
+</div></section>
+
+<!-- LETTERS -->
+<section class="sec" id="letters"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">מכתבים לנסיך</span><h2>מה הייתם אומרים לו?</h2><p>פתק אחד, עד 140 תווים. בלי שמות אמיתיים ובלי פרטים אישיים.</p></div></div>
+  <form class="write" id="lf"><input id="li" maxlength="140" placeholder="נסיך יקר..." aria-label="פתק לנסיך"><button class="btn btn-lamp" type="submit">להדביק על הקיר</button></form>
+  <div class="letters" id="lw"></div>
+</div></section>
+
+<!-- COMMUNITY -->
+<section class="sec" id="community"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">הקהילה</span><h2>מי שומר על המקום הזה</h2></div></div>
+  <div class="comm">
+    <div class="card challenge"><span class="eyebrow">אתגר השבוע</span><h3>100 מילים, פגישה אחת</h3><p style="color:var(--text)">כתבו את הפגישה של הנסיך עם דמות מהספר שאתם קוראים עכשיו. בדיוק 100 מילים.</p><p>נשארו 3 ימים · 47 השתתפו</p><a class="btn btn-lamp" href="studio.html#write" style="justify-self:start">להשתתף</a></div>
+    <div class="card"><span class="eyebrow">שומרי ה־Avatar</span><div class="guard"><span class="av" style="background:#f2c230">כ</span><span>כוכבית_15</span></div><div class="guard"><span class="av" style="background:#7fd39a">ש</span><span>שועל.לילה</span></div><div class="guard"><span class="av" style="background:#9dbbff">ד</span><span>דף_42</span></div><p>בני נוער מהקהילה. מאשרים יצירות חדשות תוך יום, ובוחרים את אתגר השבוע. עוזר השומרים מסמן פרטים אישיים וספוילרים, והם מחליטים.</p></div>
+    <div class="card"><span class="eyebrow">חוקי ה־Avatar</span><ul style="margin:0;padding-inline-start:1.1em;color:var(--muted);display:grid;gap:6px;font-size:.95rem"><li>ספוילר? מסמנים לפני שמפרסמים.</li><li>מגיבים על היצירה, לא על היוצר.</li><li>בלי שמות אמיתיים, בית ספר או טלפון.</li><li>נעזרתם במוזה? היא תופיע בפס השקיפות, וזה בסדר.</li><li>רואים משהו פוגע? ״לדווח״, ושומר יבדוק.</li></ul></div>
+  </div>
+</div></section>
+</main>
+
+<footer class="footer"><div class="wrap" style="display:grid;gap:6px">
+  <p>יצירות מעריצים, לא למכירה. הנסיך הקטן מאת אנטואן דה סנט־אכזופרי. הארי פוטר שייך לג׳.ק. רולינג ולבעלי הזכויות. כל הטקסטים כאן בניסוח שלנו.</p>
+  <p>Verse · אב־טיפוס של פרויקט גמר, מגמת אמנויות העיצוב. כל המשתמשים והיצירות הם דוגמה.</p>
+</div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{const v=localStorage.getItem('verse-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('verse-'+k,JSON.stringify(v))}catch(e){}}};
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),2600);}
+
+/* join / scan */
+let joined=store.get('joined-prince',false),owned=store.get('owned-prince',false);
+function drawJoin(){$('#join').textContent=joined?'✓ הצטרפת':'להצטרף ל־Avatar';$('#owned').hidden=!owned;}
+$('#join').onclick=()=>{joined=!joined;store.set('joined-prince',joined);drawJoin();if(joined)toast('ברוכים הבאים לכוכב. יש פה עוד 1,204 קוראים.');};
+$('#scan').onclick=()=>{owned=true;store.set('owned-prince',true);drawJoin();toast('היי, הנסיך הקטן חזר. קיבלתם את התג ״על המדף שלי״.');};
+drawJoin();
+
+/* STORY */
+const CH=[
+ {t:'פרק 1: נחיתה על כוכב קטן',s:'4 דקות קריאה',p:[
+ 'הארי לא תכנן ליפול מהמטאטא. הוא תכנן לתפוס את הכדור, לנצח, ולחזור לחדר המשותף לפני שרון יגמור את כל העוגיות. אבל אז באה רוח, ואחריה עוד רוח, ואחריה שקט מוזר מאוד, ופתאום הוא שכב על הגב על כוכב שהיה קטן יותר מהמגרש. הרבה יותר קטן.',
+ 'מעליו עמד ילד עם שיער בצבע של חיטה וצעיף צהוב ארוך. הילד החזיק משפך קטן והסתכל עליו בלי שום פחד, כמו שמסתכלים על עננה מעניינת.',
+ '״נפלת מאוד יפה,״ אמר הילד. ״רוב האנשים נופלים מהר מדי.״',
+ '״אני לא רוב האנשים,״ אמר הארי, ומייד הצטער. זה נשמע כמו משהו שמאלפוי היה אומר.',
+ 'הילד הניח את המשפך. ״אז מי אתה?״',
+ 'הארי חשב על זה. שאלה פשוטה, ובכל זאת אף אחד לא שאל אותו אותה ככה, בלי לחכות שיגיד את השם המפורסם שלו. ״אני הארי,״ אמר לבסוף. ״סתם הארי.״',
+ '״ואני סתם נסיך,״ אמר הילד, וחייך כאילו זה הדבר הכי רגיל בעולם. ״אתה יודע לצייר כבשה?״']},
+ {t:'פרק 2: שני כוכבים, משקפיים אחד',s:'5 דקות קריאה',p:[
+ 'הארי ניסה לצייר כבשה. הוא באמת ניסה. אחר כך ניסה להוציא כבשה מהשרביט, ויצאה ממנו בועה ורודה שהתפוצצה על האף של הנסיך.',
+ '״זו כבשה עצובה,״ קבע הנסיך. ״היא נראית כאילו היא מתגעגעת למישהו.״',
+ 'הארי שתק. אחר כך הוריד את המשקפיים ונתן לנסיך לנסות אותן. הנסיך הרכיב אותן, הסתובב לאט, והסתכל על השמיים.',
+ '״הכוכבים מטושטשים,״ אמר בהפתעה. ״כולם נראים כמו אור אחד גדול. ככה אתה רואה את העולם?״',
+ '״לא, ככה אני רואה בלעדיהן,״ צחק הארי. ״המשקפיים עוזרות לי לראות כל דבר לחוד.״',
+ 'הנסיך החזיר לו אותן בזהירות. ״אצלי זה הפוך,״ אמר. ״לפעמים אני צריך להפסיק לראות כל דבר לחוד, כדי להבין מה באמת חשוב לי.״',
+ 'הארי חשב על רון והרמיוני, על ארוחות חג המולד, על האור במטבח של משפחת וויזלי. ופתאום הבין שהוא יודע בדיוק על מה הנסיך מדבר.']},
+ {t:'פרק 3: מה שנשאר בכיס',s:'4 דקות קריאה',p:[
+ 'בשקיעה הארבעים ושלוש (הנסיך הזיז את הכיסא קצת, ועוד קצת), הארי הרגיש את המשיכה. מישהו קרא לו הביתה.',
+ '״אתה הולך,״ אמר הנסיך. זו לא הייתה שאלה.',
+ 'הארי חיפש בכיסים משהו לתת לו. היה שם רק ענף קטן ומעוקם שהנסיך עקר בבוקר מנבט של באובב. הארי סובב אותו בין האצבעות ולחש מילה. הענף נדלק באור ירוק וחם.',
+ '״שרביט,״ אמר. ״לא חזק במיוחד. אבל הוא יודע להאיר בלילה, כשהוורד מפחדת מהחושך.״',
+ 'הנסיך הוריד את הצעיף הצהוב וכרך אותו סביב הצוואר של הארי. ״והוא,״ אמר, ״יודע לחמם מישהו שמתגעגע.״',
+ 'כשהארי פקח את העיניים, הוא שכב על הדשא ליד המגרש, ורון רכן מעליו. ״חבר, נפלת מגובה ענק, ו... מאיפה הבאת צעיף צהוב?״',
+ 'הארי לא ענה. הוא הסתכל למעלה, וחיפש כוכב אחד קטן שצוחק.']},
+];
+let chI=store.get('story-ch',0),reacts=store.get('story-react',{});
+function drawStory(){
+  $('#toc').innerHTML=CH.map((c,i)=>`<button class="${i===chI?'on':''}" data-i="${i}"><span>${c.t}</span><small>${c.s}</small></button>`).join('')+`<div class="card" style="padding:14px"><b style="font-size:.95rem">לפרק 4?</b><p style="font-size:.85rem">78% הצביעו ״עוד פרק!״</p></div>`;
+  const c=CH[chI],r=reacts[chI]||{};
+  $('#page').innerHTML=`<div class="by"><span>כוכבית_15, בת 15</span><span class="chip">Collide</span><span class="chip">הרפתקה</span><span class="chip">בלי ספוילרים</span></div><h3>${c.t}</h3>
+  <div class="trans" title="פס שקיפות"><i style="width:91%;background:var(--human)"></i><i style="width:9%;background:var(--ai)"></i></div>
+  <div class="trans-key"><span style="--c:var(--human)">כתבה בעצמה 91%</span><span style="--c:var(--ai)">הצעות של המוזה שאומצו 9%</span></div>
+  <div class="body">${c.p.map(x=>`<p>${x}</p>`).join('')}</div>
+  <div class="react">${[['more','עוד פרק!'],['heart','הלב שלי'],['wow','לא ציפיתי']].map(([k,l])=>`<button data-k="${k}" class="${r[k]?'on':''}">${l} · ${({more:214,heart:167,wow:58})[k]+(r[k]?1:0)}</button>`).join('')}
+  ${chI<CH.length-1?`<button data-next style="margin-inline-start:auto;background:var(--ink);color:#fff">לפרק הבא ←</button>`:''}</div>
+  <span class="demo-note" style="justify-self:start;color:#6a6d85;border-color:#c9c4b4">סיפור לדוגמה. ניסוח שלנו, לא ציטוט מהספרים</span>`;
+  $('#toc').querySelectorAll('button[data-i]').forEach(b=>b.onclick=()=>{chI=+b.dataset.i;store.set('story-ch',chI);drawStory();});
+  $('#page').querySelectorAll('.react button[data-k]').forEach(b=>b.onclick=()=>{reacts[chI]=reacts[chI]||{};reacts[chI][b.dataset.k]=!reacts[chI][b.dataset.k];store.set('story-react',reacts);drawStory();});
+  const n=$('#page [data-next]');if(n)n.onclick=()=>{chI++;store.set('story-ch',chI);drawStory();$('#story').scrollIntoView({behavior:'smooth'});};
+}
+drawStory();
+
+/* ARTIFACTS */
+const ARTS=[
+ {id:'rose',n:'הוורד',d:'יש רק אחד כמוהו בכל העולם',svg:'<circle cx="28" cy="20" r="11" fill="#c8374d"/><path d="M22 18c3-5 9-5 12 0M24 23c3 3 6 3 8 0" stroke="#7a1c2c" stroke-width="2" fill="none"/><path d="M28 31v18" stroke="#2f8a4a" stroke-width="3"/><path d="M28 40c-6-1-9-5-9-8 5 0 8 3 9 8z" fill="#2f8a4a"/>'},
+ {id:'fox',n:'השועל',d:'מלמד מה זה לחכות למישהו',svg:'<path d="M12 18l8 6 8-4 8 4 8-6-4 18-12 8-12-8z" fill="#d9822b"/><path d="M22 40l6 6 6-6" fill="#fff"/><circle cx="23" cy="30" r="2" fill="#1c1406"/><circle cx="33" cy="30" r="2" fill="#1c1406"/>'},
+ {id:'sheep',n:'הכבשה בקופסה',d:'אף אחד לא ראה אותה. כולם מדמיינים',svg:'<rect x="10" y="16" width="36" height="28" rx="3" fill="#e9dcc3" stroke="#8a5f33" stroke-width="2"/><circle cx="21" cy="26" r="2" fill="#8a5f33"/><circle cx="35" cy="34" r="2" fill="#8a5f33"/><circle cx="29" cy="22" r="2" fill="#8a5f33"/>'},
+ {id:'scarf',n:'הצעיף',d:'עף ברוח של כוכב קטן',svg:'<path d="M14 18c10 6 18 6 28 0v8c-10 6-18 6-28 0z" fill="#f2c230"/><path d="M36 24l6 22-7-2-3-16" fill="#e0ae1c"/>'},
+ {id:'seed',n:'זרע הבאובב',d:'צריך לעקור כל בוקר',svg:'<ellipse cx="28" cy="32" rx="9" ry="12" fill="#6b4b2b"/><path d="M28 20c0-8 6-10 10-10-1 6-4 9-10 10z" fill="#3f7a4a"/>'},
+ {id:'b612',n:'כוכב B-612',d:'שלושה הרי געש, אחד כבוי',svg:'<circle cx="28" cy="30" r="16" fill="#8a6fd1"/><path d="M16 22l4-6 4 6M30 18l3-5 3 5M38 26l3-4 2 5" fill="#5a3fa1"/><circle cx="22" cy="34" r="3" fill="#6d55b8"/>'},
+];
+const RARE={id:'wand',n:'שרביט הבאובב',d:'נפתח רק ב־Collide עם הארי',svg:'<path d="M14 44L40 14" stroke="#6b4b2b" stroke-width="4" stroke-linecap="round"/><circle cx="41" cy="13" r="6" fill="#7fd39a" opacity=".7"/><circle cx="41" cy="13" r="11" fill="#7fd39a" opacity=".2"/>'};
+let got=store.get('arts',['rose','scarf']),chapters=store.get('collide-ch',2);
+function drawArts(){
+  const all=[...ARTS,RARE];const stage=chapters>=6?3:chapters>=3?2:1;
+  const rareOpen=stage>=2;
+  $('#arts').innerHTML=ARTS.map(a=>`<div class="art ${got.includes(a.id)?'':'lock'}"><svg viewBox="0 0 56 56">${a.svg}</svg><b>${a.n}</b><small>${got.includes(a.id)?a.d:'עוד לא נמצא'}</small></div>`).join('')
+   .replace(/^/,'')+'';
+  $('#arts').insertAdjacentHTML('beforeend','');
+  const S=[['היכרות','הדמויות מחליפות חפץ אחד: הצעיף של הנסיך עובר להארי.',1],['חברות','נפתח ארטיפקט נדיר משותף: שרביט הבאובב.',3],['new Verse','נולדת דמות חדשה, שאפשר להזמין כדמות מודפסת.',6]];
+  $('#stages').innerHTML=S.map((s,i)=>`<div class="stg ${stage>i?'done':''}"><i>${i+1}</i><div><b>Collide שלב ${i+1}: ${s[0]}</b><p>${s[1]} ${stage>i?'':'(נפתח אחרי '+s[2]+' פרקים)'}</p></div></div>`).join('')+`<p class="muted" style="font-size:.85rem">פורסמו ${chapters} פרקים ב־Collide הזה.</p>`;
+  $('#arts').insertAdjacentHTML('afterend','');
+  const rareHtml=`<div class="art rare ${rareOpen?'':'lock'}" style="grid-column:span 2"><span class="rar">נדיר</span><svg viewBox="0 0 56 56">${RARE.svg}</svg><b>${RARE.n}</b><small>${RARE.d}</small></div>`;
+  const ex=document.getElementById('rareSlot');if(ex)ex.remove();
+  const d=document.createElement('div');d.id='rareSlot';d.style.cssText='margin-top:12px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px';d.innerHTML=rareHtml;$('#arts').after(d);
+  const nv=$('#nv');nv.classList.toggle('lock',stage<3);
+  $('#nvName').textContent=stage<3?'new Verse נעול':'הנסיך הקוסם';
+  $('#nvText').textContent=stage<3?'מגיעים לשלב 3 כדי לגלות מי נולד מהמפגש.':'משקפיים עגולים, צעיף שעף, ושרביט שמאיר בירוק. נולד מ־Collide של 6 פרקים.';
+  $('#hA').textContent=got.length+'/6';
+}
+$('#addCh').onclick=()=>{chapters++;store.set('collide-ch',chapters);drawArts();toast(chapters===3?'שלב 2! נפתח שרביט הבאובב.':chapters===6?'new Verse נולד: הנסיך הקוסם!':'פרק '+chapters+' פורסם. ה־Collide מעמיק.');};
+$('#resetArts').onclick=()=>{got=[];chapters=0;store.set('arts',got);store.set('collide-ch',0);drawArts();toast('התיק ריק. אפשר לאסוף מחדש במשחק.');};
+drawArts();
+
+/* GAME */
+(function(){
+ const cv=$('#cv'),x=cv.getContext('2d'),W=800,H=600,cx=400,cy=330,R=150;
+ const pimg=new Image();pimg.src='img/prince.png';
+ let st=null,keys={},raf=0;
+ const stars=[...Array(120)].map(()=>[Math.random()*W,Math.random()*H,Math.random()*1.5+.3]);
+ function reset(){st={a:-Math.PI/2,t:60,last:performance.now(),items:[],sprouts:[],hearts:3,pulled:0,got:new Set(),spawnA:1.5,spawnS:2,over:false};}
+ function addItem(){const left=ARTS.filter(a=>!st.got.has(a.id)&&!st.items.some(i=>i.id===a.id));if(!left.length)return;const a=left[Math.floor(Math.random()*left.length)];st.items.push({id:a.id,n:a.n,a:Math.random()*Math.PI*2,life:9});}
+ function addSprout(){st.sprouts.push({a:Math.random()*Math.PI*2,g:0});}
+ function ang(d){return Math.atan2(Math.sin(d),Math.cos(d));}
+ function step(now){
+  const dt=Math.min(.05,(now-st.last)/1000);st.last=now;
+  if(keys.L)st.a-=2.4*dt;if(keys.R)st.a+=2.4*dt;
+  st.t-=dt;st.spawnA-=dt;st.spawnS-=dt;
+  if(st.spawnA<=0){addItem();st.spawnA=3.2;} if(st.spawnS<=0){addSprout();st.spawnS=Math.max(1.1,2.4-(60-st.t)/40);}
+  st.items.forEach(i=>i.life-=dt);st.items=st.items.filter(i=>{if(Math.abs(ang(i.a-st.a))<.17){st.got.add(i.id);if(!got.includes(i.id)){got.push(i.id);store.set('arts',got);}toast('מצאתם את '+i.n+'.'+(i.id==='rose'?' יש רק אחד כמוהו.':''));drawArts();return false}return i.life>0;});
+  st.sprouts.forEach(s=>s.g+=dt/6);
+  st.sprouts=st.sprouts.filter(s=>{if(s.g<.55&&Math.abs(ang(s.a-st.a))<.15){st.pulled++;return false}if(s.g>=1){st.hearts--;return false}return true;});
+  $('#hT').textContent=Math.max(0,Math.ceil(st.t));$('#hB').textContent=st.pulled;$('#hH').textContent='♥'.repeat(Math.max(0,st.hearts))||'–';$('#hA').textContent=got.length+'/6';
+  if(st.t<=0||st.hearts<=0){end();return}
+  draw();raf=requestAnimationFrame(step);
+ }
+ function pt(a,r){return[cx+Math.cos(a)*r,cy+Math.sin(a)*r]}
+ function draw(){
+  x.fillStyle='#0c1024';x.fillRect(0,0,W,H);
+  stars.forEach(s=>{x.fillStyle='rgba(255,255,255,'+(.4+Math.sin(performance.now()/700+s[0])*.3)+')';x.fillRect(s[0],s[1],s[2],s[2])});
+  const g=x.createRadialGradient(cx-40,cy-50,20,cx,cy,R);g.addColorStop(0,'#a58be6');g.addColorStop(1,'#5a3fa1');x.fillStyle=g;x.beginPath();x.arc(cx,cy,R,0,Math.PI*2);x.fill();
+  // volcanoes
+  [[.3,'#6d55b8'],[2.2,'#6d55b8'],[4.1,'#4a3590']].forEach(([a,c])=>{const[p,q]=pt(a,R-2);x.save();x.translate(p,q);x.rotate(a+Math.PI/2);x.fillStyle=c;x.beginPath();x.moveTo(-14,0);x.lineTo(0,-22);x.lineTo(14,0);x.fill();x.restore();});
+  st&&st.sprouts.forEach(s=>{const[p,q]=pt(s.a,R);x.save();x.translate(p,q);x.rotate(s.a+Math.PI/2);const h=10+s.g*70;x.fillStyle=s.g<.55?'#3f7a4a':'#6b4b2b';x.fillRect(-3-s.g*8,-h,6+s.g*16,h);x.fillStyle='#3f7a4a';x.beginPath();x.arc(0,-h,8+s.g*30,0,Math.PI*2);x.fill();if(s.g>=.55){x.strokeStyle='#e2653a';x.lineWidth=3;x.stroke();}x.restore();});
+  st&&st.items.forEach(i=>{const[p,q]=pt(i.a,R+34);const a=ARTS.find(z=>z.id===i.id);x.save();x.globalAlpha=Math.min(1,i.life);x.fillStyle='#f2c23055';x.beginPath();x.arc(p,q,22+Math.sin(performance.now()/200)*3,0,Math.PI*2);x.fill();x.fillStyle='#fff';x.font='600 15px Rubik, sans-serif';x.textAlign='center';x.fillText(a.n,p,q-30);x.fillStyle='#f2c230';x.beginPath();for(let k=0;k<10;k++){const rr=k%2?6:14,aa=k*Math.PI/5-Math.PI/2;x.lineTo(p+Math.cos(aa)*rr,q+Math.sin(aa)*rr)}x.fill();x.restore();});
+  if(st){const[p,q]=pt(st.a,R);x.save();x.translate(p,q);x.rotate(st.a+Math.PI/2);if(pimg.complete)x.drawImage(pimg,-25,-106,50,106);x.restore();}
+ }
+ function end(){st.over=true;cancelAnimationFrame(raf);const score=st.pulled*3+st.got.size*5;const ov=$('#ov');ov.hidden=false;
+  ov.querySelector('.in').innerHTML=`<h3>${st.hearts<=0?'הבאובבים ניצחו הפעם':'הכוכב שלם!'}</h3><p class="muted">עקרתם ${st.pulled} באובבים ואספתם ${st.got.size} ארטיפקטים. ${score} נקודות.</p><button class="btn btn-lamp" id="play">עוד סיבוב</button>`;
+  const li=$('#myScore');li.hidden=false;li.textContent='אתם · '+score;$('#play').onclick=start;}
+ function start(){$('#ov').hidden=true;reset();st.last=performance.now();raf=requestAnimationFrame(step);}
+ $('#play').onclick=start;
+ addEventListener('keydown',e=>{if(!st||st.over)return;if(e.key==='ArrowLeft'){keys.L=1;e.preventDefault()}if(e.key==='ArrowRight'){keys.R=1;e.preventDefault()}});
+ addEventListener('keyup',e=>{if(e.key==='ArrowLeft')keys.L=0;if(e.key==='ArrowRight')keys.R=0});
+ [['#bL','L'],['#bR','R']].forEach(([s,k])=>{const b=$(s);b.addEventListener('pointerdown',e=>{e.preventDefault();keys[k]=1});['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>keys[k]=0));});
+ cv.addEventListener('pointerdown',e=>{if(!st||st.over)return;const r=cv.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*H;const a=Math.atan2(py-cy,px-cx);
+   st.sprouts=st.sprouts.filter(s=>{if(s.g<.55&&Math.abs(ang(s.a-a))<.25){st.pulled++;return false}return true});});
+ reset();st.items=[];draw();
+})();
+
+/* WORKS */
+const WK=[
+ ['סיפור','הנסיך הקטן פוגש את הארי פוטר','כוכבית_15 · 3 פרקים','linear-gradient(135deg,#2f8a4a,#16161a)','#story',0],
+ ['ציור','השועל מחכה בשעה ארבע','צבעי_מים · 120 ״הלב שלי״','linear-gradient(135deg,#d9822b,#5a3fa1)','',0],
+ ['משחק','בין הכוכבים','שועל.לילה · 1,302 שחקנים','linear-gradient(135deg,#1f2a5a,#8a6fd1)','#game',0],
+ ['פסקול','5 שירים לקריאה בשקיעה','B612 · 18 דקות','linear-gradient(135deg,#f2c230,#e9a23b)','',0],
+ ['סיפור','מכתב מהוורד, שנה אחרי','דף_42 · ספוילר עד הסוף','linear-gradient(135deg,#c8374d,#16161a)','',1],
+ ['סטורי','״קורא איתי בלילה״','מילים.בכיס · 64 שיתופים','linear-gradient(135deg,#161b33,#2f8a4a)','',0],
+];
+let wf='all';
+function drawWorks(){const mine=store.get('my-works',[]).filter(w=>(w.chars||[]).includes('prince')).map(w=>[w.k,w.t,w.m,w.k==='משחק'?'linear-gradient(135deg,#1f2a5a,#e9a23b)':'linear-gradient(135deg,#6fa5ee,#2f8a4a)','build.html'+(w.k==='משחק'?'#level':'#story'),0,1]);
+ $('#crs').innerHTML=[...mine,...WK].filter(w=>wf==='all'||w[0]===wf).map(w=>`<a class="cr" href="${w[4]||'#works'}" style="text-decoration:none;color:inherit"><div class="cv" style="background:${w[3]}"><span class="k">${w[6]?'שלי · ':''}${w[0]}</span>${w[1]}${w[5]?'<button class="spoiler" type="button">ספוילר עד סוף הספר. לפתוח בכל זאת?</button>':''}</div><div class="m"><b>${w[1]}</b><span>${w[2]}</span></div></a>`).join('');
+ $('#crs').querySelectorAll('.spoiler').forEach(b=>b.onclick=e=>{e.preventDefault();b.remove();});}
+$('#filters').querySelectorAll('button').forEach(b=>b.onclick=()=>{wf=b.dataset.f;$('#filters').querySelectorAll('button').forEach(z=>z.classList.toggle('on',z===b));drawWorks();});
+drawWorks();
+
+/* QUIZ */
+const QS=[
+ ['יום שישי בערב. איפה תהיו?',[['עם חבר אחד טוב, לדבר עד מאוחר','fox'],['מארגנים משהו לכל החבר׳ה','king'],['בחדר, עם ספר ועם פנס','lamp'],['ממפים מקום חדש בעיר','geo']]],
+ ['מה הכי קשה לכם?',[['לחכות','fox'],['לא להחליט','king'],['להפסיק באמצע','lamp'],['לא לדעת','geo']]],
+ ['בפרויקט קבוצתי, אתם...',[['שמים לב מי נשאר בחוץ','fox'],['מחלקים תפקידים','king'],['עושים את החלק שלכם עד הסוף','lamp'],['מביאים את המחקר','geo']]],
+ ['איזה חפץ הייתם לוקחים לכוכב בודד?',[['מכתב ממישהו','fox'],['מפה של הכוכב','king'],['פנס','lamp'],['מחברת ריקה','geo']]],
+ ['מה גורם לכם לחייך?',[['שמישהו זכר משהו קטן עליכם','fox'],['שהתוכנית הצליחה','king'],['שגמרתם משהו שהתחלתם','lamp'],['שגיליתם משהו חדש','geo']]],
+ ['איזה משפט הכי מתאים לכם?',[['מה שחשוב, מרגישים','fox'],['מישהו צריך להוביל','king'],['כל יום, עוד פעם','lamp'],['עוד שאלה אחת','geo']]],
+];
+const RES={fox:['כוכב השועל','אתם יודעים לחכות לאנשים, ולשים לב לפרטים הקטנים שעושים חבר לחבר.'],king:['כוכב המלך','אתם רואים את התמונה הגדולה ויודעים לאסוף אנשים סביב רעיון. רק אל תשכחו לשאול מה הם רוצים.'],lamp:['כוכב מדליק הפנסים','אתם נאמנים למה שהבטחתם, גם כשאף אחד לא מסתכל. העולם צריך עוד כמוכם.'],geo:['כוכב הגאוגרף','אתם סקרנים בלי סוף. רק תזכרו לצאת לפעמים לראות בעצמכם את מה שאתם חוקרים.']};
+let qi=0,qa=[];
+function drawQuiz(){const q=$('#qz');
+ if(qi<QS.length){q.innerHTML=`<div class="prog"><i style="width:${qi/QS.length*100}%"></i></div><span class="muted" style="font-size:.85rem">שאלה ${qi+1} מתוך ${QS.length}</span><div class="q">${QS[qi][0]}</div><div class="opts">${QS[qi][1].map((o,i)=>`<button data-v="${o[1]}">${o[0]}</button>`).join('')}</div>`;
+  q.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{qa.push(b.dataset.v);qi++;drawQuiz();});}
+ else{const c={};qa.forEach(v=>c[v]=(c[v]||0)+1);const top=Object.keys(c).sort((a,b)=>c[b]-c[a])[0];const r=RES[top];store.set('quiz',top);
+  q.innerHTML=`<div class="result"><span class="muted">הכוכב שלכם</span><b>${r[0]}</b><p>${r[1]}</p></div><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-lamp" href="studio.html#stories">להפוך לסטורי</a><button class="btn btn-ghost" id="qr">לענות שוב</button></div>`;
+  $('#qr').onclick=()=>{qi=0;qa=[];drawQuiz();};}}
+drawQuiz();
+
+/* LETTERS */
+const BASE=[['נסיך יקר, גם אני מזיזה את הכיסא כדי לראות עוד שקיעה. רק שאצלי זה כפתור ״עוד פרק״.','כוכבית_15','','-2deg'],['תגיד לשועל שחיכיתי לו בשעה ארבע. הוא לא בא. אבל אני עדיין מחכה.','שועל.לילה','g','1.5deg'],['למה המבוגרים בספר כל כך עסוקים? אצלנו זה בדיוק אותו דבר.','דף_42','b','-1deg'],['הוורד שלך הייתה קשה, אבל אני מבינה אותה.','B612','p','2deg'],['הייתי רוצה כוכב קטן משלי. רק לשבוע.','מילים.בכיס','','-1.5deg'],['קראתי אותך בכיתה ה׳ ושוב עכשיו. זה לא אותו ספר. או שאני לא אותה אני.','צבעי_מים','g','1deg']];
+let mineL=store.get('letters',[]);
+const BAD=/\d{9,}|@|בית ספר|ביה״ס|רחוב|כתובת/;
+function drawLetters(){$('#lw').innerHTML=[...mineL.map(t=>[t,'אתם','b','0deg']),...BASE].map(l=>`<div class="note ${l[2]}" style="--r:${l[3]}">${l[0].replace(/</g,'&lt;')}<small>${l[1]}</small></div>`).join('');}
+$('#lf').onsubmit=e=>{e.preventDefault();const v=$('#li').value.trim();if(!v)return;if(BAD.test(v)){toast('עוזר השומרים: נראה שיש פה פרט אישי. אפשר לנסח בלי?');return}mineL.unshift(v);store.set('letters',mineL);$('#li').value='';drawLetters();toast('הודבק על הקיר.');};
+drawLetters();
+
+/* tabs highlight */
+const links=[...document.querySelectorAll('#tabs a')];
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('.sec').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

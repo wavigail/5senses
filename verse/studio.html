@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>הסטודיו · Verse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@700;900&family=Rubik:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="verse.css">
+<style>
+.st-hero{background:radial-gradient(ellipse 50% 90% at 85% 0%,#f08a5d26,transparent 65%),radial-gradient(ellipse 40% 70% at 10% 10%,#6fa5ee22,transparent 70%),var(--night);padding-block:40px 26px}
+.st-hero .wrap{display:grid;gap:12px}
+.muse-intro{display:flex;gap:14px;align-items:center;background:var(--night2);border:1px solid var(--line);border-radius:18px;padding:14px 16px;max-width:720px}
+.muse-av{width:46px;height:46px;border-radius:50%;flex:none;background:radial-gradient(circle at 35% 30%,#ffd1b8,var(--ai) 60%,#b8410f);display:grid;place-items:center;color:#2a1206;font:900 1.2rem var(--f-head);box-shadow:0 0 0 4px #f08a5d33}
+.muse-intro p{font-size:.92rem;color:var(--muted)}
+.muse-intro b{color:var(--text)}
+.tabs{position:sticky;top:calc(env(safe-area-inset-top,0px) + 63px);z-index:40;background:var(--night);border-bottom:1px solid #ffffff14}
+.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
+.tabs a{white-space:nowrap;text-decoration:none;color:var(--muted);padding:8px 14px;border-radius:999px;font-size:.95rem}
+.tabs a:hover,.tabs a.on{background:var(--night2);color:var(--text)}
+.sec{padding-block:52px;border-bottom:1px solid #ffffff0d;scroll-margin-top:130px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sec-head p{color:var(--muted);max-width:60ch;margin-top:6px}
+/* workshop */
+.ws{display:grid;grid-template-columns:260px minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media (max-width:1100px){.ws{grid-template-columns:minmax(0,1fr) 300px}.ws .cards{grid-column:1/-1;grid-row:1}}
+@media (max-width:760px){.ws{grid-template-columns:1fr}}
+.panel{background:var(--night2);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:12px;min-width:0}
+.panel h3{font-size:1rem}
+.pick{display:flex;gap:8px;flex-wrap:wrap}
+.pick button{display:flex;align-items:center;gap:6px;background:var(--night);border:1px solid var(--line);border-radius:999px;padding:3px 12px 3px 4px;color:var(--muted);font:inherit;font-size:.85rem;cursor:pointer}
+.pick button img{width:26px;height:26px;border-radius:50%;object-fit:cover;object-position:50% 12%;background:var(--night3)}
+.pick button.on{border-color:var(--lamp);color:var(--text);background:#e9a23b1a}
+.ucard{background:var(--paper);color:var(--ink);border-radius:14px;padding:12px 14px;display:grid;gap:6px}
+.ucard b{font:900 1rem var(--f-head)}
+.ucard ul{margin:0;padding-inline-start:1.1em;font-size:.85rem;color:#3a3e58;display:grid;gap:3px}
+.collide-tag{font-size:.8rem;color:var(--lamp);font-weight:600}
+.editor{background:var(--paper);color:var(--ink);border-radius:18px;padding:18px;display:grid;gap:10px;min-width:0}
+.editor input{font:900 1.35rem var(--f-head);border:0;background:transparent;color:var(--ink);outline:none;width:100%;border-bottom:1px dashed #1c203633;padding-bottom:6px}
+.editor textarea{width:100%;min-height:320px;resize:vertical;border:0;background:transparent;font:400 1.05rem/1.9 var(--f-text);color:#2b2f48;outline:none}
+.editor textarea::placeholder,.editor input::placeholder{color:#8a8da5}
+.ed-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:.85rem;color:#6a6d85;border-top:1px solid #1c203614;padding-top:10px}
+.trans{display:grid;gap:4px}
+.trans .bar{height:8px;border-radius:99px;background:var(--human);overflow:hidden;display:flex;justify-content:flex-end}
+.trans .bar i{display:block;background:var(--ai);transition:width .3s}
+.trans .key{display:flex;gap:12px;flex-wrap:wrap;font-size:.78rem;color:#6a6d85}
+.trans .key span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-inline-end:5px;vertical-align:middle;background:var(--human)}
+.trans .key span.ai::before{background:var(--ai)}
+.muse{border-color:#f08a5d66}
+.muse-head{display:flex;gap:10px;align-items:center}
+.muse-head .muse-av{width:36px;height:36px;font-size:1rem}
+.muse-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.muse-btns button{background:var(--night);border:1px solid var(--line);border-radius:12px;padding:8px;color:var(--text);font:inherit;font-size:.85rem;cursor:pointer;text-align:center}
+.muse-btns button:hover{border-color:var(--ai)}
+.muse-btns button.wide{grid-column:1/-1}
+.feed{display:grid;gap:10px;max-height:460px;overflow:auto;padding-inline-end:2px}
+.sug{background:#f08a5d14;border:1px solid #f08a5d44;border-radius:14px;padding:10px 12px;display:grid;gap:8px;font-size:.9rem}
+.sug .k{font-size:.72rem;color:var(--ai);font-weight:600}
+.sug.warn{background:#e9a23b14;border-color:#e9a23b66}.sug.warn .k{color:var(--lamp)}
+.sug.ok{background:#7fd39a14;border-color:#7fd39a55}.sug.ok .k{color:var(--good)}
+.ashaf{display:flex;gap:6px;flex-wrap:wrap}
+.ashaf button{border-radius:999px;border:1px solid var(--line);background:var(--night);color:var(--text);font:inherit;font-size:.78rem;padding:3px 10px;cursor:pointer}
+.ashaf button:hover{border-color:var(--text)}
+.sug.done .ashaf{display:none}
+.sug .verdict{font-size:.78rem;font-weight:600}
+.sug .rewrite{display:flex;gap:6px}.sug .rewrite input{flex:1;min-width:0;background:var(--night);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:6px 10px;font:inherit;font-size:.85rem}
+.journal{display:grid;gap:6px;font-size:.82rem}
+.journal li{list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;color:var(--muted)}
+.journal ul{margin:0;padding:0;display:grid;gap:6px}
+.jt{font-weight:700;border-radius:6px;padding:0 6px;font-size:.72rem;height:fit-content}
+.jt.a{background:#f08a5d33;color:#ffc2a6}.jt.s{background:#6fa5ee33;color:#bcd6fb}.jt.p{background:#ffffff1a;color:var(--text)}
+.pub{display:grid;gap:8px}
+.check{display:flex;gap:8px;align-items:center;font-size:.88rem;color:var(--muted)}
+.check input{accent-color:var(--lamp);width:18px;height:18px}
+/* game maker */
+.gm{display:grid;grid-template-columns:340px minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.gm{grid-template-columns:1fr}}
+.opt{display:grid;gap:8px}
+.opt>span{font-size:.85rem;color:var(--muted)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{background:var(--night);border:1px solid var(--line);border-radius:12px;padding:7px 12px;color:var(--muted);font:inherit;font-size:.88rem;cursor:pointer}
+.seg button.on{border-color:var(--lamp);color:var(--text);background:#e9a23b1a}
+.gwrap{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#0b0f22;aspect-ratio:4/3}
+.gwrap canvas{display:block;width:100%;height:100%;touch-action:none}
+.ghud{position:absolute;top:10px;right:12px;left:12px;display:flex;justify-content:space-between;font-weight:600;font-size:.9rem;pointer-events:none;text-shadow:0 1px 4px #000}
+.gover{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:#0b0f22cc;padding:20px}
+.gover[hidden]{display:none}
+.gover .in{display:grid;gap:10px;justify-items:center;max-width:34ch}
+.rule-chip{background:#f08a5d1f;border:1px dashed #f08a5d88;color:#ffc2a6;border-radius:10px;padding:6px 10px;font-size:.85rem}
+/* stories */
+.sts{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start}
+@media (max-width:860px){.sts{grid-template-columns:1fr}}
+.phone{width:min(320px,100%);margin:auto;border-radius:34px;padding:10px;background:#05081a;box-shadow:0 30px 60px -20px #000,inset 0 0 0 2px #2a3260}
+.phone canvas{display:block;width:100%;border-radius:26px;aspect-ratio:9/16;height:auto}
+.swatches{display:flex;gap:8px}
+.swatches button{width:32px;height:32px;border-radius:50%;border:2px solid transparent;cursor:pointer}
+.swatches button.on{border-color:var(--text)}
+.field{width:100%;background:var(--night);border:1px solid var(--line);border-radius:12px;color:var(--text);padding:10px 12px;font:inherit}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,120px);background:var(--paper);color:var(--ink);padding:12px 20px;border-radius:14px;font-weight:600;box-shadow:0 18px 40px -10px #000c;transition:transform .35s;z-index:90;visibility:hidden;max-width:calc(100% - 32px)}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Verse, לעמוד הבית"><svg role="img" aria-label="Verse" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 639.63 346.85" xmlns:c2pa="http://c2pa.org/manifest">
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g id="ns0aLl.tif">
+      <g>
+        <g>
+          <g>
+            <path d="M590.53,253.51c19.09,2.14,33.78-6.17,43.19-22.57,2.26.33,4.13,1.71,5.92,3.44-9.59,21.34-25.96,35.71-49.97,37.45-17.99,1.3-37.06-5.23-48.95-19.11-4.17-4.87-7.58-9.89-10.18-15.78-5.21-11.82-7.51-24.43-7.01-37.34.81-20.85,6.99-39.36,22.37-53.79,6.87-6.45,14.92-10.5,23.84-13.06,5.79-1.66,11.27-2.13,17.33-2.09,8.9.07,17.6,1.21,25.38,5.41s14.66,10.19,19.01,18.34c4.27,7.98,6.65,16.39,7.47,25.42.35,3.89,1.18,7.57.01,11.31l-87.44.03c-.09,3.38-.34,6.51.05,9.65l1.05,8.45c2.54,20.32,15.68,41.76,37.93,44.25ZM608.18,182.15c1.3,0,2.18-.84,2.2-1.77.35-15.55-3.84-39.76-23.31-41.1-6.71-.46-13.7.92-18.9,5.22-8.3,6.87-13.11,16.79-14.91,27.26-.61,3.54-1.42,6.65-.92,10.42l55.84-.04Z"/>
+            <path d="M232.58,249.57c13.03,6.79,30.21,5.47,42.48-3.01,5.88-4.06,10.01-9.58,13.81-15.65,2.33.53,4.25,1.71,6.06,3.44-2.88,5.72-5.86,10.95-9.7,15.92-9.84,12.77-24.2,20.39-40.26,21.54-19.57,1.4-38.95-5.81-51.15-21.45-15.01-19.24-18-45.32-12.95-68.66,2.57-11.86,7.79-22.36,15.83-31.51,11.8-13.42,29.21-20.34,47.03-19.51,3.94.18,7.25.13,10.98.94,11.32,2.47,21.31,8.14,28.39,17.41,8.27,11.21,12.6,28.64,10.82,42.1l-87.14.03c-.76,4.05.27,7.77.2,11.63-.05,2.59.47,4.69.87,7.16,2.53,15.69,10.13,32.01,24.72,39.61ZM265.37,182.13c.18-5.2.46-9.04-.41-13.26-1.28-12.03-6.7-26.44-20.15-29.14-7.95-1.59-16.64.32-22.74,5.9-8.77,8.02-13.1,19.26-14.25,30.91-.19,1.91-1.47,3.9-.15,5.62l57.71-.03Z"/>
+            <path d="M417.17,263.04c-2.02-.8-2.66-1.91-2.69-3.79l-.32-24.26-.21-11.19c2.25-.35,4.46-.29,6.84-.14,3.98,15.82,11.45,31.82,27.55,37.99,9.86,3.77,24.67,2.25,31.86-5.74,7.8-8.68,8.13-23.63-1.62-32.1-3.45-3-7.31-5.2-11.57-6.96l-12.73-5.25c-16.63-6.85-35.52-14.3-38.9-34.79-1.73-10.51.43-22.79,7.77-30.89,9.6-10.58,22.43-14.89,36.5-15.25,11.67-.3,22.78,1.2,33.7,5.12,2.54.91,5.11,1.37,7.33,3.1l.48,12.76.47,20.88c-2.48.28-4.28.53-6.43.39-4.33-17.82-14.42-34.73-35.05-33.8-5.93.27-11.65,1.53-16.25,5.57-8.29,7.29-8.46,19.84-1.1,28.14,3.4,3.83,7.76,6.42,12.58,8.44l26.04,10.94c12.83,5.39,24.8,14.14,27.54,28.64,1.65,8.72,1.12,17.77-2.37,26.06-9.11,21.67-35.71,27.08-56.93,24.5-11.26-1.37-21.87-4.17-32.49-8.38Z"/>
+            <path d="M306.12,263.05c6.74-.38,13.91-3.33,15.61-10.42.72-2.99,1.24-5.7,1.24-8.93l.07-74.25c0-4.37-.02-8.59-1.83-12.43-2.4-5.11-9.69-7.14-14.94-8.18-.27-1.72-.05-3.38.38-4.81l36.76-11.76c1.99-.64,4.2-1.8,5.94-.14,1.6,8.83-.6,19.29,1.12,28.46,7.48-11.64,10.22-19.06,21.69-26.09,8.86-5.6,25.5-6.25,30.95,4.84,2.76,5.63,1.92,12-2.01,17.1-4.72,6.11-13.68,6.23-19.36.86-2.45-2.32-5.32-4.87-9.03-5.07-4.14-.23-8.12,2.33-10.77,5.4-5.8,6.71-8.55,14.95-9.93,23.62-.48,3.01-.89,5.93-.88,9.14l.09,55.17c.01,9.22,5.57,15.61,14.73,16.68l6.97.82c.39,1.78.39,3.56-.13,5.54l-62.9.08c-1.18,0-3.01.84-3.55-.35-.66-1.44-.05-3.26-.22-5.28Z"/>
+          </g>
+          <g>
+            <path d="M.48,61.36l81.48.02c.33,2.11.48,4.09-.12,6.18-4.94.23-9.91.97-14.16,3.62-8.12,5.06-4.79,18.03-1.97,25.42l7.35,19.21,10.61,26.8,14.48,36.43,18.1,45.7c3.81-11.71,6.04-22.25,10.4-32.78,3.26-10.67,7.7-20.35,12.51-30.4,6.75-14.41,19.19-33.29,30.05-44.75,4.12-4.35,7.96-8.49,12.48-12.48,14.25-12.59,29.73-22.74,47.08-30.76s36.08-14.61,55.17-18.58l14.49-3.01c3.67-.76,6.28-1.16,9.78-1.98-.5,2.1-1.8,3.07-2.95,4.67l-30.19,42.11-12.83,18.52,6.3-23.49c-20.46,2.47-40.26,8.52-58.27,18.45-14.5,8-26.57,18.31-37.63,30.49-8.13,8.96-14.78,18.61-20.87,29.11-11.73,20.25-22.27,46.74-29.36,69.09l-10.17,32.02c-3.36.18-6.39.16-9.61-.11-1.24-.1-1.95-1.2-2.42-2.37l-20.14-50.19L28.12,88.65c-2.41-6-6.06-10.93-10.71-15.05s-10.66-5.55-16.79-6.14c-.89-1.93-.72-4.01-.14-6.1Z"/>
+            <path d="M139.06,147.2c-4.54,8.88-8.6,17.49-12.13,26.84-2.25,5.97-4.54,11.57-6.16,17.73-.28,1.05-.93,2.13-1.52,3.17-.15-2.7.78-5.04,1.36-7.69,5.13-23.66,14.4-50.94,27.04-71.61,4.08-6.67,8.09-12.92,12.84-19.12,13.88-18.1,30.55-33.96,49.54-46.72,19.68-13.6,41.43-23.87,64.56-32.29l-8.09,30.86c-.69,2.63-1.5,4.52-4.55,4.73-3.91,1.21-7.94,2.37-11.93,3.93l3.25-15.53c-14.12,5.42-26.27,12.31-38.42,19.95-9.85,6.2-18.43,13.19-27.06,21-19.95,18.04-36.46,40.79-48.71,64.76Z"/>
+            <path d="M172.54,54.24c-22.15,25.36-36.76,54.47-46.35,86.67-3.7,12.41-6.53,24.41-8.74,37.14-.64,3.71-.9,7.2-2.13,11.01-1.13-2.95.06-5.74.13-8.69.21-8.83,1.14-17.05,2.32-25.87C126.8,87.32,160.92,36.72,217.15,0l1.69,24.91c.24,3.47.62,6.73.6,10.21-3.85,2.27-7.38,4.46-10.84,7.07-2.16,1.62-1.18-3.7-1.78-6.84-.68-3.54-.64-6.95-1.08-10.64-2.37.46-3.42,1.79-4.88,2.85-8.13,5.93-21.61,19-28.31,26.68Z"/>
+          </g>
+        </g>
+        <g>
+          <path d="M189.07,318.92c1.06,7.2-2.1,14.52-8.44,16.79-5.51,1.97-10.44.75-14.94-3.31-1.37,4.9.17,9.16-.8,13.63-.24,1.08-3.21,1.06-4.12.11l.08-38.78c1.38-.46,3.48-.66,4.09.49.56,1.05-.36,2.42.65,3.58,2.58-3.18,5.77-4.54,9.8-4.59,7.12-.08,12.65,5.1,13.67,12.07ZM180.04,331.07c6.35-3.74,5.96-14.39.75-18.21-2.28-1.67-5.12-2.05-8.05-1.49-5.19.99-7.9,6.06-7.42,11.13.35,3.73,1.86,6.77,4.79,8.41,3.11,1.74,6.56,2.15,9.94.16Z"/>
+          <path d="M526.73,329.82c4.74,4.19,11.25,2.86,15.43-.99,1.42-.14,2.97,2.71,1.91,3.78-4.94,4.93-12.37,5.17-18.24,1.76-4.6-2.67-6.86-7.35-6.99-12.69s2.55-10.16,6.84-12.78c4.68-2.86,10.76-2.73,15.15.56s5.98,8.22,5.39,13.49l-15.2.4c-1.93.05-5.26-1.23-6.75.51-1.35,1.59.97,4.65,2.45,5.96ZM541.91,319.5c-.66-5.37-3.99-8.21-8.36-8.38-5.11-.68-9.52,2.88-10.09,8.28,6.34.35,12.27.63,18.45.1Z"/>
+          <path d="M319.52,335.81c-.91-5.81-.24-11.43-.42-17.11-.15-4.59-3.4-7.53-7.84-7.59-4.91-.07-8.93,3.31-8.96,8.39l-.12,16.2c-.37,1.05-3.33,1.1-4.22.23l-.06-40.07c1.35-.67,2.68-.5,4.14-.19l.47,14.93c4.7-3.88,10.72-4.91,15.67-2.18,3.63,2.01,5.17,6.21,5.37,10.24.28,5.75,0,11.11-.17,16.92-.03,1.04-3.68,1.33-3.85.23Z"/>
+          <path d="M335.32,323.15c-1.31,0-.1,7.48,7.77,9.1,4.15.86,7.45-.87,10.45-3.77l2.63,3.43c-3.99,4.03-8.94,5.54-14.74,4.32-7.95-1.67-13.38-10.59-10.52-19.55,1.28-4.01,4.53-7.52,7.91-8.78,4.54-1.69,9.35-1.35,12.88,1.27,4.5,3.34,6.59,8.6,5.67,13.87l-22.05.11ZM353.04,319.67c-.28-5.67-4.31-8.78-9.29-8.63-7.55.23-9.19,7.01-8.6,7.89.96,1.43,14.49.67,17.89.74Z"/>
+          <path d="M123.34,319.85l-13.48.43c-1.11.04-3.9-1-4.35.5l-.78,14.92c-.06,1.15-3.8,1.09-4.29-.01l-.05-9.5-.02-16c0-3.69.28-7.18-.1-10.85-.05-.46.18-1.01.33-1.23.2-.29.86-.63,1.44-.56,2.83.36,5.49.02,8.35.05l15.41.16c.54,1.4.45,2.66.15,4.1l-20.74.18c-.11,4.71-.37,9.04.16,13.6l17.81.28c.87.68,1.01,3.09.14,3.92Z"/>
+          <path d="M402,319.67c-2.99,1.53-13.75-.42-18.47.41l-.3,15.54c-.02,1.1-3.66,1.27-3.99.21-.45-2.79-.32-6.2-.33-9.15l-.11-26.99c0-.65.19-1.32.46-1.69.21-.29.82-.49,1.48-.47l23.37.43c1.02.02,1.05,3.01.31,3.76l-20.86.35-.12,13.55,18.58.3c.57.64.89,3.28,0,3.74Z"/>
+          <path d="M256.37,321.7c0,8.09-6.56,14.65-14.66,14.65s-14.66-6.56-14.66-14.65,6.56-14.65,14.66-14.65,14.66,6.56,14.66,14.65ZM247.75,330.35c3.49-2.57,3.92-6.97,3.52-10.79-.53-5.03-4.04-8.22-8.97-8.5-4.98-.27-8.78,2.57-10.04,7.31-1.54,5.79,1.28,11.72,6.04,13.44,3.12,1.13,6.61.63,9.46-1.46Z"/>
+          <path d="M435.99,324.41c.04,3.93.1,7.47-.29,11.1-.14,1.3-3.73,1.24-3.94.19l-.66-3.28c-3.29,3.89-8.14,4.95-12.94,3.58-11.51-3.29-7.23-19.11-8.15-28.43,1.58-.7,3.05-.76,4.74-.23l.12,17.31c.02,3.45,1.95,6.31,5.24,7.25,2.61.75,5.03.52,7.54-.93,1.79-1.03,3.69-3.59,3.72-6.3l.19-17.09c1.32-.67,2.63-.76,4.23-.24l.19,17.05Z"/>
+          <path d="M491.8,307.54l.1,27.12c0,.56-.04,1.01-.25,1.32-.32.48-2.79.92-3.88-.13-.6-.58.04-1.28-.54-2.98-5.09,4.4-11.58,5.01-17.1,1.14-2.78-1.95-4.1-5.49-4.1-8.99v-17.47c1.12-.89,3.03-.62,4.25-.04l.26,17.67c.02,1.3.6,3.09,1.43,4.15,2.91,3.69,8.85,4.25,12.29.97,2.01-1.92,3.1-4.87,3.14-7.6l.22-15.16c.76-.85,2.71-.54,4.19,0Z"/>
+          <path d="M458.34,331.46c.92-.4,2.37,2.44,1.8,3.27-3.87,3.2-10.29,2.35-12.87-2.01-.9-1.52-1.13-3.51-1.15-5.21l-.14-16.05c-1.43-.66-2.88,0-4.14-.67-.76-.4-.77-2.8-.04-3.25,1.06-.65,2.57.03,3.64-.5,1.38-1.58.31-3.92,1.08-5.69.4-.93,3.66-.92,3.76.02l.6,5.67c2.38.37,5.27-.2,7.53.53.79.26.72,2.9-.08,3.19-2.21.8-4.71.41-7.61.7l.24,18.23c.02,1.57,1.68,2.25,2.61,2.57,1.37.48,2.98-.02,4.77-.8Z"/>
+          <path d="M290.15,331.2c1.13.76,1.38,1.96,2.03,2.8-1.28,1.85-3.25,2.35-5.37,2.56-5.04.5-9.04-2.83-9.23-7.92-.22-5.65.31-11.25-.28-16.86-.78-1.09-2.92-.38-4.08-.75-.92-.3-.96-2.92-.2-3.43,1.09-.72,2.89.02,4.07-.57l.72-5.84c.6-.71,3.26-.72,3.69.13l.73,5.88c2.48.33,5.06-.32,7.46.28.68.57.39,2.46.16,3.37-2.49.81-4.9.24-7.8.72l-.12,16.11c-.01,1.89,1.04,3.67,2.34,4.33,1.85.93,3.87.57,5.87-.81Z"/>
+          <path d="M222.47,331.54c1.36-.55,2.92,2.16,1.84,3.18-2.55,2.39-6.47,2.32-9.58.9-2.75-1.25-4.08-4.02-4.14-7.05l-.29-17.18-3.88-.54c-.85-.12-.81-3.21.03-3.33l3.73-.54.52-5.64c.41-.94,3.67-.94,3.76.01l.55,5.68c2.41.61,4.85-.04,7.33.32,1.11.16,1.2,1.7,1.11,2.43-.4,3.23-6.04.16-8.6,1.87,1.18,6.3-2.4,17.69,2.51,20.38,1.76.96,3.21.28,5.12-.49Z"/>
+          <rect x="132.7" y="295.45" width="4.63" height="40.95" transform="translate(-.36 .15) rotate(-.06)"/>
+          <path d="M515.18,311.31c-13.66.27-8.18,16.05-9.6,24.46-.59.97-3.27.95-4.29.16l-.02-28.22c.47-.99,3.27-.97,3.81-.13.63.98-.19,2.52.97,3.38,2.61-2.54,5.69-4.63,9.16-3.65.95.47.59,3.04-.03,4Z"/>
+          <path d="M151.55,334.38c.11.72-.35,1.37-.57,1.65-.26.35-3.05.85-3.88-.23-.31-.4-.59-25.04.07-27.97.69-.94,3.17-.84,4.01.04.09,5.76.54,11.91.34,17.78-.1,2.99-.46,5.62.03,8.72Z"/>
+          <path d="M149.91,301.65c-1.9.92-3.67-1.37-3.74-2.82-.1-2.35,1.79-3.95,4.07-3.33,1.4.38,1.93,1.8,1.98,2.95.06,1.27-.63,2.37-2.32,3.2Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpjNTE5N2Q1MS02NjAxLTQ4ZDctODNlOC0xYjFiMjI0NjVjNTIAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaGXP0SFwpZ2GQnGJSKlv80QAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo3Yzc5MDljMC0yZTlhLTQ1Y2EtOTNlNi0xNWVkODc3NzljNTNscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoVZfA+l08Cx8psIR60pHkPQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggkSg0Y4a/QnuXC752r6Lf/TfK3lj2Wz1uxJH6Nvk05EikZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaHf9fsoG2aSdm47kU3f2EZUAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIPZAueK4VkchkxWxWXYL5QL3GYtzqPeNl6j78kc/ghO0ZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GSXkZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmM1MTk3ZDUxLTY2MDEtNDhkNy04M2U4LTFiMWIyMjQ2NWM1Mi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmM5OTMwNGQ0LWMwNWQtNDJmYy1iMDM0LWRmNjgxNzA1NTIzM3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCRKDRjhr9Ce5cLvnavot/9N8reWPZbPW7Ekfo2+TTkSKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggAUxXlHIUoSMDOzrMven5BXULkuvkMhOzL5BVEkSm306iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggUQ+LR0lKF3BW0SdgrZmLuH7Ztt1msMCQlgPdEZz+BS90Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQJea5GK9ugpGVgmtNHra2hfxcac8PW0iN5x+SIXm6bSmtqDNuJtRD08jO4NewXndsklg4ATzTWq9IKj8XROoJFs=</c2pa:manifest></metadata></svg></a>
+  <nav class="nav" aria-label="ראשי">
+    <a href="index.html">המדף</a>
+    <a href="prince.html">הנסיך הקטן</a>
+    <a href="studio.html" aria-current="page">הסטודיו</a>
+    <a href="build.html">אזור הבנייה</a>
+    <a href="lab.html">מעבדת הדמויות</a>
+    <a href="shop.html">חנות</a>
+  </nav>
+  <a class="btn btn-lamp" href="index.html#try">לסרוק דמות</a>
+  <a class="me" href="me.html" aria-label="המדף שלי">נ</a>
+</div></header>
+
+<main>
+<section class="st-hero"><div class="wrap">
+  <span class="eyebrow">הסטודיו</span>
+  <h1>כאן יוצרים עם הדמויות</h1>
+  <p class="lead">כותבים סיפור, בונים משחק, מעצבים סטורי. <b>אתם מחליטים, והמוזה רק עוזרת.</b></p>
+  <div class="muse-intro"><div class="muse-av" aria-hidden="true">מ</div><p><b>מי זאת המוזה?</b> עוזרת בינה מלאכותית שגרה בסטודיו. היא שואלת שאלות, מציעה כיוונים ובודקת שהדמויות נשארות עצמן. היא לא כותבת בשבילכם. כל הצעה שלה מחכה להחלטה שלכם: <b>אימצתי, שיניתי או פסלתי</b> (זה האש״ף), והכול נרשם ביומן.</p></div>
+  <span class="demo-note" style="justify-self:start">הדגמה. המוזה כאן מתוסרטת מראש, בלי חיבור לבינה אמיתית.</span>
+</div></section>
+
+<nav class="tabs" aria-label="בעמוד"><div class="wrap" id="tabs">
+  <a href="#write">סדנת הסיפורים</a><a href="#game">יוצר המשחקים</a><a href="#stories">סטודיו הסטוריז</a>
+</div></nav>
+
+<!-- WORKSHOP -->
+<section class="sec" id="write"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">סדנת הסיפורים</span><h2>כותבים יחד עם הדמויות</h2><p>בוחרים דמות אחת, או שתיים בשביל Collide. כל פרק שמתפרסם נכנס לעמוד של הדמויות, ומקדם את ה־Collide שלהן.</p></div><a class="btn btn-ghost" href="build.html#story">🗺️ סיפור עם הסתעפויות? למפת הסיפור</a></div>
+  <div class="ws">
+    <div class="panel cards">
+      <h3>מי בסיפור?</h3>
+      <div class="pick" id="pick"></div>
+      <span class="collide-tag" id="ctag"></span>
+      <div id="ucards" style="display:grid;gap:10px"></div>
+      <p class="muted" style="font-size:.8rem">כרטיס היקום הוא מה שנכון לגבי כל דמות בספר. המוזה בודקת מולו.</p>
+    </div>
+
+    <div style="display:grid;gap:14px;min-width:0">
+      <div class="editor">
+        <input id="title" placeholder="שם הפרק" maxlength="60" aria-label="שם הפרק">
+        <textarea id="text" placeholder="כאן מתחיל הפרק שלכם. אפשר להתחיל ממשפט אחד. תקועים? שאלו את המוזה." aria-label="הטקסט שלכם"></textarea>
+        <div class="ed-foot">
+          <div class="trans" style="flex:1 1 240px"><div class="bar"><i id="aiBar" style="width:0%"></i></div><div class="key"><span id="hk">כתבתם 100%</span><span class="ai" id="ak">מהמוזה 0%</span></div></div>
+          <span id="wc">0 מילים</span>
+        </div>
+      </div>
+      <div class="panel pub">
+        <h3>לפרסם את הפרק</h3>
+        <label class="check"><input type="checkbox" id="spoil"> יש בפרק ספוילר לספר</label>
+        <label class="check"><input type="checkbox" id="mine" checked> הכנס את יומן האש״ף לפרק (שקיפות)</label>
+        <div id="guard" class="muted" style="font-size:.85rem"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-lamp" id="publish">לפרסם</button><button class="btn btn-ghost" id="sample">לטעון התחלה לדוגמה</button></div>
+      </div>
+    </div>
+
+    <div class="panel muse">
+      <div class="muse-head"><div class="muse-av" aria-hidden="true">מ</div><div><b>המוזה</b><div class="muted" style="font-size:.8rem">שואלת, מציעה, בודקת. לא כותבת בשבילכם.</div></div></div>
+      <div class="muse-btns">
+        <button data-m="ask">❓ לשאול אותי</button>
+        <button data-m="dirs">🧭 3 כיוונים</button>
+        <button data-m="check">🔍 בדיקת עקביות</button>
+        <button data-m="voice">🎭 מי מדבר?</button>
+      </div>
+      <div class="feed" id="feed"><p class="muted" style="font-size:.85rem">תתחילו לכתוב, ואז לחצו על אחד הכפתורים.</p></div>
+      <div class="journal"><b style="font-size:.9rem">יומן האש״ף</b><ul id="journal"><li class="muted">עוד אין החלטות.</li></ul></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- GAME MAKER -->
+<section class="sec" id="game"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">יוצר המשחקים</span><h2>בונים משחק בלי לכתוב קוד</h2><p>בוחרים גיבור, עולם וחוקים, ומשחקים מיד. כך נבנה גם ״בין הכוכבים״ שבעמוד של הנסיך הקטן.</p></div><a class="btn btn-ghost" href="build.html#level">🧱 לבנות שלב משלכם באזור הבנייה</a></div>
+  <div class="gm">
+    <div class="panel" style="gap:16px">
+      <div class="opt"><span>הגיבור</span><div class="pick" id="gHero"></div></div>
+      <div class="opt"><span>העולם</span><div class="seg" id="gWorld"><button data-v="space" class="on">🌌 חלל</button><button data-v="hole">🕳️ מחילת הארנב</button><button data-v="fog">🌫️ לונדון בערפל</button></div></div>
+      <div class="opt"><span>מה נופל מלמעלה</span><div class="seg" id="gDrop"><button data-v="arts" class="on">✨ ארטיפקטים</button><button data-v="letters">✉️ מכתבים</button><button data-v="stars">⭐ כוכבים</button></div></div>
+      <div class="opt"><span>ממה נזהרים</span><div class="seg" id="gBad"><button data-v="baobab" class="on">🌱 באובבים</button><button data-v="clock">⏰ שעונים</button><button data-v="none">כלום, רק לאסוף</button></div></div>
+      <div class="opt"><span>מהירות</span><div class="seg" id="gSpd"><button data-v="1" class="on">🐢 רגוע</button><button data-v="2">בינוני</button><button data-v="3">🚀 מהיר</button></div></div>
+      <div class="opt"><span>חוק מיוחד</span><div id="rule" class="muted" style="font-size:.88rem">אין עדיין.</div><button class="btn btn-ghost" id="ruleBtn" style="justify-self:start;padding:7px 14px;font-size:.88rem">🧭 המוזה מציעה חוק</button></div>
+    </div>
+    <div style="display:grid;gap:10px">
+      <div class="gwrap"><canvas id="gc" width="800" height="600" aria-label="תצוגה מקדימה של המשחק"></canvas><div class="ghud"><span id="gScore">0</span><span id="gTime">30</span></div>
+        <div class="gover" id="gOver"><div class="in"><h3 style="font:900 1.5rem var(--f-head)" id="gTitle">המשחק שלכם</h3><p class="muted" id="gMsg">חצים או גרירה. 30 שניות.</p><button class="btn btn-lamp" id="gPlay">לנסות</button></div></div></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><input class="field" id="gName" placeholder="שם למשחק" maxlength="40" style="flex:1 1 200px;width:auto"><button class="btn btn-lamp" id="gPub">לפרסם בעמוד הדמות</button></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- STORIES -->
+<section class="sec" id="stories"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">סטודיו הסטוריז</span><h2>סטורי מוכן לשיתוף</h2><p>בגודל של סטורי (1080 על 1920). בוחרים תבנית ודמות, כותבים שורה, ומורידים.</p></div></div>
+  <div class="sts">
+    <div class="phone"><canvas id="sc" width="1080" height="1920" aria-label="תצוגה מקדימה של הסטורי"></canvas></div>
+    <div class="panel" style="gap:16px">
+      <div class="opt"><span>תבנית</span><div class="seg" id="sT"><button data-v="quote" class="on">ציטוט שלי</button><button data-v="art">ארטיפקט חדש</button><button data-v="now">קוראת עכשיו</button></div></div>
+      <div class="opt"><span>דמות</span><div class="pick" id="sF"></div></div>
+      <div class="opt"><span>השורה שלכם</span><input class="field" id="sTxt" maxlength="80" value="יש דברים שרואים רק עם הלב."></div>
+      <div class="opt"><span>צבע</span><div class="swatches" id="sC"></div></div>
+      <button class="btn btn-lamp" id="sDl" style="justify-content:center">להוריד תמונה</button>
+      <p class="muted" style="font-size:.8rem">בלי שמות אמיתיים ובלי בית ספר על הסטורי. הכינוי שלכם מופיע רק אם תבחרו.</p>
+      <label class="check"><input type="checkbox" id="sNick" checked> להוסיף את הכינוי שלי</label>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer class="footer"><div class="wrap" style="display:grid;gap:6px">
+  <p>Verse · אב־טיפוס של פרויקט גמר במגמת אמנויות העיצוב, האקתון 24.11.2026. על בסיס פרויקט הגמר של מיכל אלג׳ם, ורעיונות של צילה משנקר.</p>
+  <p>יצירות מעריצים, לא למכירה. הדמויות והספרים שייכים ליוצריהם. המוזה בעמוד הזה מתוסרטת לצורך הדגמה.</p>
+</div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{const v=localStorage.getItem('verse-'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('verse-'+k,JSON.stringify(v))}catch(e){}}};
+function addMine(w){const a=store.get('my-works',[]);a.unshift({...w,at:Date.now()});store.set('my-works',a.slice(0,12));}
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),2800);}
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const C={
+ prince:{t:'הנסיך הקטן',facts:['גר על כוכב קטן, B612, עם ורד אחד','לא יודע קסם, אבל רואה דברים שמבוגרים לא רואים','שואל שאלה ולא מוותר עד שעונים לו','מתעייף ממספרים ומ״עניינים רציניים״'],voice:'שאלות קצרות, פשוטות, בלי מילים גדולות'},
+ harry:{t:'הארי פוטר',facts:['יש לו שרביט, משקפיים עגולים וצלקת','למד קסמים, אבל לא יודע הכול','נאמן לחברים, נכנס לצרות בשבילם','לא סומך מהר על מבוגרים'],voice:'ישיר, קצת עוקצני, מצחיק כשהוא לחוץ'},
+ alice:{t:'אליס',facts:['נפלה במחילה לארץ שאין בה היגיון','משתנה בגודל כשהיא אוכלת או שותה','סקרנית ומתווכחת עם כולם','רוצה להבין את החוקים'],voice:'מנומסת, אבל שואלת ״למה?״ כל הזמן'},
+ sherlock:{t:'שרלוק',facts:['פותר תעלומות לפי פרטים קטנים','לא אוהב לבזבז זמן על נימוסים','מנגן בכינור כשהוא חושב','תמיד יש לו הסבר'],voice:'מהיר, בטוח בעצמו, משפטים מדויקים'},
+};
+const ORDER=['prince','harry','alice','sherlock'];
+let sel=store.get('ws-sel',['prince','harry']);
+let suggestions=[],journal=[],adoptedWords=0,sid=0;
+
+function drawPick(){
+ $('#pick').innerHTML=ORDER.map(id=>`<button class="${sel.includes(id)?'on':''}" data-id="${id}" aria-pressed="${sel.includes(id)}"><img src="img/${id}.png" alt="">${C[id].t}</button>`).join('');
+ $('#pick').querySelectorAll('button').forEach(b=>b.onclick=()=>{const id=b.dataset.id;
+  if(sel.includes(id)){if(sel.length>1)sel=sel.filter(x=>x!==id);}else{sel=[...sel,id].slice(-2);}
+  store.set('ws-sel',sel);drawPick();});
+ $('#ctag').textContent=sel.length===2?`Collide: ${C[sel[0]].t} × ${C[sel[1]].t}`:'סיפור על דמות אחת';
+ $('#ucards').innerHTML=sel.map(id=>`<div class="ucard"><b>כרטיס יקום · ${C[id].t}</b><ul>${C[id].facts.map(f=>`<li>${f}</li>`).join('')}</ul></div>`).join('');
+}
+const words=s=>(s.trim().match(/\S+/g)||[]).length;
+function drawTrans(){
+ const w=words($('#text').value);const tot=w+adoptedWords;const ai=tot?Math.round(adoptedWords/tot*100):0;
+ $('#aiBar').style.width=ai+'%';$('#hk').textContent=`כתבתם ${100-ai}%`;$('#ak').textContent=`הצעות של המוזה שאומצו ${ai}%`;$('#wc').textContent=w+' מילים';
+ guard();
+}
+$('#text').addEventListener('input',drawTrans);
+
+const pairKey=()=>sel.slice().sort().join('+');
+const ASK={
+ 'harry+prince':['מה הדבר הראשון שהנסיך שם לב אליו אצל הארי, ומבוגר לא היה שם לב?','מה הנסיך היה שואל על הצלקת?','מה הארי מתבייש להגיד לילד שלא מכיר אותו?','איפה הם נפגשים, ולמה דווקא שם?'],
+ default:['מה הדמות רוצה בפרק הזה, ומה עוצר אותה?','מה הקורא יודע שהדמות עוד לא יודעת?','איזה חפץ מהספר יכול להופיע כאן?','איך הפרק נגמר: בתשובה או בשאלה חדשה?']};
+const DIRS={
+ 'harry+prince':['הנסיך מבקש מהארי לצייר לו כבשה בקסם, והקסם לא מצליח','הארי מנסה להסביר מה זה ״חבר״, והנסיך מתקן אותו בעדינות','הצעיף של הנסיך נתפס בשרביט, ומשהו חדש נולד','מישהו מבוגר מגיע, ושניהם מתחבאים מאותה סיבה','הנסיך מגלה שגם לכוכב של הארי יש באובבים, רק אחרים'],
+ default:['הדמות מאבדת חפץ חשוב ומגלה שהיא לא צריכה אותו','מישהו מהספר חוזר ומבקש סליחה','הדמות מקבלת מכתב שלא נכתב לה','אותו מקום, עשר שנים אחר כך']};
+const pickN=(a,n)=>a.slice().sort(()=>Math.random()-.5).slice(0,n);
+
+function addSug(kind,label,text,opts={}){
+ const id=++sid;suggestions.unshift({id,kind,label,text,done:false,...opts});drawFeed();}
+function drawFeed(){
+ if(!suggestions.length)return;
+ $('#feed').innerHTML=suggestions.map(s=>`<div class="sug ${s.kind} ${s.done?'done':''}" data-id="${s.id}"><span class="k">${s.label}</span><span>${esc(s.text)}</span>
+  ${s.noAshaf?'':s.done?`<span class="verdict" style="color:${s.done==='אימצתי'?'var(--ai)':s.done==='שיניתי'?'var(--human)':'var(--muted)'}">${s.done}${s.mine?': '+esc(s.mine):''}</span>`:`<div class="ashaf"><button data-v="a">אימצתי</button><button data-v="s">שיניתי</button><button data-v="p">פסלתי</button></div>`}</div>`).join('');
+ $('#feed').querySelectorAll('.ashaf button').forEach(b=>b.onclick=()=>decide(+b.closest('.sug').dataset.id,b.dataset.v,b));
+}
+function decide(id,v,btn){
+ const s=suggestions.find(x=>x.id===id);
+ if(v==='s'){const box=btn.closest('.sug');const a=box.querySelector('.ashaf');a.outerHTML=`<div class="rewrite"><input placeholder="איך אתם הייתם אומרים את זה?" aria-label="הניסוח שלכם"><button class="add btn-lamp btn" style="padding:6px 12px;font-size:.8rem">שמרתי</button></div>`;
+  const inp=box.querySelector('.rewrite input');inp.focus();box.querySelector('.rewrite button').onclick=()=>{if(!inp.value.trim())return;s.done='שיניתי';s.mine=inp.value.trim();log('s',s);drawFeed();};return;}
+ s.done=v==='a'?'אימצתי':'פסלתי';
+ if(v==='a')adoptedWords+=words(s.text);
+ log(v,s);drawFeed();drawTrans();
+}
+function log(v,s){journal.unshift({v,txt:s.mine||s.text,label:s.label});
+ $('#journal').innerHTML=journal.slice(0,8).map(j=>`<li><span class="jt ${j.v}">${j.v==='a'?'אימצתי':j.v==='s'?'שיניתי':'פסלתי'}</span><span>${esc(j.txt)}</span></li>`).join('');}
+
+const RULES=[
+ {re:/(נסיך|הנסיך)[^.!?]{0,50}(הטיל|לחש|כישוף|קסם|שרביט)/,who:'prince',msg:'בכרטיס היקום כתוב שהנסיך לא יודע קסם. זה בכוונה? אם כן, כדאי שמישהו יופתע מזה בסיפור.'},
+ {re:/הארי[^.!?]{0,50}(ורד|כוכב שלו|B612)/,who:'harry',msg:'הוורד והכוכב B612 שייכים לנסיך. אולי הארי שואל עליהם, במקום שיהיו שלו?'},
+ {re:/(מבוגר|מבוגרים)[^.!?]{0,30}(צדק|צודקים|הבין|הבינו)/,who:'prince',msg:'אצל הנסיך מבוגרים כמעט אף פעם לא מבינים. אם כאן הם כן, זה רגע גדול. שווה להאט עליו.'},
+];
+function museCheck(){
+ const t=$('#text').value;if(words(t)<12){addSug('warn','בדיקת עקביות','עוד אין מספיק טקסט לבדוק. כתבו כמה משפטים ונבדוק יחד.',{noAshaf:true});return;}
+ const hits=RULES.filter(r=>sel.includes(r.who)&&r.re.test(t));
+ if(!hits.length)addSug('ok','בדיקת עקביות','לא מצאתי סתירה לכרטיס היקום. שאלה אחת לבדוק לבד: אם הייתם מכסים את השמות, הייתם יודעים מי מדבר?',{noAshaf:true});
+ hits.forEach(h=>addSug('warn','בדיקת עקביות',h.msg));
+}
+document.querySelectorAll('.muse-btns button').forEach(b=>b.onclick=()=>{
+ const k=pairKey(),m=b.dataset.m;
+ if(m==='ask')addSug('','שאלה',pickN(ASK[k]||ASK.default,1)[0]);
+ if(m==='dirs')pickN(DIRS[k]||DIRS.default,3).forEach((d,i)=>addSug('','כיוון '+(3-i)+' מתוך 3',d));
+ if(m==='check')museCheck();
+ if(m==='voice')sel.forEach(id=>addSug('','הקול של '+C[id].t,`${C[id].t} מדבר/ת כך: ${C[id].voice}. נסו לקרוא את השורות שלו/ה בקול.`,{noAshaf:true}));
+});
+
+function guard(){
+ const t=$('#text').value+' '+$('#title').value;const f=[];
+ if(/\d{2,3}[- ]?\d{7}|05\d[- ]?\d{3}[- ]?\d{4}/.test(t))f.push('מספר טלפון');
+ if(/\S+@\S+\.\S+/.test(t))f.push('כתובת מייל');
+ if(/בית ספר\s+[א-ת"״]+|תיכון\s+[א-ת"״]+/.test(t))f.push('שם של בית ספר');
+ $('#guard').innerHTML=f.length?`<span style="color:var(--lamp)">⚠️ עוזר השומרים: נראה שיש כאן ${f.join(', ')}. כדאי למחוק לפני שמפרסמים. אתם מחליטים.</span>`:'עוזר השומרים בודק פרטים אישיים לפני פרסום. כרגע הכול נקי.';
+ return f.length;}
+$('#title').addEventListener('input',guard);
+$('#sample').onclick=()=>{$('#title').value='פרק 4: הכבשה שלא הצליחה';$('#text').value='הארי הרים את השרביט ואמר את המילים שלמד. משהו נצץ לרגע, ואז נעלם.\n״זאת לא כבשה,״ אמר הנסיך הקטן. ״זה רק אור.״\n״זה היה אמור להיות כבשה,״ אמר הארי, והרגיש שהלחיים שלו מתחממות.\nהנסיך התיישב על הדשא. ';drawTrans();toast('נטענה התחלה. עכשיו תמשיכו אתם.');};
+$('#publish').onclick=()=>{
+ const w=words($('#text').value);
+ if(w<30){toast('עוד קצת. פרק מתפרסם מ־30 מילים.');return;}
+ let ch=store.get('collide-ch',2);
+ if(sel.length===2){ch++;store.set('collide-ch',ch);}
+ const st=ch>=6?3:ch>=3?2:1;
+ addMine({k:'סיפור',t:$('#title').value.trim()||'הפרק שלי',m:`אני · ${w} מילים · ${$('#ak').textContent}`,chars:sel.slice()});toast(sel.length===2?`פורסם! הפרק מופיע בעמודים של ${C[sel[0]].t} ושל ${C[sel[1]].t}. Collide בשלב ${st}.`:`פורסם בעמוד של ${C[sel[0]].t}.`);
+};
+
+// ---- GAME MAKER ----
+const GH=['prince','alice','sherlock','harry'];let g={hero:'prince',world:'space',drop:'arts',bad:'baobab',spd:1,rule:null};
+function seg(id,key){$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{g[key]=b.dataset.v;$(id).querySelectorAll('button').forEach(z=>z.classList.toggle('on',z===b));drawIdle();});}
+seg('#gWorld','world');seg('#gDrop','drop');seg('#gBad','bad');
+$('#gHero').innerHTML=GH.map(id=>`<button data-id="${id}" class="${id===g.hero?'on':''}"><img src="img/${id}.png" alt="">${C[id].t}</button>`).join('');
+$('#gHero').querySelectorAll('button').forEach(b=>b.onclick=()=>{g.hero=b.dataset.id;$('#gHero').querySelectorAll('button').forEach(z=>z.classList.toggle('on',z===b));heroImg.src='img/'+g.hero+'.png';});
+$('#gSpd').querySelectorAll('button').forEach(b=>b.onclick=()=>{g.spd=+b.dataset.v;$('#gSpd').querySelectorAll('button').forEach(z=>z.classList.toggle('on',z===b));});
+const GRULES=[{k:'double',t:'כל חמישה ארטיפקטים ברצף, הניקוד מוכפל'},{k:'shrink',t:'כמו אליס: אחרי כל פגיעה הגיבור מתכווץ, וקשה יותר לתפוס'},{k:'rose',t:'פעם במשחק נופל ורד. מי שתופס אותו מקבל עוד 5 שניות'}];
+$('#ruleBtn').onclick=()=>{const r=pickN(GRULES.filter(x=>!g.rule||x.k!==g.rule.k),1)[0];
+ $('#rule').innerHTML=`<div class="sug" style="font-size:.85rem"><span class="k">המוזה מציעה</span><span>${r.t}</span><div class="ashaf"><button data-v="a">אימצתי</button><button data-v="p">פסלתי</button></div></div>`;
+ $('#rule').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.v==='a'){g.rule=r;$('#rule').innerHTML=`<span class="rule-chip">✓ ${r.t}</span>`;}else{g.rule=null;$('#rule').textContent='פסלתם. אפשר לבקש עוד הצעה.';}});};
+const gc=$('#gc'),x=gc.getContext('2d');const heroImg=new Image();heroImg.src='img/prince.png';
+const WORLD={space:['#0b0f22','#1c2350'],hole:['#1e1236','#3b2257'],fog:['#1f2430','#4a5262']};
+const ICON={arts:['🌹','🦊','🐑','🧣','⭐'],letters:['✉️','💌'],stars:['⭐','🌟'],baobab:'🌱',clock:'⏰'};
+let G=null,keys={};
+function bg(){const [a,b]=WORLD[g.world];const gr=x.createLinearGradient(0,0,0,600);gr.addColorStop(0,a);gr.addColorStop(1,b);x.fillStyle=gr;x.fillRect(0,0,800,600);
+ x.fillStyle='#ffffff55';for(let i=0;i<50;i++){x.fillRect((i*137)%800,(i*71)%560,2,2);}
+ x.fillStyle=g.world==='space'?'#7b5fd0':g.world==='hole'?'#6b4b2a':'#3a3f4d';x.fillRect(0,560,800,40);}
+function drawHero(px,s=1){const h=130*s,w=h*360/630;if(heroImg.complete)x.drawImage(heroImg,0,0,360,630,px-w/2,566-h,w,h);}
+function drawIdle(){if(G&&G.on)return;bg();drawHero(400);x.font='40px serif';x.textAlign='center';const d=ICON[g.drop];x.fillText(d[0],250,150);x.fillText(d[1%d.length],560,220);if(g.bad!=='none')x.fillText(ICON[g.bad],420,120);}
+heroImg.onload=drawIdle;
+function start(){G={on:true,px:400,items:[],score:0,t:30,s:1,streak:0,last:performance.now(),spawn:0,rose:false};$('#gOver').hidden=true;requestAnimationFrame(loop);}
+function loop(now){if(!G.on)return;const dt=Math.min(.05,(now-G.last)/1000);G.last=now;G.t-=dt;
+ const v=420;if(keys.ArrowRight)G.px+=v*dt;if(keys.ArrowLeft)G.px-=v*dt;G.px=Math.max(40,Math.min(760,G.px));
+ G.spawn-=dt;if(G.spawn<=0){G.spawn=(1.1-g.spd*.25);const bad=g.bad!=='none'&&Math.random()<.3;let ic=bad?ICON[g.bad]:pickN(ICON[g.drop],1)[0],kind=bad?'bad':'good';
+  if(g.rule&&g.rule.k==='rose'&&!G.rose&&G.t<22&&Math.random()<.3){ic='🌹';kind='rose';G.rose=true;}
+  G.items.push({x:40+Math.random()*720,y:-20,v:(140+g.spd*70)*(.8+Math.random()*.4),ic,kind});}
+ bg();x.font='42px serif';x.textAlign='center';
+ const hw=34*G.s;
+ G.items=G.items.filter(it=>{it.y+=it.v*dt;x.fillText(it.ic,it.x,it.y);
+  if(it.y>470&&it.y<560&&Math.abs(it.x-G.px)<hw+18){
+   if(it.kind==='bad'){G.score=Math.max(0,G.score-3);G.streak=0;if(g.rule&&g.rule.k==='shrink')G.s=Math.max(.55,G.s-.12);}
+   else if(it.kind==='rose'){G.t+=5;G.score+=2;}
+   else{G.streak++;G.score+=(g.rule&&g.rule.k==='double'&&G.streak>=5)?2:1;}
+   return false;}
+  return it.y<620;});
+ drawHero(G.px,G.s);$('#gScore').textContent='נקודות: '+G.score;$('#gTime').textContent=Math.ceil(G.t)+' שנ׳';
+ if(G.t<=0){G.on=false;$('#gTitle').textContent=G.score+' נקודות';$('#gMsg').textContent='ככה ירגישו השחקנים שלכם. רוצים לשנות משהו? כל שינוי משפיע מיד.';$('#gPlay').textContent='עוד פעם';$('#gOver').hidden=false;return;}
+ requestAnimationFrame(loop);}
+$('#gPlay').onclick=start;
+addEventListener('keydown',e=>{if(G&&G.on&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){keys[e.key]=true;e.preventDefault();}});
+addEventListener('keyup',e=>{keys[e.key]=false;});
+gc.addEventListener('pointermove',e=>{if(!G||!G.on)return;const r=gc.getBoundingClientRect();G.px=(e.clientX-r.left)/r.width*800;});
+gc.addEventListener('pointerdown',e=>{if(!G||!G.on)return;const r=gc.getBoundingClientRect();G.px=(e.clientX-r.left)/r.width*800;});
+$('#gPub').onclick=()=>{const n=$('#gName').value.trim()||'המשחק שלי';addMine({k:'משחק',t:n,m:'אני · נבנה ביוצר המשחקים',chars:[g.hero]});toast(`״${n}״ פורסם בעמוד של ${C[g.hero].t}. בהדגמה הוא נשמר רק אצלכם.`);store.set('my-game',{...g,name:n});};
+
+// ---- STORIES ----
+const sc=$('#sc'),y=sc.getContext('2d');let S={t:'quote',f:'prince',c:0};
+const COLS=[['#161b33','#2f8a4a','#f2c230'],['#2a1236','#f08a5d','#f3eee2'],['#0f2a3a','#6fa5ee','#f3eee2'],['#f3eee2','#e9a23b','#1c2036']];
+$('#sC').innerHTML=COLS.map((c,i)=>`<button style="background:linear-gradient(135deg,${c[0]} 50%,${c[1]} 50%)" data-i="${i}" class="${i?'':'on'}" aria-label="צבע ${i+1}"></button>`).join('');
+$('#sC').querySelectorAll('button').forEach(b=>b.onclick=()=>{S.c=+b.dataset.i;$('#sC').querySelectorAll('button').forEach(z=>z.classList.toggle('on',z===b));drawStory();});
+$('#sF').innerHTML=['prince','alice','sherlock','anne','oz'].map(id=>`<button data-id="${id}" class="${id===S.f?'on':''}"><img src="img/${id}.png" alt="">${(C[id]||{t:{anne:'אן',oz:'דורותי'}[id]}).t}</button>`).join('');
+$('#sF').querySelectorAll('button').forEach(b=>b.onclick=()=>{S.f=b.dataset.id;$('#sF').querySelectorAll('button').forEach(z=>z.classList.toggle('on',z===b));fimg.src='img/'+S.f+'.png';});
+$('#sT').querySelectorAll('button').forEach(b=>b.onclick=()=>{S.t=b.dataset.v;$('#sT').querySelectorAll('button').forEach(z=>z.classList.toggle('on',z===b));drawStory();});
+$('#sTxt').oninput=drawStory;$('#sNick').onchange=drawStory;
+const fimg=new Image();fimg.onload=drawStory;fimg.src='img/prince.png';
+function wrapText(t,maxW){const w=t.split(' ');const lines=[];let cur='';w.forEach(word=>{const test=cur?cur+' '+word:word;if(y.measureText(test).width>maxW&&cur){lines.push(cur);cur=word;}else cur=test;});if(cur)lines.push(cur);
+ if(lines.length>1&&lines[lines.length-1].split(' ').length===1){const prev=lines[lines.length-2].split(' ');lines[lines.length-1]=prev.pop()+' '+lines[lines.length-1];lines[lines.length-2]=prev.join(' ');}return lines;}
+function drawStory(){
+ const [bgc,acc,ink]=COLS[S.c];y.direction='rtl';y.textAlign='center';
+ y.fillStyle=bgc;y.fillRect(0,0,1080,1920);
+ const gr=y.createRadialGradient(540,700,50,540,700,700);gr.addColorStop(0,acc+'66');gr.addColorStop(1,acc+'00');y.fillStyle=gr;y.fillRect(0,0,1080,1920);
+ y.fillStyle=ink;y.font='600 44px Rubik';y.fillText(S.t==='quote'?'מהפרק שלי':S.t==='art'?'ארטיפקט חדש בתיק':'קוראת עכשיו',540,220);
+ if(fimg.complete){const h=S.t==='art'?560:740,w=h*360/630;const top=S.t==='art'?400:340;y.drawImage(fimg,0,0,360,630,540-w/2,top,w,h);const sh=y.createRadialGradient(540,top+h,10,540,top+h,w*.7);sh.addColorStop(0,'#0008');sh.addColorStop(1,'#0000');y.fillStyle=sh;y.fillRect(540-w,top+h-30,w*2,60);y.drawImage(fimg,0,0,360,630,540-w/2,top,w,h);}
+ if(S.t==='art'){y.font='240px serif';y.fillText('🌹',540,1290);y.font='900 80px "Frank Ruhl Libre"';y.fillStyle=ink;y.fillText('הוורד',540,1420);y.font='500 40px Rubik';y.globalAlpha=.75;y.fillText('נאסף במשחק ״בין הכוכבים״ · 4 מתוך 6',540,1490);y.globalAlpha=1;}
+ const txt=$('#sTxt').value||' ';y.font='900 76px "Frank Ruhl Libre"';y.fillStyle=ink;
+ const lines=wrapText((S.t==='quote'?'״'+txt+'״':txt),860);const top=S.t==='art'?1600:1300;
+ lines.slice(0,4).forEach((l,i)=>y.fillText(l,540,top+i*96));
+ if(S.t==='now'){y.fillStyle=acc;y.fillRect(240,1700,600,16);y.fillStyle=ink;y.fillRect(240,1700,600*.62,16);y.font='500 38px Rubik';y.fillText('62% מהספר',540,1770);}
+ y.font='700 40px Rubik';y.fillStyle=ink;y.globalAlpha=.85;y.fillText('Verse'+($('#sNick').checked?' · כוכבית_15':''),540,1850);y.globalAlpha=1;}
+document.fonts&&document.fonts.ready.then(drawStory);
+$('#sDl').onclick=()=>{try{const a=document.createElement('a');a.download='verse-story.png';a.href=sc.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();toast('הסטורי ירד. בלי שמות אמיתיים, כן?');}catch(e){toast('בתצוגה הזאת אי אפשר להוריד. באתר עצמו זה עובד.');}};
+
+// tabs highlight
+const secs=['write','game','stories'].map(id=>document.getElementById(id));
+addEventListener('scroll',()=>{let cur='write';secs.forEach(s=>{if(s.getBoundingClientRect().top<200)cur=s.id;});document.querySelectorAll('#tabs a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));},{passive:true});
+drawPick();drawTrans();drawIdle();drawStory();
+</script>
+</body>
+</html>
